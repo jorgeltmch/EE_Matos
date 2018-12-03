@@ -14,7 +14,7 @@
       </div>
       <div class="uk-margin-xlarge-left">
 
-        <h1 style="text-decoration: underline">Profile</h1>
+        <h1 class=" uk-margin-left uk-heading-bullet uk-heading-line">Profile</h1>
         <img src="./img/homer.jpg" width="230" height="230" style="float: left">
         <div style="float: left">
         <h2 class="uk-margin-xlarge-left">Homer Simpson</h2>
@@ -24,7 +24,7 @@
           <p>Adresse : homer.smpsn@eduge.ch</p>
           <p>Nombre de prêts : 3</p>
         </div>
-<div class="uk-child-width-expand@s uk-grid uk-position-center-right" style="margin-right: 30%; margin-top: -180px">
+<div class="uk-child-width-expand@s uk-grid uk-position-center-right" style="margin-right: 30%; margin-top: -110px">
 
   <div class="">
 
