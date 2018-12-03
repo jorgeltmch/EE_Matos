@@ -1,15 +1,14 @@
+<!--NavBar Haut avec bouton-->
+
 <nav class="uk-navbar uk-navbar-container uk-margin ">
     <div class="uk-navbar-left uk-margin-left">
-
         <a href="#offcanvas-slide" class="uk-button uk-button-default" uk-navbar-toggle-icon uk-toggle></a>
         <div class="uk-navbar-left">
               <a class="uk-navbar-item uk-logo" href="#">Matos</a>
         </div>
-
     </div>
 
     <div class="uk-navbar-right">
-
         <ul class="uk-navbar-nav">
           <form class="uk-search uk-search-default uk-margin-right">
               <span class="uk-search-icon-flip" uk-search-icon></span>
@@ -17,10 +16,10 @@
           </form>
             <li><button class="uk-button uk-button-secondary uk-margin-right">Login</button></li>
         </ul>
-        
     </div>
-
 </nav>
+
+<!-- NavBar sur le coter gauche qui est retactable -->
 
 <div id="offcanvas-slide" uk-offcanvas>
     <div class="uk-offcanvas-bar">
