@@ -10,11 +10,11 @@
     </head>
     <body class="">
       <?php require "navbar.php"; ?>
-      <div class="uk-position-top" style="margin-top: 300px">
-        <div class="uk-position-center-left uk-padding-large uk-width-1-2">
+      <!-- <div class="" > -->
+        <div class=" uk-padding-large">
 
-          <h1 class=" uk-margin-left uk-heading-bullet uk-heading-line">Profile</h1>
-          <img src="./img/homer.jpg" width="230" height="230" style="float: left">
+          <h1 class="uk-margin-left uk-heading-bullet uk-heading-line">Profile</h1>
+          <img src="./img/homer.jpg" width="230" height="230" class="uk-overlay uk-overlay-default ">
 
           <div style="float: left">
             <h2 class="uk-margin-large-left">Homer Simpson</h2>
@@ -32,7 +32,7 @@
           </div>
         </div>
 
-        <div class="uk-position-center-right uk-width-1-2">
+        <div class="uk-position-right uk-width-1-2 uk-position-relative">
           <table class="uk-table uk-table-hover uk-table-divider">
             <thead>
               <tr>
@@ -76,7 +76,7 @@
           </table>
         </div>
 
-      </div>
+      <!-- </div> -->
 
     </body>
 </html>
