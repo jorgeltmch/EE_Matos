@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 <!--NavBar Haut avec bouton-->
 
 <nav class="uk-navbar uk-navbar-container uk-margin ">
