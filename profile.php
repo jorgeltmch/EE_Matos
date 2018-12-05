@@ -10,52 +10,73 @@
     </head>
     <body class="">
       <?php require "navbar.php"; ?>
+      <div class="uk-position-top" style="margin-top: 300px">
+        <div class="uk-position-center-left uk-padding-large uk-width-1-2">
+
+          <h1 class=" uk-margin-left uk-heading-bullet uk-heading-line">Profile</h1>
+          <img src="./img/homer.jpg" width="230" height="230" style="float: left">
+
+          <div style="float: left">
+            <h2 class="uk-margin-large-left">Homer Simpson</h2>
+            <div class="uk-padding-small">
+            <p>Nom : SIMPSON</p>
+            <p>Prénom : Homer</p>
+            <p>Adresse : homer.smpsn@eduge.ch</p>
+            <p>Nombre de prêts : 4</p>
+
+            <div class="uk-alert-warning">
+              Vous devez rendre un objet dans 1 jour !
+            </div>
+
+            </div>
+          </div>
+        </div>
+
+        <div class="uk-position-center-right uk-width-1-2">
+          <table class="uk-table uk-table-hover uk-table-divider">
+            <thead>
+              <tr>
+                <th>Prêt</th>
+                <th> </th>
+                <th>Début</th>
+                <th> </th>
+                <th>Fin</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>iPad</td>
+                <td> du </td>
+                <td>04.11.18</td>
+                <td> au </td>
+                <td>06.11.18<td>
+              </tr>
+              <tr>
+                <td>Imprimante 3D</td>
+                <td> du </td>
+                <td>26.10.18</td>
+                <td> au </td>
+                <td>27.10.18</td>
+              </tr>
+              <tr>
+                <td>Souris</td>
+                <td> du </td>
+                <td>02.10.18</td>
+                <td> au </td>
+                <td>10.10.18</td>
+              </tr>
+              <tr>
+                <td>Clavier</td>
+                <td> du </td>
+                <td>02.10.18</td>
+                <td> au </td>
+                <td>10.10.18</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
 
       </div>
-      <div class="uk-margin-xlarge-left">
-
-        <h1 class=" uk-margin-left uk-heading-bullet uk-heading-line">Profile</h1>
-        <img src="./img/homer.jpg" width="230" height="230" style="float: left">
-        <div style="float: left">
-        <h2 class="uk-margin-xlarge-left">Homer Simpson</h2>
-        <div class="uk-margin-medium-left">
-          <p>Nom : SIMPSON</p>
-          <p>Prénom : Homer</p>
-          <p>Adresse : homer.smpsn@eduge.ch</p>
-          <p>Nombre de prêts : 3</p>
-        </div>
-<div class="uk-child-width-expand@s uk-grid uk-position-center-right" style="margin-right: 30%; margin-top: -110px">
-
-  <div class="">
-
-      <h4>Prêt</h4>
-      <ul class="uk-list uk-list-large uk-list-divider">
-          <li>iPad Pro</li>
-          <li>Chaise</li>
-          <li>Imprimante 3D</li>
-      </ul>
-  </div>
-
-  <div>
-      <h4>Début</h4>
-      <ul class="uk-list uk-list-large uk-list-divider">
-          <li>28.11.18</li>
-          <li>12.11.18</li>
-          <li>03.11.18</li>
-      </ul>
-  </div>
-
-  <div>
-      <h4>Fin</h4>
-      <ul class="uk-list uk-list-large uk-list-divider">
-          <li>10.12.18</li>
-          <li>15.11.18</li>
-          <li>05.11.18</li>
-      </ul>
-  </div>
-</div>
-
-</div>
 
     </body>
 </html>
