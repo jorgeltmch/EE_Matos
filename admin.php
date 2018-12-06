@@ -36,29 +36,29 @@
 
         
                 <div uk-overflow-auto="selContainer: .uk-height-medium; selContent: .js-wrapper" class="uk-height-medium uk-tile uk-tile-muted">
-                    <ul class="uk-nav uk-width-1-3 uk-margin-auto">
+                    <ul class="uk-nav uk-width-1-2 uk-margin-auto">
                         <li class="uk-active">
                             <label class="uk-form-label" for="form-stacked-text">Taille</label>
                             <div class="uk-form-controls">
-                                <input class="uk-input" id="form-stacked-text" type="text" placeholder="ASUS...">
+                                <input class="uk-input" id="form-stacked-text" type="text" placeholder="L20 x H20 x P20">
                             </div>
                         </li>
                         <li class="uk-active">
                             <label class="uk-form-label" for="form-stacked-text">Résolution</label>
                             <div class="uk-form-controls">
-                                <input class="uk-input" id="form-stacked-text" type="text" placeholder="ASUS...">
+                                <input class="uk-input" id="form-stacked-text" type="text" placeholder="1080 x 1920">
                             </div>
                         </li>
                         <li class="uk-active">
                             <label class="uk-form-label" for="form-stacked-text">Couleur</label>
                             <div class="uk-form-controls">
-                                <input class="uk-input" id="form-stacked-text" type="text" placeholder="ASUS...">
+                                <input class="uk-input" id="form-stacked-text" type="text" placeholder="Rouge">
                             </div>
                         </li>
                         <li class="uk-active">
                             <label class="uk-form-label" for="form-stacked-text">Entré</label>
                             <div class="uk-form-controls">
-                                <input class="uk-input" id="form-stacked-text" type="text" placeholder="ASUS...">
+                                <input class="uk-input" id="form-stacked-text" type="text" placeholder="2 x HDMI, 1 x DisplayPort Femelle">
                             </div>
                         </li>
                     </ul>
@@ -137,7 +137,7 @@
                 });
 
             </script>
-
+            <input type="submit" value="Ajouter" class="uk-button uk-button-primary uk-margin-bottom" onclick="UIkit.notification({message: 'Ajout réussi.', status: 'success'})"></input>
         </form>
 
 
