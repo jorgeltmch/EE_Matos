@@ -16,7 +16,7 @@
             <input class="uk-search-input" type="search" placeholder="Search...">
         </form>
         
-        <h1 class="uk-heading-line uk-text-center uk-margin-large"><span>Nouveaute</span></h1>
+        <h1 class="uk-heading-line uk-text-center uk-margin-large"><span>Nouveauté</span></h1>
         
         <div class="uk-child-width-1-5@m uk-margin" uk-grid>
             <div class="uk-margin-auto">
