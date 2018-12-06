@@ -8,75 +8,62 @@
         <script src="js/uikit.min.js"></script>
         <script src="js/uikit-icons.min.js"></script>
     </head>
-    <body class="">
-      <?php require "navbar.php"; ?>
-      <div class="" >
-        <div class="uk-margin-auto uk-margin-xlarge-top uk-position-left">
+    <body>
+      <header>
+        <?php require "navbar.php"; ?>
+      </header>
+      <!--<div class="uk-background-muted uk-padding-small" uk-height-viewport="expand: true" >
 
-          <h1 class=" uk-heading-bullet uk-heading-line">Profile</h1>
-          <img src="./img/homer.jpg" class="uk-overlay uk-overlay-default uk-width-1-6">
+        <div class="uk-child-width-expand@s uk-text-center" uk-grid>
 
-          <div style="float: left">
-            <h2 class="">Homer Simpson</h2>
-            <div class="">
-            <p>Nom : SIMPSON</p>
-            <p>Prénom : Homer</p>
-            <p>Adresse : homer.smpsn@eduge.ch</p>
-            <p>Nombre de prêts : 4</p>
+            <div>
+              <div class="uk-text-left uk-padding-small" uk-height-viewport="offset-bottom: 60">
 
-            <div class="uk-alert-warning">
-              Vous devez rendre un objet dans 1 jour !
+              </div>
+              <div>
+                <div class="uk-card uk-card-default uk-text-left uk-padding-small" uk-height-viewport="offset-bottom: 60">
+
+                </div>
+              </div>
+              <div>
+
+              </div>
             </div>
-
+            <div>
+              <div class="uk-card uk-card-default uk-flex uk-flex-center uk-flex-middle" uk-height-viewport="offset-bottom: 15"><?php include("calendrier.php"); ?></div>
             </div>
-          </div>
         </div>
 
-        <div class="uk-width-1-3 uk-margin-auto uk-position-right uk-margin-xlarge-top">
-          <table class="uk-table uk-table-hover uk-table-divider">
-            <thead>
-              <tr>
-                <th>Prêt</th>
-                <th> </th>
-                <th>Début</th>
-                <th> </th>
-                <th>Fin</th>
-              </tr>
-            </thead>
-            <tbody>
-              <tr>
-                <td>iPad</td>
-                <td> du </td>
-                <td>04.11.18</td>
-                <td> au </td>
-                <td>06.11.18<td>
-              </tr>
-              <tr>
-                <td>Imprimante 3D</td>
-                <td> du </td>
-                <td>26.10.18</td>
-                <td> au </td>
-                <td>27.10.18</td>
-              </tr>
-              <tr>
-                <td>Souris</td>
-                <td> du </td>
-                <td>02.10.18</td>
-                <td> au </td>
-                <td>10.10.18</td>
-              </tr>
-              <tr>
-                <td>Clavier</td>
-                <td> du </td>
-                <td>02.10.18</td>
-                <td> au </td>
-                <td>10.10.18</td>
-              </tr>
-            </tbody>
-          </table>
+      </div> -->
+      <div class="uk-background-muted uk-padding-small" uk-height-viewport="expand: true" >
+        <div class="uk-grid-small uk-child-width-1-3@s" uk-grid="masonry: true">
+            <div>
+                <div class="uk-card uk-card-default uk-card-body uk-text-center"  style="height: 300px">
+                  <img class="uk-border-circle uk-height-max-medium" src="img/profil.png" alt="Border circle" style="height: 200px">
+                </div>
+            </div>
+            <div>
+                <div class="uk-card uk-card-default uk-card-body" style="height: 815px">
+                  <h3 class="uk-card-title">Profil</h3>
+                  <p><b>Nom :</b> Machado</p>
+                  <p><b>Prenom :</b> Jorge</p>
+                  <p><b>Email :</b> jorge.ltmch@eduge.ch </p>
+                  <p><b>Nombre de prets :</b> 15</p>
+                  <div class="uk-alert-success" uk-alert>
+                    <a class="uk-alert-close" uk-close></a>
+                    <p>Vous n'avez aucun article en retard</p>
+                  </div>
+                </div>
+            </div>
+            <div>
+                <div class="uk-card uk-card-default uk-card-body" style="height: 815px">
+                <div >Item</div>
+                </div>
+            </div>
+            <div>
+                <div class="uk-card uk-card-default uk-card-body" style="height: 500px"><?php include("calendrier.php"); ?> </div>
+            </div>
         </div>
-
-       </div>
-
+      </div>
     </body>
 </html>

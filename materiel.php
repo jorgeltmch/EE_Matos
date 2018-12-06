@@ -13,7 +13,7 @@
         <?php  include("navbar.php"); ?>
       </header>
 
-<h1 class="uk-heading-bullet uk-heading-line" >Ecran AOC 24" LED - C24G1</h1>
+
       <div class="uk-background-muted uk-padding-small" uk-height-viewport="expand: true">
         <div class="uk-animation-toggle">
               <div class=" uk-position-relative uk-position-medium uk-position-top-left uk-overlay uk-overlay-default uk-width-1-4@m">
@@ -23,8 +23,9 @@
               </div>
         </div>
 
-          <div class="uk-position-large uk-position-center-right uk-overlay uk-overlay-default uk-width-2-3 ">
-
+          <div class="uk-position-absolute uk-position-center-right uk-overlay uk-overlay-default uk-width-2-3">
+            <h1 class="uk-heading-bullet uk-heading-line" >AOC C24G1 24" 144Hz</h1>
+            <h2 class="uk-heading-line uk-text-center"><span>Description</span></h2>
             <ul class="uk-list uk-list-striped uk-width-expand">
                 <li>Marque: AOC</li>
                 <li>Modèle: C24G1</li>
@@ -37,6 +38,8 @@
                 <li>Luminosité : 250 cd/m²</li>
                 <li>Angle de vision (horizontal) : 178 Degré(s)</li>
                 <li>Angle de vision (vertical) : 178 Degré(s)</li>
+
+
             </ul>
           </div>
           <div class="uk-position-relative uk-position-medium uk-position-bottom-left uk-overlay uk-overlay-default uk-width-1-4@m">
