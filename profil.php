@@ -57,7 +57,55 @@
             </div>
             <div>
                 <div class="uk-card uk-card-default uk-card-body" style="height: 815px">
-                <div >Item</div>
+                <div>
+                <h3 class="uk-card-title">Historique des prêts</h3>
+                <table class="uk-table uk-table-hover uk-table-divider">
+                  <thead>
+                    <tr>
+                      <th>Prêt</th>
+                      <th> </th>
+                      <th>Début</th>
+                      <th> </th>
+                      <th>Fin</th>
+                      <th>État</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <tr>
+                      <td>iPad</td>
+                      <td> du </td>
+                      <td>26.11.18</td>
+                      <td> au </td>
+                      <td>7.12.18</td>
+                      <td>En retard</td>
+                    </tr>
+                    <tr>
+                      <td>Imprimante 3D</td>
+                      <td> du </td>
+                      <td>26.10.18</td>
+                      <td> au </td>
+                      <td>27.10.18</td>
+                      <td>Rendu</td>
+                    </tr>
+                    <tr>
+                      <td>Souris</td>
+                      <td> du </td>
+                      <td>02.10.18</td>
+                      <td> au </td>
+                      <td>10.10.18</td>
+                      <td>Rendu</td>
+                    </tr>
+                    <tr>
+                      <td>Clavier</td>
+                      <td> du </td>
+                      <td>02.10.18</td>
+                      <td> au </td>
+                      <td>10.10.18</td>
+                      <td>Rendu</td>
+                    </tr>
+                  </tbody>
+                </table>
+                </div>
                 </div>
             </div>
             <div>
