@@ -1,5 +1,5 @@
 <link rel="stylesheet" href="css/calendrier.css" />
-<div id="calendar">
+<div id="calendar" class="uk-width-1-1@m">
   <h1>October</h1>
   <table>
     <tr><td class="lastmonth">30</td><td>1</td><td>2</td><td>3</td><td class="hastask">4</td><td>5</td><td>6</td></tr>

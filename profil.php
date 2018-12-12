@@ -8,7 +8,7 @@
         <script src="js/uikit.min.js"></script>
         <script src="js/uikit-icons.min.js"></script>
     </head>
-    <body>
+    <body class="uk-background-muted">
       <header>
         <?php require "navbar.php"; ?>
       </header>
@@ -44,7 +44,7 @@
             </div>
             <div>
                 <div class="uk-card uk-card-default uk-card-body" style="height: 815px">
-                  <h3 class="uk-card-title">Profil</h3>
+                  <h3 class="uk-card-title uk-heading-bullet uk-heading-line">Profil</h3>
                   <p><b>Nom :</b> Machado</p>
                   <p><b>Prenom :</b> Jorge</p>
                   <p><b>Email :</b> jorge.ltmch@eduge.ch </p>
@@ -57,59 +57,41 @@
             </div>
             <div>
                 <div class="uk-card uk-card-default uk-card-body" style="height: 815px">
-                <div>
-                <h3 class="uk-card-title">Historique des prêts</h3>
-                <table class="uk-table uk-table-hover uk-table-divider">
-                  <thead>
-                    <tr>
-                      <th>Prêt</th>
-                      <th> </th>
-                      <th>Début</th>
-                      <th> </th>
-                      <th>Fin</th>
-                      <th>État</th>
-                    </tr>
-                  </thead>
-                  <tbody>
-                    <tr>
-                      <td>iPad</td>
-                      <td> du </td>
-                      <td>26.11.18</td>
-                      <td> au </td>
-                      <td>7.12.18</td>
-                      <td>En retard</td>
-                    </tr>
-                    <tr>
-                      <td>Imprimante 3D</td>
-                      <td> du </td>
-                      <td>26.10.18</td>
-                      <td> au </td>
-                      <td>27.10.18</td>
-                      <td>Rendu</td>
-                    </tr>
-                    <tr>
-                      <td>Souris</td>
-                      <td> du </td>
-                      <td>02.10.18</td>
-                      <td> au </td>
-                      <td>10.10.18</td>
-                      <td>Rendu</td>
-                    </tr>
-                    <tr>
-                      <td>Clavier</td>
-                      <td> du </td>
-                      <td>02.10.18</td>
-                      <td> au </td>
-                      <td>10.10.18</td>
-                      <td>Rendu</td>
-                    </tr>
-                  </tbody>
+                  <h2 class="uk-heading-bullet uk-heading-line" >Historique</h2>
+                  <table class="uk-table uk-table-striped">
+                    <thead>
+                        <tr>
+                            <th>Debut</th>
+                            <th>Objet</th>
+                            <th>Fin</th>
+                            <th>Rendu à l'heure</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>28.09.2018</td>
+                            <td>Samsung SSD 860 EVO 250 Go</td>
+                            <td>05.09.2018</td>
+                            <td>Non</td>
+                        </tr>
+                        <tr>
+                            <td>17.08.2018</td>
+                            <td>iiyama 27" LED - G-MASTER G2730HSU-B1</td>
+                            <td>29.08.2018</td>
+                            <td>Non</td>
+                        </tr>
+                        <tr>
+                            <td>29.12.2017</td>
+                            <td>Clé de démontage pour clavier mécanique</td>
+                            <td>10.01.2017</td>
+                            <td>Oui</td>
+                        </tr>
+                    </tbody>
                 </table>
-                </div>
                 </div>
             </div>
             <div>
-                <div class="uk-card uk-card-default uk-card-body" style="height: 500px"><?php include("calendrier.php"); ?> </div>
+                <div class="uk-card uk-card-default uk-card-body uk-width-*@s" style="height: 500px"><?php include("calendrier.php"); ?> </div>
             </div>
         </div>
       </div>

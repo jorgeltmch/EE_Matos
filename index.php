@@ -1,4 +1,3 @@
-
 <!doctype html>
 <html lang="fr">
     <head>
@@ -15,9 +14,9 @@
             <span uk-search-icon></span>
             <input class="uk-search-input" type="search" placeholder="Search...">
         </form>
-        
+
         <h1 class="uk-heading-line uk-text-center uk-margin-large"><span>Nouveauté</span></h1>
-        
+
         <div class="uk-child-width-1-5@m uk-margin" uk-grid>
             <div class="uk-margin-auto">
                 <div class="uk-card uk-card-default">
@@ -64,7 +63,7 @@
                 </div>
             </div>
         </div>
-        
+
         <div class="uk-child-width-1-5@m uk-margin uk-margin-medium" uk-grid>
             <div class="uk-margin-auto">
                 <div class="uk-card uk-card-default">
@@ -112,6 +111,7 @@
             </div>
         </div>
 
-      
+
 
     </body>
+</html>
