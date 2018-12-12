@@ -65,6 +65,7 @@
                             <th>Objet</th>
                             <th>Fin</th>
                             <th>Rendu à l'heure</th>
+                            <th> </th>
                         </tr>
                     </thead>
                     <tbody>
@@ -73,18 +74,27 @@
                             <td>Samsung SSD 860 EVO 250 Go</td>
                             <td>05.09.2018</td>
                             <td>Non</td>
+                            <td>
+                              <button class="uk-button uk-button-default">Modifier</button>
+                            </td>
                         </tr>
                         <tr>
                             <td>17.08.2018</td>
                             <td>iiyama 27" LED - G-MASTER G2730HSU-B1</td>
                             <td>29.08.2018</td>
                             <td>Non</td>
+                            <td>
+                              <button class="uk-button uk-button-default">Modifier</button>
+                            </td>
                         </tr>
                         <tr>
                             <td>29.12.2017</td>
                             <td>Clé de démontage pour clavier mécanique</td>
                             <td>10.01.2017</td>
                             <td>Oui</td>
+                            <td>
+                              <button class="uk-button uk-button-default" disabled>Modifier</button>
+                            </td>
                         </tr>
                     </tbody>
                 </table>
