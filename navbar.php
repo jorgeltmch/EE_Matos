@@ -20,7 +20,7 @@
             <span class="uk-search-icon-flip" uk-search-icon></span>
             <input class="uk-search-input" type="search" placeholder="Search...">
         </form>
-        <button class="uk-button uk-button-secondary uk-margin-right">Login</button>
+        <button class="uk-button uk-button-secondary">Login</button>
     </div>
 
 </nav>
