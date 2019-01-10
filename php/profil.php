@@ -39,7 +39,7 @@
                   <img class="uk-border-circle uk-height-max-medium" src="../img/profil.png" alt="Border circle" style="height: 200px">
                 </div>
             </div>
-            <div>
+            <div style="width: 500px;">
                 <div class="uk-card uk-card-default uk-card-body" style="height: 815px">
                   <h3 class="uk-card-title uk-heading-bullet uk-heading-line">Profil</h3>
                   <p><b>Nom :</b> Machado</p>
@@ -53,7 +53,7 @@
                 </div>
             </div>
             <div>
-                <div class="uk-card uk-card-default uk-card-body" style="height: 815px">
+                <div class="uk-card uk-card-default uk-card-body uk-overflow-auto">
                   <h2 class="uk-heading-bullet uk-heading-line" >Historique</h2>
                   <table class="uk-table uk-table-striped">
                     <thead>
@@ -61,7 +61,7 @@
                             <th>Debut</th>
                             <th>Objet</th>
                             <th>Fin</th>
-                            <th>Rendu à l'heure</th>
+                            <th>Rendu</th>
                             <th> </th>
                         </tr>
                     </thead>

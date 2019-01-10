@@ -4,6 +4,8 @@
         <title>Matos</title>
         <meta charset="utf-8">
         <?php require "ulkit.php"; ?>
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <link rel="stylesheet" href="css/uikit.min.css" />
     </head>
     <body class="uk-background-muted">
       <header>
@@ -30,7 +32,8 @@
             <div>
                 <div class="uk-card uk-card-default uk-card-body" style="height: 815px">
                 <div>
-                  <h1 class="uk-heading-bullet uk-heading-line" >AOC C24G1 24" 144Hz</h1>
+                  <h1 class="uk-heading-bullet" >AOC C24G1 24" 144Hz <button class="uk-float-right uk-button uk-button-default uk-text-center">Modifier</button></h1>
+
                   <div class="uk-alert-success" uk-alert>
                       <a class="uk-alert-close" uk-close></a>
                       <p>5 éléments en stock</p>
@@ -60,7 +63,7 @@
                           <form class="uk-form">
                             <fieldset class="uk-fieldset">
                             <legend class="uk-legend">Réserver ce produit</legend>
-                            <p>Date de début : <input type="text" data-uk-datepicker="{format:'DD.MM.YYYY'}"></p>
+                            <p>Date de début : <input id="date" type="date" value="2017-06-01"></p>
                             <p>Date de fin : <input type="text" data-uk-datepicker="{format:'DD.MM.YYYY'}"></p>
                             </fieldset>
                             <button class="uk-button uk-button-default uk-float-right">Réserver</button>
@@ -109,4 +112,6 @@
       </div>
 -->
     </body>
+    <script src="js/uikit.min.js"></script>
+    <script src="js/uikit-icons.min.js"></script>
 </html>
