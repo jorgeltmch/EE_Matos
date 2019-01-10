@@ -6,8 +6,12 @@
      <?php require "ulkit.php"; ?>
     </head>
     <body class="uk-background-muted">
+
       <header>
-        <?php require "navbar.php"; ?>
+        <?php
+          require_once "navbar.php";
+          //require_once "js/eelauth.js";
+        ?>
       </header>
       <!--<div class="uk-background-muted uk-padding-small" uk-height-viewport="expand: true" >
 
