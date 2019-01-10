@@ -3,10 +3,7 @@
     <head>
         <title>Matos</title>
         <meta charset="utf-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1">
-        <link rel="stylesheet" href="css/uikit.min.css" />
-        <script src="js/uikit.min.js"></script>
-        <script src="js/uikit-icons.min.js"></script>
+        <?php require "ulkit.php"; ?>
     </head>
     <body class="uk-background-muted">
       <header>
@@ -19,13 +16,13 @@
                 <div class="uk-card uk-card-default uk-card-body uk-text-center"  style="height: 400px">
                     <div class="uk-child-width-1-3@m" uk-grid uk-lightbox="animation: slide">
                         <div>
-                            <a class="uk-inline" href="img/AOC_C24G1.jpg" data-caption="Caption 1"></a>
+                            <a class="uk-inline" href="../img/AOC_C24G1.jpg" data-caption="Caption 1"></a>
                         </div>
                         <div>
-                            <a class="uk-inline" href="img/ecran1.jpg" data-caption="Caption 2"><img src="img/AOC_C24G1.jpg" alt=""></a>
+                            <a class="uk-inline" href="../img/ecran1.jpg" data-caption="Caption 2"><img src="../img/AOC_C24G1.jpg" alt=""></a>
                         </div>
                         <div>
-                            <a class="uk-inline" href="img/AOC_C24G1.jpg" data-caption="Caption 3"></a>
+                            <a class="uk-inline" href="../img/AOC_C24G1.jpg" data-caption="Caption 3"></a>
                         </div>
                     </div>
                 </div>

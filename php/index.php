@@ -21,7 +21,7 @@
             <div class="uk-margin-auto">
                 <div class="uk-card uk-card-default">
                     <div class="uk-card-media-top">
-                        <img src="img/ecran1.jpg" alt="">
+                        <img src="../img/ecran1.jpg" alt="">
                     </div>
                     <div class="uk-card-body">
                         <h3 class="uk-card-title">Media Top</h3>
@@ -32,7 +32,7 @@
             <div class="uk-margin-auto">
                 <div class="uk-card uk-card-default">
                     <div class="uk-card-media-top">
-                        <img src="img/ecran1.jpg" alt="">
+                        <img src="../img/ecran1.jpg" alt="">
                     </div>
                     <div class="uk-card-body">
                         <h3 class="uk-card-title">Media Top</h3>
@@ -43,7 +43,7 @@
             <div class="uk-margin-auto">
                 <div class="uk-card uk-card-default">
                     <div class="uk-card-media-top">
-                        <img src="img/ecran1.jpg" alt="">
+                        <img src="../img/ecran1.jpg" alt="">
                     </div>
                     <div class="uk-card-body">
                         <h3 class="uk-card-title">Media Top</h3>
@@ -54,7 +54,7 @@
             <div class="uk-margin-auto">
                 <div class="uk-card uk-card-default">
                     <div class="uk-card-media-top">
-                        <img src="img/ecran1.jpg" alt="">
+                        <img src="../img/ecran1.jpg" alt="">
                     </div>
                     <div class="uk-card-body">
                         <h3 class="uk-card-title">Media Top</h3>
@@ -68,7 +68,7 @@
             <div class="uk-margin-auto">
                 <div class="uk-card uk-card-default">
                     <div class="uk-card-media-top">
-                        <img src="img/ecran1.jpg" alt="">
+                        <img src="../img/ecran1.jpg" alt="">
                     </div>
                     <div class="uk-card-body">
                         <h3 class="uk-card-title">Media Top</h3>
@@ -79,7 +79,7 @@
             <div class="uk-margin-auto">
                 <div class="uk-card uk-card-default">
                     <div class="uk-card-media-top">
-                        <img src="img/ecran1.jpg" alt="">
+                        <img src="../img/ecran1.jpg" alt="">
                     </div>
                     <div class="uk-card-body">
                         <h3 class="uk-card-title">Media Top</h3>
@@ -90,7 +90,7 @@
             <div class="uk-margin-auto">
                 <div class="uk-card uk-card-default">
                     <div class="uk-card-media-top">
-                        <img src="img/ecran1.jpg" alt="">
+                        <img src="../img/ecran1.jpg" alt="">
                     </div>
                     <div class="uk-card-body">
                         <h3 class="uk-card-title">Media Top</h3>
@@ -101,7 +101,7 @@
             <div class="uk-margin-auto">
                 <div class="uk-card uk-card-default">
                     <div class="uk-card-media-top">
-                        <img src="img/ecran1.jpg" alt="">
+                        <img src="../img/ecran1.jpg" alt="">
                     </div>
                     <div class="uk-card-body">
                         <h3 class="uk-card-title">Media Top</h3>

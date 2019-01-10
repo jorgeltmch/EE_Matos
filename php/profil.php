@@ -3,10 +3,7 @@
     <head>
         <meta charset="utf-8">
         <title>Profile</title>
-        <meta name="viewport" content="width=device-width, initial-scale=1">
-        <link rel="stylesheet" href="css/uikit.min.css" />
-        <script src="js/uikit.min.js"></script>
-        <script src="js/uikit-icons.min.js"></script>
+     <?php require "ulkit.php"; ?>
     </head>
     <body class="uk-background-muted">
       <header>
@@ -39,7 +36,7 @@
         <div class="uk-grid-small uk-child-width-1-3@s" uk-grid="masonry: true">
             <div>
                 <div class="uk-card uk-card-default uk-card-body uk-text-center"  style="height: 300px">
-                  <img class="uk-border-circle uk-height-max-medium" src="img/profil.png" alt="Border circle" style="height: 200px">
+                  <img class="uk-border-circle uk-height-max-medium" src="../img/profil.png" alt="Border circle" style="height: 200px">
                 </div>
             </div>
             <div>

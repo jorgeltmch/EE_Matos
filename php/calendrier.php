@@ -1,4 +1,4 @@
-<link rel="stylesheet" href="css/calendrier.css" />
+<link rel="stylesheet" href="../css/calendrier.css" />
 <div id="calendar" class="uk-width-1-1@m">
   <h1>October</h1>
   <table>
