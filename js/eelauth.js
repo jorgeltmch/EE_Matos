@@ -96,7 +96,7 @@ var EELAuth = (function () {
                     'image': image,
                     'locale': locale};
                 OnReceiveInfo.call(this, obj);
-                
+
             });
         },
     };

@@ -2,8 +2,6 @@
 <?php
 require_once 'fonction.php';
 
-addProduit("salut", "2018-01-12","2018-02-12");
-?>
 <!doctype html>
 <html lang="fr">
     <head>

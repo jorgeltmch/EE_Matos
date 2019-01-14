@@ -1,4 +1,19 @@
 
+<?php
+require_once "fonction.php";
+
+//Initialisation des variables nécessaires
+$nomCategorie = "";
+
+// Récupération des paramètres
+$nomCategorie = (empty(filter_input(INPUT_POST, "nomCategorie", FILTER_SANITIZE_STRING))) ? "" : filter_input(INPUT_POST, "nomCategorie", FILTER_SANITIZE_STRING);
+echo $nomCategorie;
+  if (!empty($nomCategorie)) {
+    echo "bite supreme";
+    AjouterCategorie($nomCategorie);
+  }
+
+?>
 <!doctype html>
 <html lang="fr">
     <head>
@@ -48,12 +63,12 @@
 
         <h2 class="uk-heading-line uk-text-center"><span>Ajout</span></h2>
 
-        <form class="uk-margin-auto uk-margin-large-top uk-form-stacked uk-width-1-3@m">
+        <form action="#" method="post" class="uk-margin-auto uk-margin-large-top uk-form-stacked uk-width-1-3@m">
 
             <div class="uk-margin">
                 <label class="uk-form-label" for="form-stacked-text">Ajouter un nom de catégorie</label>
                 <div class="uk-form-controls">
-                    <input class="uk-input" id="form-stacked-text" type="text" placeholder="Ecran">
+                    <input class="uk-input" id="form-stacked-text" type="text" name="nomCategorie" placeholder="Ecran">
                 </div>
             </div>
 
@@ -78,7 +93,7 @@
                 </ul>
             </div>
 
-            <input type="submit" value="Valider" class="uk-button uk-button-primary uk-margin-small-top uk-margin-bottom" onclick="UIkit.notification({message: 'Ajout réussi.', status: 'success'})"></input>
+            <input type="submit" name="creerCategorie" value="Valider" class="uk-button uk-button-primary uk-margin-small-top uk-margin-bottom" onclick="UIkit.notification({message: 'Ajout réussi.', status: 'success'})"></input>
 
         </form>
 
