@@ -1,6 +1,28 @@
 
 <?php
+
 require_once 'fonction.php';
+
+if(isset($_POST['btnAjout'])){
+    $nomProduit = filter_input(INPUT_POST, 'nomProduit', FILTER_SANITIZE_STRING);
+    $idCategorie = filter_input(INPUT_POST, 'categorie', FILTER_SANITIZE_STRING);
+    $caracteristique1 = filter_input(INPUT_POST, 'caracteristique1', FILTER_SANITIZE_STRING);
+    $caracteristique2 = filter_input(INPUT_POST, 'caracteristique2', FILTER_SANITIZE_STRING);
+    $caracteristique3 = filter_input(INPUT_POST, 'caracteristique3', FILTER_SANITIZE_STRING);
+    $caracteristique4 = filter_input(INPUT_POST, 'caracteristique4', FILTER_SANITIZE_STRING);
+    $imgArticle = filter_input(INPUT_POST, 'imgArticle', FILTER_SANITIZE_STRING);
+
+    $caracteristique = $caracteristique1 . ", " . $caracteristique2 . ", " . $caracteristique3 . ", " . $caracteristique4;
+
+    $extensionUpload = strtolower(substr(strrchr($_FILES['imgArticle']['name'], '.'), 1));
+
+    $pdpName= "../img/article/12"."."."{$extensionUpload}";
+    $imgArticle = move_uploaded_file($_FILES['imgArticle']['tmp_name'],$pdpName);
+    
+    addProduit($nomProduit, $idCategorie, $caracteristique, $imgArticle);
+}
+
+?>
 
 <!doctype html>
 <html lang="fr">
@@ -22,23 +44,30 @@ require_once 'fonction.php';
         </div>
 
         <h1 class="uk-heading-divider">Ajout de nouveau produit</h1>
-        <form class="uk-margin-auto uk-margin-large-top uk-form-stacked uk-width-1-3@m">
+        <form action="#" method="POST" class="uk-margin-auto uk-margin-large-top uk-form-stacked uk-width-1-3@m">
 
             <div class="uk-margin">
                 <label class="uk-form-label" for="form-stacked-text">Nom du produit</label>
                 <div class="uk-form-controls">
-                    <input class="uk-input" id="form-stacked-text" type="text" placeholder="ASUS...">
+                    <input name="nomProduit" class="uk-input" id="form-stacked-text" type="text" placeholder="ASUS...">
                 </div>
             </div>
 
             <div class="uk-margin">
                 <label class="uk-form-label" for="form-stacked-text">Type de catégorie</label>
-                <select class="uk-select">
-                    <option>Ecran</option>
-                    <option>Souris</option>
-                    <option>Clavier</option>
-                    <option>Drone</option>
-                    <option>Tablette</option>
+                <select name="categorie" class="uk-select">
+                    <?php 
+                    $sql = 'SELECT * FROM categorie';
+                    $req = EDatabase::prepare($sql, array(PDO::ATTR_CURSOR, PDO::CURSOR_SCROLL));
+                    $req->execute();
+                    $datacom = $req->fetchAll(PDO::FETCH_ASSOC);
+                  
+                    foreach ($datacom as $com) 
+                    {
+                     echo '<option value="'.$com['idCategorie'].'">'.$com['nomCategorie'].'</option>';                
+                    }                      
+                    ?>
+                    
                 </select>
             </div>
 
@@ -50,25 +79,25 @@ require_once 'fonction.php';
                     <li class="uk-active">
                         <label class="uk-form-label" for="form-stacked-text">Taille</label>
                         <div class="uk-form-controls">
-                            <input class="uk-input" id="form-stacked-text" type="text" placeholder="L20 x H20 x P20">
+                            <input name="caracteristique1" class="uk-input" id="form-stacked-text" type="text" placeholder="L20 x H20 x P20">
                         </div>
                     </li>
                     <li class="uk-active">
                         <label class="uk-form-label" for="form-stacked-text">Résolution</label>
                         <div class="uk-form-controls">
-                            <input class="uk-input" id="form-stacked-text" type="text" placeholder="1080 x 1920">
+                            <input name="caracteristique2" class="uk-input" id="form-stacked-text" type="text" placeholder="1080 x 1920">
                         </div>
                     </li>
                     <li class="uk-active">
                         <label class="uk-form-label" for="form-stacked-text">Couleur</label>
                         <div class="uk-form-controls">
-                            <input class="uk-input" id="form-stacked-text" type="text" placeholder="Rouge">
+                            <input name="caracteristique3" class="uk-input" id="form-stacked-text" type="text" placeholder="Rouge">
                         </div>
                     </li>
                     <li class="uk-active">
                         <label class="uk-form-label" for="form-stacked-text">Entré</label>
                         <div class="uk-form-controls">
-                            <input class="uk-input" id="form-stacked-text" type="text" placeholder="2 x HDMI, 1 x DisplayPort Femelle">
+                            <input name="caracteristique4" class="uk-input" id="form-stacked-text" type="text" placeholder="2 x HDMI, 1 x DisplayPort Femelle">
                         </div>
                     </li>
                 </ul>
@@ -80,7 +109,7 @@ require_once 'fonction.php';
                 <span uk-icon="icon: cloud-upload"></span>
                 <span class="uk-text-middle">Glissez, déposez ou </span>
                 <div uk-form-custom>
-                    <input type="file" multiple>
+                    <input type="file" name="imgArticle" multiple>
                     <span class="uk-link">cliquez ici</span>
                 </div>
             </div>
@@ -147,7 +176,7 @@ require_once 'fonction.php';
                 });
 
             </script>
-            <input type="submit" value="Ajouter" class="uk-button uk-button-primary uk-margin-bottom" onclick="UIkit.notification({message: 'Ajout réussi.', status: 'success'})"></input>
+            <input type="submit" name="btnAjout" value="Ajouter"  class="uk-button uk-button-primary uk-margin-bottom"/>
         </form>
 
 

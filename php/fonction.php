@@ -2,6 +2,7 @@
 require_once '../classe/database.php';
 
 
+
 //Ajoute une catégorie à la basse de donnée
  function AjouterCategorie($nomCategorie)
  {
@@ -35,3 +36,32 @@ require_once '../classe/database.php';
            ));
            return EDatabase::lastInsertId();
  }
+
+//___________________________AJOUT PRODUIT________________________________ 
+function addProduit($nom, $idCategorie, $description, $imgArticle)
+ {
+   $sql = "INSERT INTO article(nom, descriptionArticle, idCategorie, imgArticle) VALUES(:nom, :descriptionArticle, :idCategorie, :imgArticle)";
+   $req = EDatabase::prepare($sql, array(PDO::ATTR_CURSOR, PDO::CURSOR_SCROLL));
+   $req->execute(
+     array(
+        ':nom' => $nom,
+        ':descriptionArticle' => $description,
+        ':idCategorie' => $idCategorie,
+        ':imgArticle' => $imgArticle
+        )
+    );
+    return EDatabase::lastInsertId();
+ }
+
+ //function idCategorie($categorie)
+ //{
+ // $sql = 'SELECT idCategorie FROM categorie WHERE nomCategorie = :nomCategorie';
+ // $req = EDatabase::prepare($sql, array(PDO::ATTR_CURSOR, PDO::CURSOR_SCROLL));
+ // $req->execute(
+ //   array(
+ //      ':nomCategorie' => $categorie
+ //      )
+ //  );
+ //  $res = $req->fetch();
+ //  return $res;
+ //}
