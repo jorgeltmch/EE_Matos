@@ -1,3 +1,8 @@
+<?php
+require_once 'fonction.php';
+$emprunts = getEmpruntsByUserID("1");
+
+?>
 <!doctype html>
 <html lang="fr">
     <head>
@@ -13,29 +18,7 @@
           //require_once "js/eelauth.js";
         ?>
       </header>
-      <!--<div class="uk-background-muted uk-padding-small" uk-height-viewport="expand: true" >
 
-        <div class="uk-child-width-expand@s uk-text-center" uk-grid>
-
-            <div>
-              <div class="uk-text-left uk-padding-small" uk-height-viewport="offset-bottom: 60">
-
-              </div>
-              <div>
-                <div class="uk-card uk-card-default uk-text-left uk-padding-small" uk-height-viewport="offset-bottom: 60">
-
-                </div>
-              </div>
-              <div>
-
-              </div>
-            </div>
-            <div>
-              <div class="uk-card uk-card-default uk-flex uk-flex-center uk-flex-middle" uk-height-viewport="offset-bottom: 15"><?php include("calendrier.php"); ?></div>
-            </div>
-        </div>
-
-      </div> -->
       <div class="uk-background-muted uk-padding-small" uk-height-viewport="expand: true" >
         <div class="uk-grid-small uk-child-width-1-3@s" uk-grid="masonry: true">
             <div>
@@ -57,6 +40,7 @@
                 </div>
             </div>
             <div>
+
                 <div class="uk-card uk-card-default uk-card-body uk-overflow-auto">
                   <h2 class="uk-heading-bullet uk-heading-line" >Historique</h2>
                   <table class="uk-table uk-table-striped">
@@ -70,6 +54,8 @@
                         </tr>
                     </thead>
                     <tbody>
+                      <?php displayEmprunts($emprunts); ?>
+                      <!--
                         <tr>
                             <td>28.09.2018</td>
                             <td>Samsung SSD 860 EVO 250 Go</td>
@@ -112,7 +98,7 @@
 
                               </div>
                             </td>
-                        </tr>
+                        </tr> --->
                     </tbody>
                 </table>
                 </div>

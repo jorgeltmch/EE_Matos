@@ -20,7 +20,10 @@
             <span class="uk-search-icon-flip" uk-search-icon></span>
             <input class="uk-search-input" type="search" placeholder="Search...">
         </form>
-        <button class="uk-button uk-button-secondary" id="login" href="#" onclick="">Login</button>
+        <?php if (empty($_SESSION["username"])): ?>
+          <button class="uk-button uk-button-secondary" id="login"  onclick=""><a href="login.php">Login</a></button>
+        <?php endif; ?>
+
     </div>
 
 </nav>

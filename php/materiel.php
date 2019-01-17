@@ -1,3 +1,17 @@
+<?php
+require_once 'fonction.php';
+
+$article = getProduitByID("20");
+
+
+$dateFin = (empty($_POST["dateFin"])) ? '' : $_POST["dateFin"];
+$dateDebut = (empty($_POST["dateDebut"])) ? '' : $_POST["dateDebut"];
+
+if (filter_has_var(INPUT_POST, 'btnReserver')) {
+  addEmprunt($article["idArticle"], "1", $dateDebut, $dateFin); //TODO : changer id
+}
+
+?>
 <!DOCTYPE html>
 <html>
     <head>
@@ -57,21 +71,7 @@
             <div>
                 <div class="uk-card uk-card-default uk-card-body uk-width-*@s" style="height: 400px">
                   <a class="uk-button uk-button-default" href="#modal-center" uk-toggle><?php include("calendrier.php"); ?></a>
-                  <div id="modal-center" class="uk-flex-top" uk-modal>
-                      <div class="uk-modal-dialog uk-modal-body uk-margin-auto-vertical">
-                          <button class="uk-modal-close-default" type="button" uk-close></button>
-                          <form class="uk-form">
-                            <fieldset class="uk-fieldset">
-                            <legend class="uk-legend">Réserver ce produit</legend>
-                            <p>Date de début : <input id="date" type="date" value="2017-06-01"></p>
-                            <p>Date de fin : <input type="text" data-uk-datepicker="{format:'DD.MM.YYYY'}"></p>
-                            </fieldset>
-                            <button class="uk-button uk-button-default uk-float-right">Réserver</button>
-                          </form>
-                      </div>
-                    </div>
-
-                </div>
+            <?php  include("popupRelouer.php"); ?>
             </div>
         </div>
       </div>

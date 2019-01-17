@@ -1,4 +1,3 @@
-
 <?php
 require_once "fonction.php";
 
@@ -12,8 +11,9 @@ echo $nomCategorie;
     echo "bite supreme";
     AjouterCategorie($nomCategorie);
   }
-
+  
 ?>
+
 <!doctype html>
 <html lang="fr">
     <head>
