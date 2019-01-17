@@ -18,7 +18,7 @@ if(isset($_POST['btnAjout'])){
 
     $pdpName= "../img/article/12"."."."{$extensionUpload}";
     $imgArticle = move_uploaded_file($_FILES['imgArticle']['tmp_name'],$pdpName);
-    
+
     addProduit($nomProduit, $idCategorie, $caracteristique, $imgArticle);
 }
 
@@ -56,18 +56,12 @@ if(isset($_POST['btnAjout'])){
             <div class="uk-margin">
                 <label class="uk-form-label" for="form-stacked-text">Type de catégorie</label>
                 <select name="categorie" class="uk-select">
-                    <?php 
-                    $sql = 'SELECT * FROM categorie';
-                    $req = EDatabase::prepare($sql, array(PDO::ATTR_CURSOR, PDO::CURSOR_SCROLL));
-                    $req->execute();
-                    $datacom = $req->fetchAll(PDO::FETCH_ASSOC);
-                  
-                    foreach ($datacom as $com) 
-                    {
-                     echo '<option value="'.$com['idCategorie'].'">'.$com['nomCategorie'].'</option>';                
-                    }                      
-                    ?>
-                    
+                  <?php
+                  foreach (getCategories() as $com)
+                  {
+                    echo '<option value="'.$com['idCategorie'].'">'.$com['nomCategorie'].'</option>';
+                  }
+                  ?>
                 </select>
             </div>
 

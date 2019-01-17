@@ -16,25 +16,24 @@ session_start();
 //Suprime la categorie voulue de la base de donnée
  function SupprimerCategorie($idCategorie)
  {
-   $sql = 'DELETE FROM categorie WHERE $idCategorie = :idCategorie';
+   $sql = 'DELETE FROM categorie WHERE idCategorie = :idCategorie';
    $req = EDatabase::prepare($sql, array(PDO::ATTR_CURSOR, PDO::CURSOR_SCROLL));
    $req->execute(array(
             'idCategorie' => $idCategorie
             ));
  }
 
-function addProduit($nom, $dateAjout, $dateModif)
-{
-   $sql = 'INSERT INTO categorie(nomCategorie, dateAjout, dateModif) VALUES(:nom, :dateAjout, :dateModif)';
+//Modifie la categorie voulue
+ function ModifierCategorie($idCategorie, $nomCategorie)
+ {
+   $sql = 'UPDATE categorie SET nomCategorie = :nomCategorie WHERE idCategorie = :idCategorie';
    $req = EDatabase::prepare($sql, array(PDO::ATTR_CURSOR, PDO::CURSOR_SCROLL));
    $req->execute(array(
-           ':nom' => $nom,
-           ':dateAjout' => $dateAjout,
-           ':dateModif' => $dateModif
-           ));
+           'nomCategorie' => $nomCategorie,
+           'idCategorie' => $idCategorie
+         ));
            return EDatabase::lastInsertId();
  }
-
 
 //___________________________AJOUT PRODUIT________________________________
 function addProduit($nom, $idCategorie, $description, $imgArticle)
@@ -43,13 +42,22 @@ function addProduit($nom, $idCategorie, $description, $imgArticle)
    $req = EDatabase::prepare($sql, array(PDO::ATTR_CURSOR, PDO::CURSOR_SCROLL));
    $req->execute(
      array(
-        ':nom' => $nom,
-        ':descriptionArticle' => $description,
-        ':idCategorie' => $idCategorie,
-        ':imgArticle' => $imgArticle
+        'nom' => $nom,
+        'descriptionArticle' => $description,
+        'idCategorie' => $idCategorie,
+        'imgArticle' => $imgArticle
         )
     );
     return EDatabase::lastInsertId();
+ }
+
+ function GetCategories(){
+   $sql = 'SELECT * FROM categorie';
+   $req = EDatabase::prepare($sql, array(PDO::ATTR_CURSOR, PDO::CURSOR_SCROLL));
+   $req->execute();
+   $datacom = $req->fetchAll(PDO::FETCH_ASSOC);
+   return $datacom;
+
  }
 
  //function idCategorie($categorie)

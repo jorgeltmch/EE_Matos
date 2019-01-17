@@ -5,13 +5,36 @@ require_once "fonction.php";
 $nomCategorie = "";
 
 // Récupération des paramètres
+$idCategorie = (empty(filter_input(INPUT_POST, "TypeCategorie"))) ? "" : filter_input(INPUT_POST, "TypeCategorie");
 $nomCategorie = (empty(filter_input(INPUT_POST, "nomCategorie", FILTER_SANITIZE_STRING))) ? "" : filter_input(INPUT_POST, "nomCategorie", FILTER_SANITIZE_STRING);
-echo $nomCategorie;
-  if (!empty($nomCategorie)) {
-    echo "bite supreme";
-    AjouterCategorie($nomCategorie);
-  }
-  
+$nouveauNomCategorie = (empty(filter_input(INPUT_POST, "nouveauNom", FILTER_SANITIZE_STRING))) ? "" : filter_input(INPUT_POST, "nouveauNom", FILTER_SANITIZE_STRING);
+
+$flashMessage = "";
+
+if (!empty($nomCategorie)) {
+  AjouterCategorie($nomCategorie);
+  $nomCategorie = "";
+}
+
+if (filter_has_var(INPUT_POST,'Supprimer')) {
+  SupprimerCategorie($idCategorie);
+  $flashMessage = '<div class="uk-alert-success" uk-alert>
+                  <a class="uk-alert-close" uk-close></a>
+                  <p>La catégorie à été supprimée avec succès.</p>
+                  </div>';
+}
+
+if (filter_has_var(INPUT_POST,'Modifier')) {
+  ModifierCategorie($idCategorie, $nouveauNomCategorie);
+  $flashMessage = '<div class="uk-alert-success" uk-alert>
+                  <a class="uk-alert-close" uk-close></a>
+                  <p>La catégorie à été modifiée avec succès.</p>
+                  </div>';
+}
+//
+// if (isset($idCategorie)) {
+//
+// }
 ?>
 
 <!doctype html>
@@ -37,27 +60,31 @@ echo $nomCategorie;
 
         <h2 class="uk-heading-line uk-text-center"><span>Modification/Supression</span></h2>
 
-        <form class="uk-margin-auto uk-margin-large-top uk-form-stacked uk-width-1-3@m">
+        <?php echo $flashMessage; ?>
+
+        <form class="uk-margin-auto uk-margin-large-top uk-form-stacked uk-width-1-3@m" method="POST" action="#">
 
             <div class="uk-margin">
                 <label class="uk-form-label" for="form-stacked-text">Type de catégorie</label>
-                <select class="uk-select">
-                    <option>Ecran</option>
-                    <option>Souris</option>
-                    <option>Clavier</option>
-                    <option>Drone</option>
-                    <option>Tablette</option>
+                <select name="TypeCategorie" class="uk-select">
+                  <?php
+                  foreach (getCategories() as $com)
+                  {
+                    echo '<option value="'.$com['idCategorie'].'">'.$com['nomCategorie'].'</option>';
+                  }
+                  ?>
                 </select>
             </div>
 
             <div class="uk-margin">
                 <label class="uk-form-label" for="form-stacked-text">Modifier le nom de catégorie</label>
                 <div class="uk-form-controls">
-                    <input class="uk-input" id="form-stacked-text" type="text" placeholder="Remplire si modification du nom">
+                    <input class="uk-input" id="form-stacked-text" type="text" name="nouveauNom" placeholder="Remplire si modification du nom">
                 </div>
             </div>
-            <input type="submit" value="Modifier" class="uk-button uk-button-primary uk-margin-bottom" onclick="UIkit.notification({message: 'Modification réussi.', status: 'success'})"></input>
-            <input type="submit" value="Suprimer" class="uk-button uk-button-primary uk-margin-bottom" onclick="UIkit.notification({message: 'Supression réussi.', status: 'success'})"></input>
+            <input type="submit" name="Supprimer" value="Supprimer" id="Supprimer" class="uk-button uk-button-primary uk-margin-small-top uk-margin-bottom" ></input>
+            <input type="submit" name="Modifier" value="Modifier" id="Modifier" class="uk-button uk-button-primary uk-margin-small-top uk-margin-bottom" ></input>
+
 
         </form>
 
