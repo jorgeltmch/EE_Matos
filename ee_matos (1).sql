@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Hôte : 127.0.0.1
--- Généré le :  jeu. 17 jan. 2019 à 15:31
+-- Généré le :  mer. 23 jan. 2019 à 08:33
 -- Version du serveur :  5.7.17
 -- Version de PHP :  5.6.30
 
@@ -35,8 +35,15 @@ CREATE TABLE `article` (
   `dateAjout` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP,
   `dateModif` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP,
   `idCategorie` int(11) NOT NULL,
-  `imgArticle` varchar(100) DEFAULT NULL
+  `imgArticle` blob
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+--
+-- Déchargement des données de la table `article`
+--
+
+INSERT INTO `article` (`idArticle`, `nom`, `descriptionArticle`, `dateAjout`, `dateModif`, `idCategorie`, `imgArticle`) VALUES
+(1, 'Nintendo ds', ', , , ', '2019-01-18 11:23:53', '2019-01-18 11:23:53', 56, '');
 
 -- --------------------------------------------------------
 
@@ -57,10 +64,9 @@ CREATE TABLE `categorie` (
 
 INSERT INTO `categorie` (`idCategorie`, `nomCategorie`, `dateAjout`, `dateModif`) VALUES
 (51, 'Souris', '2019-01-17 14:57:36', '2019-01-17 14:57:36'),
-(55, 'Jorge', '2019-01-17 15:15:54', '2019-01-17 15:15:54'),
 (56, 'Clavier', '2019-01-17 15:16:18', '2019-01-17 15:16:18'),
-(57, 'Brique', '2019-01-17 15:16:25', '2019-01-17 15:16:25'),
-(58, 'Stoopid', '2019-01-17 15:16:32', '2019-01-17 15:16:32');
+(59, 'Chaise', '2019-01-21 08:47:39', '2019-01-21 08:47:39'),
+(60, 'Ecran', '2019-01-21 08:48:13', '2019-01-21 08:48:13');
 
 -- --------------------------------------------------------
 
@@ -124,12 +130,12 @@ ALTER TABLE `users`
 -- AUTO_INCREMENT pour la table `article`
 --
 ALTER TABLE `article`
-  MODIFY `idArticle` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=23;
+  MODIFY `idArticle` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 --
 -- AUTO_INCREMENT pour la table `categorie`
 --
 ALTER TABLE `categorie`
-  MODIFY `idCategorie` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=59;
+  MODIFY `idCategorie` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=61;
 --
 -- AUTO_INCREMENT pour la table `users`
 --

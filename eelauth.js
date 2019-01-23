@@ -5,7 +5,7 @@
  * 				 Google People API
  * @Version: 1.0.0
  * @Date: 03.04.2017
- * @Copyright: Entreprise Ecole CFPT-I © 2016-2017
+ * @Copyright: Entreprise Ecole CFPT-I © 2016-2017 
  */
 
 var EELAuth = (function () {
@@ -71,13 +71,13 @@ var EELAuth = (function () {
         signIn: function () {
             gapi.auth2.getAuthInstance().signIn();
         },
-
+        
         revokeAllScopes : function () {
             gapi.auth2.getAuthInstance().signOut();
             gapi.auth2.getAuthInstance().disconnect();
         },
         /**
-         * @brief
+         * @brief 
          * @returns
          */
         getUserInfo: function (OnReceiveInfo) {

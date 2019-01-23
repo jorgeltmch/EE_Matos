@@ -62,7 +62,7 @@ function addProduit($nom, $idCategorie, $description, $imgArticle)
 
 //Recherche d'articles
 function Recherche($recherche){
-  $sql = "SELECT * FROM article WHERE nomArticle LIKE '%'. :recherche .'%'"
+  $sql = "SELECT * FROM article WHERE nomArticle LIKE '%'. :recherche .'%'";
   $req = EDatabase::prepare($sql, array(PDO::ATTR_CURSOR, PDO::CURSOR_SCROLL));
   $req->execute(
     array(

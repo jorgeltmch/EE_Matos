@@ -31,10 +31,7 @@ if (filter_has_var(INPUT_POST,'Modifier')) {
                   <p>La catégorie à été modifiée avec succès.</p>
                   </div>';
 }
-//
-// if (isset($idCategorie)) {
-//
-// }
+
 ?>
 
 <!doctype html>
