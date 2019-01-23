@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Hôte : 127.0.0.1
--- Généré le :  mer. 23 jan. 2019 à 08:33
+-- Généré le :  mer. 23 jan. 2019 à 08:37
 -- Version du serveur :  5.7.17
 -- Version de PHP :  5.6.30
 
@@ -34,7 +34,7 @@ CREATE TABLE `article` (
   `descriptionArticle` varchar(200) NOT NULL,
   `dateAjout` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP,
   `dateModif` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP,
-  `idCategorie` int(11) NOT NULL,
+  `idCategorie` int(11) DEFAULT NULL,
   `imgArticle` blob
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
@@ -149,7 +149,7 @@ ALTER TABLE `users`
 -- Contraintes pour la table `article`
 --
 ALTER TABLE `article`
-  ADD CONSTRAINT `article_ibfk_1` FOREIGN KEY (`idCategorie`) REFERENCES `categorie` (`idCategorie`) ON DELETE CASCADE ON UPDATE CASCADE;
+  ADD CONSTRAINT `article_ibfk_1` FOREIGN KEY (`idCategorie`) REFERENCES `categorie` (`idCategorie`) ON DELETE SET NULL ON UPDATE CASCADE;
 
 --
 -- Contraintes pour la table `emprunt`
