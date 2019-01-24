@@ -23,6 +23,7 @@ session_start();
             ));
  }
 
+
 //Modifie la categorie voulue
  function ModifierCategorie($idCategorie, $nomCategorie)
  {
@@ -98,7 +99,7 @@ function Recherche($recherche){
 
   function getEmpruntsByUserID($id)
    {
-     $sql = 'SELECT nom, dateDebut, dateFin, rendu FROM emprunt JOIN article ON article.idArticle = emprunt.idArticle  WHERE idUser = :id';
+     $sql = 'SELECT nom, dateDebut, dateFin, rendu, emprunt.idArticle FROM emprunt JOIN article ON article.idArticle = emprunt.idArticle  WHERE idUser = :id';
      $req = EDatabase::prepare($sql, array(PDO::ATTR_CURSOR, PDO::CURSOR_SCROLL));
      $req->execute(array(
              ':id' => $id
@@ -106,6 +107,7 @@ function Recherche($recherche){
              $res = $req->fetchAll();
              return $res;
    }
+
 function addEmprunt($idArticle, $idUser, $dateDebut, $dateFin)
   {
     $sql = 'INSERT INTO emprunt(idArticle, idUser,dateDebut, dateFin) VALUES(:idArticle, :idUser, :dateDebut, :dateFin)';
@@ -133,16 +135,24 @@ function ajoutEmprunt($idUser, $idArticle, $dateDebut,$dateFin){
 function displayEmprunts($emprunts)
 {
   foreach ($emprunts as $key => $value) {
-echo "<tr><td>" . $value["dateDebut"] ."</td> " . "<td> " . $value["nom"] . "</td>" . "<td>" . $value["dateFin"] . "</td>";
+echo "<tr><td>" . date('d-m-Y', strtotime($value["dateDebut"])) ."</td> " . "<td> " . $value["nom"] . "</td>" . "<td>" . date('d-m-Y', strtotime($value["dateFin"]))  . "</td>";
 if ($value["rendu"] == 1) {
   echo "<td>Oui</td>";
 }
 else{
   echo "<td>Non</td>";
 }
-echo "<td>";
-include("popupRelouer.php");
+echo "<td><a class=\"uk-button uk-button-default\" href=\"materiel.php?idArticle=". $value["idArticle"] . "\">Relouer</a>";
 echo "</td></tr>";
 
   }
+}
+function displayInfos($article){
+  echo "<ul class=\"uk-list uk-list-striped uk-width-expand\">";
+    $description = explode(',', $article["descriptionArticle"]);
+    foreach ($description as $key => $value) {
+      echo "<li>" . $value . "</li>";
+    }
+  echo "</ul>";
+
 }

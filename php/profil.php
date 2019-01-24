@@ -2,6 +2,15 @@
 require_once 'fonction.php';
 $emprunts = getEmpruntsByUserID("1");
 
+
+
+$dateFin = (empty($_POST["dateFin"])) ? '' : $_POST["dateFin"];
+$idArticle = (empty($_POST["idArticle"])) ? '' : $_POST["dateFin"];
+$dateDebut = (empty($_POST["dateDebut"])) ? '' : $_POST["dateDebut"];
+
+if (!empty($dateFin) && !empty($dateDebut)) {
+  addEmprunt($idArticle, "1", $dateDebut, $dateFin); //TODO : changer id
+}
 ?>
 <!doctype html>
 <html lang="fr">
@@ -55,50 +64,7 @@ $emprunts = getEmpruntsByUserID("1");
                     </thead>
                     <tbody>
                       <?php displayEmprunts($emprunts); ?>
-                      <!--
-                        <tr>
-                            <td>28.09.2018</td>
-                            <td>Samsung SSD 860 EVO 250 Go</td>
-                            <td>05.09.2018</td>
-                            <td>Non</td>
-                            <td>
-                              <button class="uk-button uk-button-default">Modifier</button>
-                            </td>
-                        </tr>
-                        <tr>
-                            <td>17.08.2018</td>
-                            <td>iiyama 27" LED - G-MASTER G2730HSU-B1</td>
-                            <td>29.08.2018</td>
-                            <td>Non</td>
-                            <td>
-                              <button class="uk-button uk-button-default uk-toggle">Modifier</button>
-                            </td>
-                        </tr>
-                        <tr>
-                            <td>29.12.2017</td>
-                            <td>Clé de démontage pour clavier mécanique</td>
-                            <td>10.01.2017</td>
-                            <td>Oui</td>
-                            <td>
-                              <div class="uk-width-*@s" style="height: 40px">
-                                <a class="uk-button uk-button-default" href="#modal-center" uk-toggle>Relouer</a>
-                                <div id="modal-center" class="uk-flex-top" uk-modal>
-                                    <div class="uk-modal-dialog uk-modal-body uk-margin-auto-vertical">
-                                        <button class="uk-modal-close-default" type="button" uk-close></button>
-                                        <form class="uk-form">
-                                          <fieldset class="uk-fieldset">
-                                          <legend class="uk-legend">Réserver ce produit</legend>
-                                          <p>Date de début : <input type="text" data-uk-datepicker="{format:'DD.MM.YYYY'}"></p>
-                                          <p>Date de fin : <input type="text" data-uk-datepicker="{format:'DD.MM.YYYY'}"></p>
-                                          </fieldset>
-                                          <button class="uk-button uk-button-default uk-float-right">Réserver</button>
-                                        </form>
-                                    </div>
-                                  </div>
 
-                              </div>
-                            </td>
-                        </tr> --->
                     </tbody>
                 </table>
                 </div>
