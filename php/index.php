@@ -1,5 +1,15 @@
 <?php
 require_once 'fonction.php';
+
+$idCategorie = (empty($_GET["idCategorie"])) ? '' : $_GET["idCategorie"];
+
+if (!empty($idCategorie)) {
+  $categorie = GetCategorieById($idCategorie);
+  $articles = getArticlesByCategorie($idCategorie);
+}
+else{
+  $article = getArticlesByDate();
+}
 ?>
 <!doctype html>
 <html lang="fr">
@@ -18,7 +28,15 @@ require_once 'fonction.php';
             <input class="uk-search-input" type="search" placeholder="Search...">
         </form>
 
-        <h1 class="uk-heading-line uk-text-center uk-margin-large"><span>Nouveautés</span></h1>
+      <h1 class="uk-heading-line uk-text-center uk-margin-large"><span>
+        <?php
+        if (!empty($idCategorie)) {
+          echo $categorie["nomCategorie"];
+        }
+        else{
+          echo "Nouveautés :";
+        }
+        ?></span></h1>
 
         <div class="uk-child-width-1-5@m uk-margin" uk-grid>
             <div class="uk-margin-auto">

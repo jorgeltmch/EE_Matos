@@ -32,8 +32,8 @@
 
 <div id="offcanvas-slide" uk-offcanvas>
     <div class="uk-offcanvas-bar">
-
-        <ul class="uk-nav uk-nav-default uk-text-center">
+      <?php displayCategories(); ?>
+      <!--  <ul class="uk-nav uk-nav-default uk-text-center">
             <li class="uk-active"><a href="index.php">EE Matos</a></li>
             <li class="uk-nav-header">Catégorie</li>
             <li><a href="index.php">Accueil</a></li>
@@ -42,6 +42,6 @@
             <li class="uk-nav-divider"></li>
             <li><a href="#">Info</a></li>
         </ul>
-
+      -->
     </div>
 </div>

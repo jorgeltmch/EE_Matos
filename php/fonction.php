@@ -61,6 +61,36 @@ function addProduit($nom, $idCategorie, $description, $imgArticle)
 
  }
 
+ function GetCategorieById($idCategorie){
+   $sql = 'SELECT * FROM categorie WHERE idCategorie = :id';
+   $req = EDatabase::prepare($sql, array(PDO::ATTR_CURSOR, PDO::CURSOR_SCROLL));
+   $req->execute(array(
+           ':id' => $idCategorie
+           ));
+           $res = $req->fetch();
+           return $res;
+
+ }
+
+ function getArticlesByCategorie($idCategorie){
+   $sql = 'SELECT * FROM article WHERE idCategorie = :id ORDER BY dateAjout DESC';
+   $req = EDatabase::prepare($sql, array(PDO::ATTR_CURSOR, PDO::CURSOR_SCROLL));
+   $req->execute(array(
+           ':id' => $idCategorie
+           ));
+           $res = $req->fetch();
+           return $res;
+
+ }
+
+ function getArticlesByDate(){
+   $sql = 'SELECT * FROM article ORDER BY dateAjout DESC';
+   $req = EDatabase::prepare($sql, array(PDO::ATTR_CURSOR, PDO::CURSOR_SCROLL));
+   $req->execute();
+   $res = $req->fetchAll(PDO::FETCH_ASSOC);
+   return $res;
+
+ }
 //Recherche d'articles
 function Recherche($recherche){
   $sql = "SELECT * FROM article WHERE nomArticle LIKE '%'. :recherche .'%'";
@@ -132,6 +162,17 @@ function ajoutEmprunt($idUser, $idArticle, $dateDebut,$dateFin){
           return EDatabase::lastInsertId();
 }
 
+function displayCategories(){
+  $categories = GetCategories();
+  echo "<ul class=\"uk-nav uk-nav-default uk-text-center\">";
+  echo "<li class=\"uk-active\"><a href=\"index.php\">EE Matos</a></li>";
+  echo "<li class=\"uk-nav-header\">Catégories</li>";
+  echo "<li class=\"uk-nav-divider\"></li>";
+  foreach ($categories as $key => $value) {
+    echo "<li><a href=\"index.php?idCategorie=" .  $value["idCategorie"] . "\">" . $value["nomCategorie"] . "</a></li>";
+  }
+  echo "</ul>";
+}
 function displayEmprunts($emprunts)
 {
   foreach ($emprunts as $key => $value) {
