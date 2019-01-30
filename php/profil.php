@@ -17,6 +17,9 @@ if (!empty($dateFin) && !empty($dateDebut)) {
     <head>
         <meta charset="utf-8">
         <title>Profile</title>
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+        <script src="https://apis.google.com/js/platform.js"></script>
+        <script type="text/javascript" src="../js/eelauth.js"></script>
      <?php require "ulkit.php"; ?>
     </head>
     <body class="uk-background-muted">
@@ -31,16 +34,17 @@ if (!empty($dateFin) && !empty($dateDebut)) {
       <div class="uk-background-muted uk-padding-small" uk-height-viewport="expand: true" >
         <div class="uk-grid-small uk-child-width-1-3@s" uk-grid="masonry: true">
             <div>
-                <div class="uk-card uk-card-default uk-card-body uk-text-center"  style="height: 300px">
-                  <img class="uk-border-circle uk-height-max-medium" src="../img/profil.png" alt="Border circle" style="height: 200px">
+                <div class="uk-card uk-card-default uk-card-body uk-text-center" id="profilImage" style="height: 300px">
+                  <img class="uk-border-circle uk-height-max-medium"  src="../img/profil.png" alt="Border circle" style="height: 200px">
                 </div>
             </div>
             <div style="width: 500px;">
                 <div class="uk-card uk-card-default uk-card-body" style="height: 815px">
                   <h3 class="uk-card-title uk-heading-bullet uk-heading-line">Profil</h3>
-                  <p><b>Nom :</b> Machado</p>
-                  <p><b>Prenom :</b> Jorge</p>
-                  <p><b>Email :</b> jorge.ltmch@eduge.ch </p>
+                  <span><b>Prenom :</b> </span><span id="firstName"></span><br>
+                  <span><b>Nom complet : </b>  </span><span id="lastName"></span><br>
+                  <span><b>Email : </b></span><span id="email"></span><br>
+
                   <p><b>Nombre de prets :</b> 15</p>
                   <div class="uk-alert-success" uk-alert>
                     <a class="uk-alert-close" uk-close></a>

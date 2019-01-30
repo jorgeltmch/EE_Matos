@@ -52,19 +52,6 @@ if (!empty($dateFin) && !empty($dateDebut)) {
                       <p>5 éléments en stock</p>
                   </div>
                   <?php displayInfos($article) ?>
-                  <!-- <ul class="uk-list uk-list-striped uk-width-expand">
-                    <li>Marque: AOC</li>
-                    <li>Modèle: C24G1</li>
-                    <li>Taille de l'écran :	24 pouces</li>
-                    <li>Format de l'écran :	16/9</li>
-                    <li>Technologie LCD :	VA</li>
-                    <li>Résolution Max : 1920 x 1080 pixels</li>
-                    <li>Entrées vidéo : 1 X DisplayPort Femelle 2 X HDMI Femelle 1 X VGA (D-sub 15 Femelle)</li>
-                    <li>Sorties audio	: Casque (Jack 3.5mm Femelle)</li>
-                    <li>Luminosité : 250 cd/m²</li>
-                    <li>Angle de vision (horizontal) : 178 Degré(s)</li>
-                    <li>Angle de vision (vertical) : 178 Degré(s)</li>
-                </ul>-->
               </div>
                 </div>
             </div>

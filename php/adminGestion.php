@@ -14,6 +14,10 @@ $flashMessage = "";
 if (!empty($nomCategorie)) {
   AjouterCategorie($nomCategorie);
   $nomCategorie = "";
+  $flashMessage = '<div class="uk-alert-success" uk-alert>
+                  <a class="uk-alert-close" uk-close></a>
+                  <p>La catégorie à été ajoutée avec succès.</p>
+                  </div>';
 }
 
 if (filter_has_var(INPUT_POST,'Supprimer')) {
@@ -33,7 +37,6 @@ if (filter_has_var(INPUT_POST,'Modifier')) {
 }
 
 ?>
-
 <!doctype html>
 <html lang="fr">
     <head>
