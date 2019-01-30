@@ -36,7 +36,7 @@ if (!empty($dateFin) && !empty($dateDebut)) {
                     <div class="uk-child-width-1-3@m" uk-grid uk-lightbox="animation: slide">
                         <div>
                             <?php
-                            echo '<a href="apercu.php?idArticle='.$article['idArticle'].'"><img src="apercu.php?idArticle='.$article['idArticle'].'" alt="'.$article['nom'].'" title="'.$article['nom'].'" /></a>';
+                            echo '<img src="apercu.php?idArticle='.$article['idArticle'].'" alt="'.$article['nom'].'" title="'.$article['nom'].'" />';
                              ?>
                         </div>
                     </div>
