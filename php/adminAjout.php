@@ -1,9 +1,8 @@
-
 <?php
 
 require_once 'fonction.php';
 
-if(isset($_POST['btnAjout'])){
+if(isset($_POST['validation'])){
     $nomProduit = filter_input(INPUT_POST, 'nomProduit', FILTER_SANITIZE_STRING);
     $idCategorie = filter_input(INPUT_POST, 'categorie', FILTER_SANITIZE_STRING);
     $caracteristique1 = filter_input(INPUT_POST, 'caracteristique1', FILTER_SANITIZE_STRING);
@@ -12,22 +11,46 @@ if(isset($_POST['btnAjout'])){
     $caracteristique4 = filter_input(INPUT_POST, 'caracteristique4', FILTER_SANITIZE_STRING);
     $imgArticle = filter_input(INPUT_POST, 'imgArticle', FILTER_SANITIZE_STRING);
 
-    $caracteristique = $caracteristique1 . ", " . $caracteristique2 . ", " . $caracteristique3 . ", " . $caracteristique4;
+    $description = $caracteristique1 . ", " . $caracteristique2 . ", " . $caracteristique3 . ", " . $caracteristique4;
 
-    $extensionUpload = strtolower(substr(strrchr($_FILES['imgArticle']['name'], '.'), 1));
+    //Indique si le fichier a été téléchargé
+    	 if(!is_uploaded_file($_FILES['image']['tmp_name']))
+    		echo 'Un problème est survenu durant l\'opération. Veuillez réessayer !';
+    	 else {
+    		//liste des extensions possibles
+    		$extensions = array('/png', '/gif', '/jpg', '/jpeg');
 
-    $pdpName= "../img/article/12"."."."{$extensionUpload}";
-    $imgArticle = move_uploaded_file($_FILES['imgArticle']['tmp_name'],$pdpName);
+    		//récupère la chaîne à partir du dernier / pour connaître l'extension
+    		$extension = strrchr($_FILES['image']['type'], '/');
 
-    addProduit($nomProduit, $idCategorie, $caracteristique, $imgArticle);
+    		//vérifie si l'extension est dans notre tableau
+    		if(!in_array($extension, $extensions))
+    			echo 'Vous devez uploader un fichier de type png, gif, jpg, jpeg.';
+    		else {
+
+    			//on définit la taille maximale
+    			define('MAXSIZE', 300000);
+    			if($_FILES['image']['size'] > MAXSIZE)
+    			   echo 'Votre image est supérieure à la taille maximale de '.MAXSIZE.' octets';
+    			else {
+
+    				//Lecture du fichier
+    				$image = file_get_contents($_FILES['image']['tmp_name']);
+
+            addProduit($nomProduit, $idCategorie, $description, $image, $_FILES['image']['type']);
+
+    				echo 'L\'insertion s est bien déroulée !';
+    			 }
+    		  }
+    	  }
 }
-
 ?>
 
 <!doctype html>
 <html lang="fr">
     <head>
         <meta charset="utf-8">
+        <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1" />
         <title>EE Matos</title>
         <?php require "ulkit.php"; ?>
     </head>
@@ -44,7 +67,7 @@ if(isset($_POST['btnAjout'])){
         </div>
 
         <h1 class="uk-heading-divider">Ajout de nouveau produit</h1>
-        <form action="#" method="POST" class="uk-margin-auto uk-margin-large-top uk-form-stacked uk-width-1-3@m">
+        <form enctype="multipart/form-data" action="adminAjout.php" method="post" class="uk-margin-auto uk-margin-large-top uk-form-stacked uk-width-1-3@m">
 
             <div class="uk-margin">
                 <label class="uk-form-label" for="form-stacked-text">Nom du produit</label>
@@ -103,11 +126,14 @@ if(isset($_POST['btnAjout'])){
                 <span uk-icon="icon: cloud-upload"></span>
                 <span class="uk-text-middle">Glissez, déposez ou </span>
                 <div uk-form-custom>
-                    <input type="file" name="imgArticle" multiple>
+                    <input type="file" name="image" id="image"/>
                     <span class="uk-link">cliquez ici</span>
                 </div>
             </div>
 
+
+
+            <!--
             <progress id="js-progressbar" class="uk-progress" value="0" max="100" hidden></progress>
 
             <script>
@@ -169,8 +195,8 @@ if(isset($_POST['btnAjout'])){
 
                 });
 
-            </script>
-            <input type="submit" name="btnAjout" value="Ajouter"  class="uk-button uk-button-primary uk-margin-bottom"/>
+            </script> -->
+            <input type="submit" name="validation" id="validation" value="Envoyer" class="uk-button uk-button-primary uk-margin-bottom"/>
         </form>
 
 

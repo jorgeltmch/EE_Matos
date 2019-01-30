@@ -35,13 +35,9 @@ if (!empty($dateFin) && !empty($dateDebut)) {
                 <div class="uk-card uk-card-default uk-card-body uk-text-center"  style="height: 400px">
                     <div class="uk-child-width-1-3@m" uk-grid uk-lightbox="animation: slide">
                         <div>
-                            <a class="uk-inline" href="../img/AOC_C24G1.jpg" data-caption="Caption 1"></a>
-                        </div>
-                        <div>
-                            <a class="uk-inline" href="../img/ecran1.jpg" data-caption="Caption 2"><img src="../img/AOC_C24G1.jpg" alt=""></a>
-                        </div>
-                        <div>
-                            <a class="uk-inline" href="../img/AOC_C24G1.jpg" data-caption="Caption 3"></a>
+                            <?php
+                            echo '<a href="apercu.php?idArticle='.$article['idArticle'].'"><img src="apercu.php?idArticle='.$article['idArticle'].'" alt="'.$article['nom'].'" title="'.$article['nom'].'" /></a>';
+                             ?>
                         </div>
                     </div>
                 </div>
@@ -49,7 +45,7 @@ if (!empty($dateFin) && !empty($dateDebut)) {
             <div>
                 <div class="uk-card uk-card-default uk-card-body" style="height: 815px">
                 <div>
-                  <h1 class="uk-heading-bullet" >AOC C24G1 24" 144Hz <button class="uk-float-right uk-button uk-button-default uk-text-center">Modifier</button></h1>
+                  <h1 class="uk-heading-bullet" ><?php echo $article["nom"] ?><button class="uk-float-right uk-button uk-button-default uk-text-center">Modifier</button></h1>
 
                   <div class="uk-alert-success" uk-alert>
                       <a class="uk-alert-close" uk-close></a>

@@ -37,16 +37,17 @@ session_start();
  }
 
 //___________________________AJOUT PRODUIT________________________________
-function addProduit($nom, $idCategorie, $description, $imgArticle)
+function addProduit($nom, $idCategorie, $description, $imgArticle, $imgExtension)
  {
-   $sql = "INSERT INTO article(nom, descriptionArticle, idCategorie, imgArticle) VALUES(:nom, :descriptionArticle, :idCategorie, :imgArticle)";
+   $sql = "INSERT INTO article(nom, descriptionArticle, idCategorie, img, imgExtension) VALUES(:nom, :descriptionArticle, :idCategorie, :img, :imgExtension)";
    $req = EDatabase::prepare($sql, array(PDO::ATTR_CURSOR, PDO::CURSOR_SCROLL));
    $req->execute(
      array(
         'nom' => $nom,
         'descriptionArticle' => $description,
         'idCategorie' => $idCategorie,
-        'imgArticle' => $imgArticle
+        'img' => $imgArticle,
+        'imgExtension' => $imgExtension
         )
     );
     return EDatabase::lastInsertId();
@@ -118,7 +119,7 @@ function Recherche($recherche){
 
  function getProduitByID($id)
   {
-    $sql = 'SELECT idArticle, nom, descriptionArticle, dateAjout, dateModif, idCategorie, imgArticle FROM article WHERE idArticle = :id';
+    $sql = 'SELECT * FROM article WHERE idArticle = :id';
     $req = EDatabase::prepare($sql, array(PDO::ATTR_CURSOR, PDO::CURSOR_SCROLL));
     $req->execute(array(
             ':id' => $id
@@ -173,6 +174,7 @@ function displayCategories(){
   }
   echo "</ul>";
 }
+
 function displayEmprunts($emprunts)
 {
   foreach ($emprunts as $key => $value) {
