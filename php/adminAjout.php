@@ -29,7 +29,7 @@ if(isset($_POST['validation'])){
     		else {
 
     			//on définit la taille maximale
-    			define('MAXSIZE', 300000);
+    			define('MAXSIZE', 3000000);
     			if($_FILES['image']['size'] > MAXSIZE)
     			   echo 'Votre image est supérieure à la taille maximale de '.MAXSIZE.' octets';
     			else {

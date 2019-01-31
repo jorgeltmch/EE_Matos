@@ -62,34 +62,65 @@ function addProduit($nom, $idCategorie, $description, $imgArticle, $imgExtension
 
  }
 
+
+ function getNumberArticles(){
+   $sql = 'SELECT COUNT(*) FROM article';
+   $req = EDatabase::prepare($sql, array(PDO::ATTR_CURSOR, PDO::CURSOR_SCROLL));
+   $req->execute();
+   $datacom = $req->fetch();
+   return $datacom;
+ }
+
+ function getNumberArticlesByCategorie($idCategorie){
+   $sql = 'SELECT COUNT(*) FROM article WHERE idCategorie = :idCategorie';
+   $req = EDatabase::prepare($sql, array(PDO::ATTR_CURSOR, PDO::CURSOR_SCROLL));
+   $req->execute(
+     array(
+        'idCategorie' => $idCategorie
+        )
+   );
+   $datacom = $req->fetch();
+   return $datacom;
+ }
+
  function GetCategorieById($idCategorie){
    $sql = 'SELECT * FROM categorie WHERE idCategorie = :id';
    $req = EDatabase::prepare($sql, array(PDO::ATTR_CURSOR, PDO::CURSOR_SCROLL));
    $req->execute(array(
-           ':id' => $idCategorie
+           ':id' => $idCategorie,
            ));
            $res = $req->fetch();
            return $res;
 
  }
 
- function getArticlesByCategorie($idCategorie){
-   $sql = 'SELECT * FROM article WHERE idCategorie = :id ORDER BY dateAjout DESC';
-   $req = EDatabase::prepare($sql, array(PDO::ATTR_CURSOR, PDO::CURSOR_SCROLL));
-   $req->execute(array(
-           ':id' => $idCategorie
-           ));
-           $res = $req->fetch();
-           return $res;
+ function getArticlesByCategorie($idCategorie, $page){
+           $page2 = $page * 10;
+           $page = ($page == 1) ? 0 : $page + 10 - 1;
+           $sql = 'SELECT * FROM article WHERE idCategorie = :id  ORDER BY dateAjout LIMIT ' .$page. ','. $page2  ;
+             $req = EDatabase::prepare($sql);
+                  $req->execute(array(
+                          ':id' => $idCategorie,
+                          ));
+                     $res = $req->fetchAll(PDO::FETCH_ASSOC);
+                     return $res;
 
  }
 
- function getArticlesByDate(){
-   $sql = 'SELECT * FROM article ORDER BY dateAjout DESC';
-   $req = EDatabase::prepare($sql, array(PDO::ATTR_CURSOR, PDO::CURSOR_SCROLL));
-   $req->execute();
-   $res = $req->fetchAll(PDO::FETCH_ASSOC);
-   return $res;
+ function getArticlesByDate($page){
+   $page2 = $page * 10;
+   $page = ($page == 1) ? 1 : $page + 10 - 1;
+   $sql = 'SELECT * FROM article ORDER BY dateAjout LIMIT ' .$page. ','. $page2  ;
+   try {
+     $req = EDatabase::prepare($sql);
+          $req->execute();
+             $res = $req->fetchAll(PDO::FETCH_ASSOC);
+             return $res;
+   } catch (\Exception $e) {
+     echo $e->getMessage();
+   }
+
+
 
  }
 //Recherche d'articles
