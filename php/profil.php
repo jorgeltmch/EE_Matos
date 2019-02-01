@@ -11,6 +11,7 @@ $dateDebut = (empty($_POST["dateDebut"])) ? '' : $_POST["dateDebut"];
 if (!empty($dateFin) && !empty($dateDebut)) {
   addEmprunt($idArticle, "1", $dateDebut, $dateFin); //TODO : changer id
 }
+
 ?>
 <!doctype html>
 <html lang="fr">
@@ -35,7 +36,7 @@ if (!empty($dateFin) && !empty($dateDebut)) {
         <div class="uk-grid-small uk-child-width-1-3@s" uk-grid="masonry: true">
             <div>
                 <div class="uk-card uk-card-default uk-card-body uk-text-center" id="profilImage" style="height: 300px">
-                  <img class="uk-border-circle uk-height-max-medium"  src="../img/profil.png" alt="Border circle" style="height: 200px">
+                  <img class="uk-border-circle uk-height-max-medium"  src="<?php echo $username; ?>" alt="Border circle" style="height: 200px">
                 </div>
             </div>
             <div style="width: 500px;">

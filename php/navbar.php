@@ -19,11 +19,16 @@
             <span class="uk-search-icon-flip" uk-search-icon></span>
             <input class="uk-search-input" type="search" placeholder="Search...">
         </form>
-        <?php if (empty($_SESSION["username"])): ?>
-          <form>
+        <form method="post">
+        <?php
+        if (!isset($_SESSION["username"])): ?>
           <button class="uk-button uk-button-secondary" id="SignInButton"  onclick=""><a href="profil.php">Login</a></button>
-        </form>
-        <?php endif; ?>
+      <?php endif;
+      if (isset($_SESSION["username"])):
+        ?>
+        <button class="uk-button uk-button-secondary" id="SignOutButton"  onclick=""><a href="profil.php">Logout</a></button>
+      <?php endif; ?>
+            </form>
         <div id="result"></div>
     </div>
 
@@ -39,6 +44,7 @@
     $(document).ready(function () {
         // Ajouter un handle sur le bouton connexion
         $("#SignInButton").click(handleAuthClick);
+        $("#SignOutButton").click(disconnect);
         // Initialiser l'api people de google
         // en lui passant une call-back pour la mise à jour
         // du status de la personne connectée.
@@ -90,26 +96,27 @@
           $("#email").html(info.email);
           $("#locale").html(info.locale);
           $("#result").html(info.lastName);
-          var variableToSend = info.lastName;
-
-          $.post('navbar.php', {postuser:variableToSend});
+          $.post('manageLoginAjax.php', {postuser:$("#lastName").html()}, function(data) {
+            location.reload();
+            // console.log(data);
+            // $("#SignInButton").hide();
+          });
     }
 
     /**
      * Gère la déconnection avec people api de google
      * @returns {undefined}
      */
-    function disconnect() {
-        /*
-         var delete_cookie = function () {
-         document.cookie = "G_AUTHUSER_H=0" + '=;expires=Thu, 01 Jan 1970 00:00:01 GMT;';
-         };
-         delete_cookie("G_AUTHUSER_H=0");
-         */
-        EELAuth.revokeAllScopes();
+    function disconnect(){
+      /*EELAuth.revokeAllScopes();
         clearInfo();
         // On lance la fenêtre de déconnexion
         window.open('https://www.google.com/accounts/Logout?continue=https://appengine.google.com/_ah/logout', "LogoutEEL", strWindowFeatures);
+      */
+        $.post('manageLoginAjax.php', {decuser:"dec"}, function(data) {
+          console.log(data);
+
+        });
     }
 
 
@@ -127,13 +134,7 @@
 
 </script>
 
-<?php
-if (!empty($_POST['postuser'])) {
-  $username = $_POST['postuser'];
-  echo $username;
-}
 
- ?>
 
 <!-- NavBar sur le coter gauche qui est retactable -->
 
