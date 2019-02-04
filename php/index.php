@@ -42,7 +42,7 @@ $nbPages = ceil($nbArticles[0] / 10);
           echo $categorie["nomCategorie"];
         }
         else{
-          echo "Nouveautés :";
+          echo "Nouveautés";
         }
         ?></span></h1>
 

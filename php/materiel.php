@@ -55,12 +55,14 @@ if (!empty($dateFin) && !empty($dateDebut)) {
               </div>
                 </div>
             </div>
+            <?php if(!empty($_SESSION["username"])): ?>
             <div>
                 <div class="uk-card uk-card-default uk-card-body uk-width-*@s" style="height: 400px">
                   <a class="uk-button uk-button-default" href="#modal-center" uk-toggle><?php include("calendrier.php"); ?></a>
             <?php  include("popupLouer.php"); ?>
             </div>
         </div>
+      <?php endif; ?>
       </div>
     </body>
     <script src="js/uikit.min.js"></script>

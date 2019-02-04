@@ -65,7 +65,7 @@ if (filter_has_var(INPUT_POST,'Modifier')) {
         <form class="uk-margin-auto uk-margin-large-top uk-form-stacked uk-width-1-3@m" method="POST" action="#">
 
             <div class="uk-margin">
-                <label class="uk-form-label" for="form-stacked-text">Type de catégorie</label>
+                <label class="uk-form-label" for="form-stacked-text">Catégorie</label>
                 <select name="TypeCategorie" class="uk-select">
                   <?php
                   foreach (getCategories() as $com)
@@ -98,28 +98,6 @@ if (filter_has_var(INPUT_POST,'Modifier')) {
                     <input class="uk-input" id="form-stacked-text" type="text" name="nomCategorie" placeholder="Ecran">
                 </div>
             </div>
-
-
-            <div uk-overflow-auto="selContainer: .uk-height-medium; selContent: .js-wrapper" class="uk-height-medium uk-tile uk-tile-muted">
-                <ul class="uk-nav uk-width-1-2 uk-margin-auto">
-
-                    <div>
-                        <label class="uk-form-label" for="form-stacked-text">Ajouter un nom de caractéristique</label>
-                        <div class="uk-form-controls">
-                            <input class="uk-input" id="form-stacked-text" type="text" placeholder="Ecran">
-                        </div>
-                    </div>
-                    <input type="submit" value="Ajout" class="uk-button uk-button-primary uk-margin-small-top uk-margin-bottom" onclick="UIkit.notification({message: 'Ajout réussi.', status: 'success'})"></input>
-
-                    <label class="uk-form-label" for="form-stacked-text">Taille &nbsp;<span uk-icon="trash"></span></label>
-                    <label class="uk-form-label" for="form-stacked-text">Taille &nbsp;<span uk-icon="trash"></span></label>
-                    <label class="uk-form-label" for="form-stacked-text">Taille &nbsp;<span uk-icon="trash"></span></label>
-                    <label class="uk-form-label" for="form-stacked-text">Taille &nbsp;<span uk-icon="trash"></span></label>
-                    <label class="uk-form-label" for="form-stacked-text">Taille &nbsp;<span uk-icon="trash"></span></label>
-
-                </ul>
-            </div>
-
             <input type="submit" name="creerCategorie" value="Valider" class="uk-button uk-button-primary uk-margin-small-top uk-margin-bottom" onclick="UIkit.notification({message: 'Ajout réussi.', status: 'success'})"></input>
 
         </form>

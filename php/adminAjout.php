@@ -73,7 +73,7 @@ if(isset($_POST['validation'])){
             </div>
 
             <div class="uk-margin">
-                <label class="uk-form-label" for="form-stacked-text">Type de catégorie</label>
+                <label class="uk-form-label" for="form-stacked-text">Catégorie de l'objet</label>
                 <select name="categorie" class="uk-select">
                   <?php
                   foreach (getCategories() as $com)

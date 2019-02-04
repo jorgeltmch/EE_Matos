@@ -53,6 +53,7 @@ if (isset($_POST['decuser'])) {
             ?>
           <button class="uk-button uk-button-secondary" id="SignInButton"  onclick=""><a href="adminAjout.php">Login</a></button>
 <?php else: ?>
+        <a href="profil.php" ><img class="uk-border-circle uk-height-max-medium"  src="<?php echo $_SESSION["imgProfil"]; ?>" alt="Border circle" style="height: 40px"></a>
         <button class="uk-button uk-button-secondary" id="SignOutButton"  onclick=""><a href="index.php">Logout</a></button>
 <?php endif; ?>
             </form>
@@ -125,22 +126,8 @@ if (isset($_POST['decuser'])) {
               data: {"lastname": info.lastname, "fistname": info.firstname,"email": info.email,"locale": info.locale,"imgProfil": info.image},
               success: function () {
               window.location.replace("profil.php");
-              // $("#SignInButton").hide();
-              // $("#SignOutButton").show();
               }
           });
-          // $.ajax({
-          //     type: "POST",
-          //     url: "manageLoginAjax.php",
-          //     data: info.lastname,
-          //     success: "str",
-          //     dataType: "text"
-          //   });
-          // $.post('manageLoginAjax.php', {lastName:$("#lastName").html()}, function(data) {
-          //   // location.reload();
-          //   // console.log(data);
-          //   // $("#SignInButton").hide();
-          // });
     }
 
 
@@ -154,8 +141,7 @@ if (isset($_POST['decuser'])) {
         // On lance la fenêtre de déconnexion
         window.open('https://www.google.com/accounts/Logout?continue=https://appengine.google.com/_ah/logout', "LogoutEEL", strWindowFeatures);
       */
-      // $("#SignInButton").show();
-      // $("#SignOutButton").hide();
+
       $.post('navbar.php', {decuser:"dec"}, function(data) {
           console.log(data);
           clearInfo();

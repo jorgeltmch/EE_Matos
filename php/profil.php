@@ -2,12 +2,6 @@
 require_once 'fonction.php';
 $emprunts = getEmpruntsByUserID("1");
 
-//Variables à afficher (infos profil)
-// if (!isset($_SESSION["username"])) {
-//   header("Location: index.php");
-//   exit;
-// }
-
 $dateFin = (empty($_POST["dateFin"])) ? '' : $_POST["dateFin"];
 $idArticle = (empty($_POST["idArticle"])) ? '' : $_POST["dateFin"];
 $dateDebut = (empty($_POST["dateDebut"])) ? '' : $_POST["dateDebut"];
@@ -15,7 +9,10 @@ $dateDebut = (empty($_POST["dateDebut"])) ? '' : $_POST["dateDebut"];
 if (!empty($dateFin) && !empty($dateDebut)) {
   addEmprunt($idArticle, "1", $dateDebut, $dateFin); //TODO : changer id
 }
-
+if (empty($_SESSION["username"])) {
+  header("Location: index.php");
+  exit;
+}
 ?>
 <!doctype html>
 <html lang="fr">
@@ -32,7 +29,6 @@ if (!empty($dateFin) && !empty($dateDebut)) {
       <header>
         <?php
           require_once "navbar.php";
-          //require_once "js/eelauth.js";
         ?>
       </header>
 
