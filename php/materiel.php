@@ -47,9 +47,9 @@ if (!empty($dateFin) && !empty($dateDebut)) {
                 <div>
                   <h1 class="uk-heading-bullet" ><?php echo $article["nom"] ?><button class="uk-float-right uk-button uk-button-default uk-text-center">Modifier</button></h1>
 
-                  <div class="uk-alert-success" uk-alert>
+                  <div class="uk-alert-success" uk-alert> <?php // TODO: alert rouge si pas disponible ?>
                       <a class="uk-alert-close" uk-close></a>
-                      <p>5 éléments en stock</p>
+                      <p><?php echo $article["stockDisponible"] ?> éléments en stock</p>
                   </div>
                   <?php displayInfos($article) ?>
               </div>

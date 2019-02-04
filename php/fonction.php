@@ -37,15 +37,16 @@ session_start();
  }
 
 //___________________________AJOUT PRODUIT________________________________
-function addProduit($nom, $idCategorie, $description, $imgArticle, $imgExtension)
+function addProduit($nom, $idCategorie, $description, $stock, $imgArticle, $imgExtension)
  {
-   $sql = "INSERT INTO article(nom, descriptionArticle, idCategorie, img, imgExtension) VALUES(:nom, :descriptionArticle, :idCategorie, :img, :imgExtension)";
+   $sql = "INSERT INTO article(nom, descriptionArticle, idCategorie, stockDisponible, img, imgExtension) VALUES(:nom, :descriptionArticle, :idCategorie, :stock, :img, :imgExtension)";
    $req = EDatabase::prepare($sql, array(PDO::ATTR_CURSOR, PDO::CURSOR_SCROLL));
    $req->execute(
      array(
         'nom' => $nom,
         'descriptionArticle' => $description,
         'idCategorie' => $idCategorie,
+        'stock' => $stock,
         'img' => $imgArticle,
         'imgExtension' => $imgExtension
         )
@@ -109,8 +110,8 @@ function addProduit($nom, $idCategorie, $description, $imgArticle, $imgExtension
 
  function getArticlesByDate($page){
    $page2 = $page * 10;
-   $page = ($page == 1) ? 1 : $page + 10 - 1;
-   $sql = 'SELECT * FROM article ORDER BY dateAjout LIMIT ' .$page. ','. $page2  ;
+   $page = ($page == 1) ? 0 : $page + 10 - 1;
+   $sql = 'SELECT * FROM article ORDER BY dateAjout DESC LIMIT ' .$page. ','. $page2  ;
    try {
      $req = EDatabase::prepare($sql);
           $req->execute();

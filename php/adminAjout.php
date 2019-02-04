@@ -5,13 +5,9 @@ require_once 'fonction.php';
 if(isset($_POST['validation'])){
     $nomProduit = filter_input(INPUT_POST, 'nomProduit', FILTER_SANITIZE_STRING);
     $idCategorie = filter_input(INPUT_POST, 'categorie', FILTER_SANITIZE_STRING);
-    $caracteristique1 = filter_input(INPUT_POST, 'caracteristique1', FILTER_SANITIZE_STRING);
-    $caracteristique2 = filter_input(INPUT_POST, 'caracteristique2', FILTER_SANITIZE_STRING);
-    $caracteristique3 = filter_input(INPUT_POST, 'caracteristique3', FILTER_SANITIZE_STRING);
-    $caracteristique4 = filter_input(INPUT_POST, 'caracteristique4', FILTER_SANITIZE_STRING);
+    $description = filter_input(INPUT_POST, 'description', FILTER_SANITIZE_STRING);
     $imgArticle = filter_input(INPUT_POST, 'imgArticle', FILTER_SANITIZE_STRING);
-
-    $description = $caracteristique1 . ", " . $caracteristique2 . ", " . $caracteristique3 . ", " . $caracteristique4;
+    $stock = filter_input(INPUT_POST, 'stock', FILTER_SANITIZE_STRING);
 
     //Indique si le fichier a été téléchargé
     	 if(!is_uploaded_file($_FILES['image']['tmp_name']))
@@ -37,7 +33,7 @@ if(isset($_POST['validation'])){
     				//Lecture du fichier
     				$image = file_get_contents($_FILES['image']['tmp_name']);
 
-            addProduit($nomProduit, $idCategorie, $description, $image, $_FILES['image']['type']);
+            addProduit($nomProduit, $idCategorie, $description, $stock, $image, $_FILES['image']['type']);
 
     				echo 'L\'insertion s est bien déroulée !';
     			 }
@@ -88,36 +84,16 @@ if(isset($_POST['validation'])){
                 </select>
             </div>
 
-            <label class="uk-form-label" for="form-stacked-text">Caractéristique du produit</label>
+            <label class="uk-form-label" for="form-stacked-text">Caractéristiques du produit (séparer avec des virgules)</label>
+            <div class="uk-margin">
+              <textarea class="uk-textarea" rows="5" name="description" placeholder="Textarea"></textarea>
+            </div>
 
-
-            <div uk-overflow-auto="selContainer: .uk-height-medium; selContent: .js-wrapper" class="uk-height-medium uk-tile uk-tile-muted">
-                <ul class="uk-nav uk-width-1-2 uk-margin-auto">
-                    <li class="uk-active">
-                        <label class="uk-form-label" for="form-stacked-text">Taille</label>
-                        <div class="uk-form-controls">
-                            <input name="caracteristique1" class="uk-input" id="form-stacked-text" type="text" placeholder="L20 x H20 x P20">
-                        </div>
-                    </li>
-                    <li class="uk-active">
-                        <label class="uk-form-label" for="form-stacked-text">Résolution</label>
-                        <div class="uk-form-controls">
-                            <input name="caracteristique2" class="uk-input" id="form-stacked-text" type="text" placeholder="1080 x 1920">
-                        </div>
-                    </li>
-                    <li class="uk-active">
-                        <label class="uk-form-label" for="form-stacked-text">Couleur</label>
-                        <div class="uk-form-controls">
-                            <input name="caracteristique3" class="uk-input" id="form-stacked-text" type="text" placeholder="Rouge">
-                        </div>
-                    </li>
-                    <li class="uk-active">
-                        <label class="uk-form-label" for="form-stacked-text">Entré</label>
-                        <div class="uk-form-controls">
-                            <input name="caracteristique4" class="uk-input" id="form-stacked-text" type="text" placeholder="2 x HDMI, 1 x DisplayPort Femelle">
-                        </div>
-                    </li>
-                </ul>
+            <div class="uk-margin">
+                <label class="uk-form-label" for="form-stacked-text">Stock disponible</label>
+                <div class="uk-form-controls">
+                    <input name="stock" class="uk-input" id="form-stacked-text" type="text">
+                </div>
             </div>
 
 
