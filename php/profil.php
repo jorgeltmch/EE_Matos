@@ -2,7 +2,11 @@
 require_once 'fonction.php';
 $emprunts = getEmpruntsByUserID("1");
 
-
+//Variables à afficher (infos profil)
+// if (!isset($_SESSION["username"])) {
+//   header("Location: index.php");
+//   exit;
+// }
 
 $dateFin = (empty($_POST["dateFin"])) ? '' : $_POST["dateFin"];
 $idArticle = (empty($_POST["idArticle"])) ? '' : $_POST["dateFin"];
@@ -36,15 +40,15 @@ if (!empty($dateFin) && !empty($dateDebut)) {
         <div class="uk-grid-small uk-child-width-1-3@s" uk-grid="masonry: true">
             <div>
                 <div class="uk-card uk-card-default uk-card-body uk-text-center" id="profilImage" style="height: 300px">
-                  <img class="uk-border-circle uk-height-max-medium"  src="<?php echo $username; ?>" alt="Border circle" style="height: 200px">
+                  <img class="uk-border-circle uk-height-max-medium"  src="<?php echo $_SESSION["imgProfil"]; ?>" alt="Border circle" style="height: 200px">
                 </div>
             </div>
             <div style="width: 500px;">
                 <div class="uk-card uk-card-default uk-card-body" style="height: 815px">
                   <h3 class="uk-card-title uk-heading-bullet uk-heading-line">Profil</h3>
-                  <span><b>Prenom :</b> </span><span id="firstName"></span><br>
-                  <span><b>Nom complet : </b>  </span><span id="lastName"></span><br>
-                  <span><b>Email : </b></span><span id="email"></span><br>
+                  <span><b>Prenom :</b> </span><span id="firstName"><?php echo $_SESSION["firstname"]; ?></span><br>
+                  <span><b>Nom complet : </b>  </span><span id="lastName"><?php echo $_SESSION["username"]; ?></span><br>
+                  <span><b>Email : </b></span><span id="email"><?php echo $_SESSION["email"]; ?></span><br>
 
                   <p><b>Nombre de prets :</b> 15</p>
                   <div class="uk-alert-success" uk-alert>

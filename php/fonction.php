@@ -136,6 +136,29 @@ function Recherche($recherche){
        return $res;
 }
 
+function addUser($username){
+  $sql = "INSERT INTO users(username) VALUES(:username)";
+  $req = EDatabase::prepare($sql, array(PDO::ATTR_CURSOR, PDO::CURSOR_SCROLL));
+  $req->execute(
+    array(
+       'username' => $username
+       )
+   );
+   return EDatabase::lastInsertId();
+}
+
+function userExists($username){
+  $sql = "SELECT idUser FROM users WHERE username = :username";
+  $req = EDatabase::prepare($sql, array(PDO::ATTR_CURSOR, PDO::CURSOR_SCROLL));
+  $req->execute(
+    array(
+       'username' => $username
+       )
+   );
+   $res = $req->fetch();
+   return $res;
+}
+
  //function idCategorie($categorie)
  //{
  // $sql = 'SELECT idCategorie FROM categorie WHERE nomCategorie = :nomCategorie';

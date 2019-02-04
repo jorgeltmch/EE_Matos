@@ -1,3 +1,32 @@
+<?php
+require_once 'fonction.php';
+$username = filter_input(INPUT_POST, "lastname", FILTER_SANITIZE_STRING);
+$fistname = filter_input(INPUT_POST, "fistname", FILTER_SANITIZE_STRING);
+$locale = filter_input(INPUT_POST, "locale", FILTER_SANITIZE_STRING);
+$email = filter_input(INPUT_POST, "email", FILTER_SANITIZE_STRING);
+$imgProfil = filter_input(INPUT_POST, "imgProfil");
+
+
+
+if (!empty($username)) {
+  $_SESSION["username"] = $username;
+  $_SESSION["firstname"] = $fistname;
+  $_SESSION["email"] = $email;
+  $_SESSION["imgProfil"] = $imgProfil;
+  if (empty(userExists($username))) {
+    addUser($username);
+  }
+}
+
+if (isset($_POST['decuser'])) {
+    if (ini_get("session.use_cookies")) {
+    $params = session_get_cookie_params();
+    setcookie(session_name(), '', time() - 42000, $params["path"], $params["domain"], $params["secure"], $params["httponly"]);
+    }
+    $_SESSION = array();
+    session_destroy();
+}
+ ?>
 <!--NavBar Haut avec bouton-->
 <nav class="uk-navbar uk-navbar-container uk-margin uk-width-auto@m ">
 
@@ -19,20 +48,20 @@
             <span class="uk-search-icon-flip" uk-search-icon></span>
             <input class="uk-search-input" type="search" placeholder="Search...">
         </form>
-        <form method="post">
-        <?php
-        if (!isset($_SESSION["username"])): ?>
-          <button class="uk-button uk-button-secondary" id="SignInButton"  onclick=""><a href="profil.php">Login</a></button>
-      <?php endif;
-      if (isset($_SESSION["username"])):
-        ?>
-        <button class="uk-button uk-button-secondary" id="SignOutButton"  onclick=""><a href="profil.php">Logout</a></button>
-      <?php endif; ?>
+          <form method="post">
+          <?php if (empty($_SESSION["username"])):
+            ?>
+          <button class="uk-button uk-button-secondary" id="SignInButton"  onclick=""><a href="adminAjout.php">Login</a></button>
+<?php else: ?>
+        <button class="uk-button uk-button-secondary" id="SignOutButton"  onclick=""><a href="index.php">Logout</a></button>
+<?php endif; ?>
             </form>
         <div id="result"></div>
     </div>
 
 </nav>
+<script type="text/javascript" src="../js/eelauth.js"></script>
+<script src="https://apis.google.com/js/platform.js"></script>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
 <script type="text/javascript">
     // Email pour savoir si on a déjà envoyé les information de pointage pour un user.
@@ -53,6 +82,7 @@
     });
 
     function updateSigninStatus(isSignedIn) {
+      // location.reload();
         // Si l'utilisateur est connecté, on va récupérer
         // les infos de l'utilisateur sous forme d'objet
         // qui contient :
@@ -89,19 +119,30 @@
           info.image
           info.locale
           */
-
-          $("#profilImage").html('<img src="' + info.image + '" alt="imgOf' + info.email + '" class = \"uk-border-circle uk-height-max-medium\" style = \"height : 200px\"/>');
-          $("#lastName").html(info.lastname);
-          $("#firstName").html(info.firstname);
-          $("#email").html(info.email);
-          $("#locale").html(info.locale);
-          $("#result").html(info.lastName);
-          $.post('manageLoginAjax.php', {postuser:$("#lastName").html()}, function(data) {
-            location.reload();
-            // console.log(data);
-            // $("#SignInButton").hide();
+          $.ajax({
+              method: "POST",
+              url: "navbar.php",
+              data: {"lastname": info.lastname, "fistname": info.firstname,"email": info.email,"locale": info.locale,"imgProfil": info.image},
+              success: function () {
+              window.location.replace("profil.php");
+              // $("#SignInButton").hide();
+              // $("#SignOutButton").show();
+              }
           });
+          // $.ajax({
+          //     type: "POST",
+          //     url: "manageLoginAjax.php",
+          //     data: info.lastname,
+          //     success: "str",
+          //     dataType: "text"
+          //   });
+          // $.post('manageLoginAjax.php', {lastName:$("#lastName").html()}, function(data) {
+          //   // location.reload();
+          //   // console.log(data);
+          //   // $("#SignInButton").hide();
+          // });
     }
+
 
     /**
      * Gère la déconnection avec people api de google
@@ -113,10 +154,13 @@
         // On lance la fenêtre de déconnexion
         window.open('https://www.google.com/accounts/Logout?continue=https://appengine.google.com/_ah/logout', "LogoutEEL", strWindowFeatures);
       */
-        $.post('manageLoginAjax.php', {decuser:"dec"}, function(data) {
+      // $("#SignInButton").show();
+      // $("#SignOutButton").hide();
+      $.post('navbar.php', {decuser:"dec"}, function(data) {
           console.log(data);
-
-        });
+          clearInfo();
+          window.location.replace("index.php");
+      });
     }
 
 
