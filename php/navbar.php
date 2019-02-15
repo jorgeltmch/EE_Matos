@@ -13,9 +13,11 @@ if (!empty($username)) {
   $_SESSION["firstname"] = $fistname;
   $_SESSION["email"] = $email;
   $_SESSION["imgProfil"] = $imgProfil;
+
   if (empty(userExists($username))) {
-    addUser($username);
+    addUser($username, $email);
   }
+  $_SESSION["uID"] = getUserIdByEmail($_SESSION["email"])["idUser"];
 }
 
 if (isset($_POST['decuser'])) {

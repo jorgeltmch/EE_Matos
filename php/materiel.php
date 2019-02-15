@@ -11,7 +11,7 @@ if (!empty($idArticle)) {
 }
 
 if (!empty($dateFin) && !empty($dateDebut)) {
-  addEmprunt($article["idArticle"], "1", $dateDebut, $dateFin); //TODO : changer id
+  addEmprunt($article["idArticle"], $_SESSION["uID"], $dateDebut, $dateFin); //TODO : changer id
 }
 
 ?>

@@ -56,10 +56,11 @@ if(isset($_POST['validation'])){
         <?php require "navbar.php"; ?>
 
         <div>
-            <div class="uk-button-group">
-                <a href="adminGestion.php" class="uk-button uk-button-secondary">Gestion</a>
-                <a href="adminAjout.php" class="uk-button uk-button-secondary">Ajout</a>
-            </div>
+          <div class="uk-button-group">
+              <a href="adminGestion.php" class="uk-button uk-button-secondary">Gestion</a>
+              <a href="adminAjout.php" class="uk-button uk-button-secondary">Ajout</a>
+              <a href="adminListe.php" class="uk-button uk-button-secondary">Liste</a>
+          </div>
         </div>
 
         <h1 class="uk-heading-divider">Ajout de nouveau produit</h1>

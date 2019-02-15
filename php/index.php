@@ -17,7 +17,6 @@ else{
 
 
 $nbPages = ceil($nbArticles[0] / 10);
-
 ?>
 <!doctype html>
 <html lang="fr">

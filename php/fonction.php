@@ -136,12 +136,13 @@ function Recherche($recherche){
        return $res;
 }
 
-function addUser($username){
-  $sql = "INSERT INTO users(username) VALUES(:username)";
+function addUser($username, $email){
+  $sql = "INSERT INTO users(username, email) VALUES(:username, :email)";
   $req = EDatabase::prepare($sql, array(PDO::ATTR_CURSOR, PDO::CURSOR_SCROLL));
   $req->execute(
     array(
-       'username' => $username
+       'username' => $username,
+       'email' => $email
        )
    );
    return EDatabase::lastInsertId();
@@ -194,6 +195,27 @@ function userExists($username){
              return $res;
    }
 
+   function getAllEmprunts()
+    {
+      $sql = 'SELECT idEmprunt, nom, dateDebut, dateFin, rendu, username FROM emprunt JOIN article ON article.idArticle = emprunt.idArticle JOIN users ON users.idUser = emprunt.idUser';
+      $req = EDatabase::prepare($sql, array(PDO::ATTR_CURSOR, PDO::CURSOR_SCROLL));
+      $req->execute();
+              $res = $req->fetchAll();
+              return $res;
+    }
+
+
+   function getUserIdByEmail($email){
+     $sql = 'SELECT idUser FROM users WHERE email = :email';
+     $req = EDatabase::prepare($sql, array(PDO::ATTR_CURSOR, PDO::CURSOR_SCROLL));
+     $req->execute(array(
+             ':email' => $email
+             ));
+             $res = $req->fetch();
+             return $res;
+   }
+
+
 function addEmprunt($idArticle, $idUser, $dateDebut, $dateFin)
   {
     $sql = 'INSERT INTO emprunt(idArticle, idUser,dateDebut, dateFin) VALUES(:idArticle, :idUser, :dateDebut, :dateFin)';
@@ -245,6 +267,22 @@ echo "</td></tr>";
 
   }
 }
+
+function displayAllEmprunts($emprunts)
+{
+  foreach ($emprunts as $key => $value) {
+  echo "<tr><td>" . $value["nom"] ."</td> " . "<td> " . $value["username"] . "</td>" . "<td>" . "du " . date('d-m-Y', strtotime($value["dateDebut"])) . " au " . date('d-m-Y', strtotime($value["dateFin"])) . "</td>";
+  if ($value["rendu"] == 1) {
+  echo "<td>Oui</td>";
+  echo "<td>[EVAL]</td>";
+  }
+  else{
+  echo "<td>Non</td>";
+  echo "<th><button class='uk-button uk-button-default' value='" . $value["idEmprunt"] . "'>Rendre</button></td>";
+  }
+  }
+}
+
 function displayInfos($article){
   echo "<ul class=\"uk-list uk-list-striped uk-width-expand\">";
     $description = explode(',', $article["descriptionArticle"]);
