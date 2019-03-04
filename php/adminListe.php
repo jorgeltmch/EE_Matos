@@ -1,6 +1,16 @@
 <?php
 require_once "fonction.php";
 $emprunts = getAllEmprunts();
+$singleEmprunt = "";
+
+
+if (filter_has_var(INPUT_POST,'rendre')) {
+  $singleEmprunt = $_POST["rendre"];
+  list($idArticle, $idUser, $dateDebut, $dateFin) = explode(",", $singleEmprunt);
+  rendreArticle($idArticle, $idUser, $dateDebut, $dateFin);
+  header('Refresh: 0; url=adminListe.php');
+}
+
 ?>
 <!doctype html>
 <html lang="fr">
@@ -23,8 +33,6 @@ $emprunts = getAllEmprunts();
         </div>
 
         <h1 class="uk-heading-divider">Liste des emprunts</h1>
-
-        <?php //echo $flashMessage; ?>
 
         <form class="uk-margin-auto uk-margin-large-top uk-form-stacked uk-width-1-2" method="POST" action="#">
           <table class="uk-table uk-table-striped">
