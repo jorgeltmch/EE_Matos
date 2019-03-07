@@ -36,6 +36,23 @@ session_start();
            return EDatabase::lastInsertId();
  }
 
+ //Modifie l'article
+ function ModifierArticle($idArticle, $modifNom, $idCategorie, $modifDescript, $imageArticle, $exImg)
+ {
+   $sql = 'UPDATE article SET nom = :modifNom, idCategorie = :idCategorie, descriptionArticle = :modifDescript, dateModif = :dateModif, img = :imageArticle, imgExtension = :exImg WHERE idArticle = :idArticle';
+   $req = EDatabase::prepare($sql, array(PDO::ATTR_CURSOR, PDO::CURSOR_SCROLL));
+   $req->execute(array(
+           'modifNom' => $modifNom,
+           'idCategorie' => $idCategorie,
+           'modifDescript' => $modifDescript,
+           'dateModif' => date('Y-m-d H:i:s'),
+           'imageArticle' => $imageArticle,
+           'exImg' => $exImg,
+           'idArticle' => $idArticle
+         ));
+           return EDatabase::lastInsertId();
+ };
+
 //___________________________AJOUT PRODUIT________________________________
 function addProduit($nom, $idCategorie, $description, $stock, $imgArticle, $imgExtension)
  {
