@@ -36,6 +36,24 @@ session_start();
            return EDatabase::lastInsertId();
  }
 
+
+ //Modifie l'article
+ function ModifierArticle($idArticle, $modifNom, $idCategorie, $modifDescript, $imageArticle, $exImg)
+ {
+   $sql = 'UPDATE article SET nom = :modifNom, idCategorie = :idCategorie, descriptionArticle = :modifDescript, dateModif = :dateModif, img = :imageArticle, imgExtension = :exImg WHERE idArticle = :idArticle';
+   $req = EDatabase::prepare($sql, array(PDO::ATTR_CURSOR, PDO::CURSOR_SCROLL));
+   $req->execute(array(
+           'modifNom' => $modifNom,
+           'idCategorie' => $idCategorie,
+           'modifDescript' => $modifDescript,
+           'dateModif' => date('Y-m-d H:i:s'),
+           'imageArticle' => $imageArticle,
+           'exImg' => $exImg,
+           'idArticle' => $idArticle
+         ));
+           return EDatabase::lastInsertId();
+ };
+
 //___________________________AJOUT PRODUIT________________________________
 function addProduit($nom, $idCategorie, $description, $stock, $imgArticle, $imgExtension)
  {
@@ -160,18 +178,6 @@ function userExists($username){
    return $res;
 }
 
- //function idCategorie($categorie)
- //{
- // $sql = 'SELECT idCategorie FROM categorie WHERE nomCategorie = :nomCategorie';
- // $req = EDatabase::prepare($sql, array(PDO::ATTR_CURSOR, PDO::CURSOR_SCROLL));
- // $req->execute(
- //   array(
- //      ':nomCategorie' => $categorie
- //      )
- //  );
- //  $res = $req->fetch();
- //  return $res;
- //}
 
  function getProduitByID($id)
   {
@@ -186,7 +192,7 @@ function userExists($username){
 
   function getEmpruntsByUserID($id)
    {
-     $sql = 'SELECT nom, dateDebut, dateFin, rendu FROM emprunt JOIN article ON article.idArticle = emprunt.idArticle  WHERE idUser = :id';
+     $sql = 'SELECT nom, dateDebut, dateFin, rendu, emprunt.idArticle FROM emprunt JOIN article ON article.idArticle = emprunt.idArticle  WHERE idUser = :id';
      $req = EDatabase::prepare($sql, array(PDO::ATTR_CURSOR, PDO::CURSOR_SCROLL));
      $req->execute(array(
              ':id' => $id
@@ -194,15 +200,6 @@ function userExists($username){
              $res = $req->fetchAll();
              return $res;
    }
-
-   function getAllEmprunts()
-    {
-      $sql = 'SELECT nom, dateDebut, dateFin, rendu, username, emprunt.idArticle, emprunt.idUser FROM emprunt JOIN article ON article.idArticle = emprunt.idArticle JOIN users ON users.idUser = emprunt.idUser';
-      $req = EDatabase::prepare($sql, array(PDO::ATTR_CURSOR, PDO::CURSOR_SCROLL));
-      $req->execute();
-              $res = $req->fetchAll();
-              return $res;
-    }
 
 
    function getUserIdByEmail($email){
@@ -267,23 +264,6 @@ echo "</td></tr>";
 
   }
 }
-
-function displayAllEmprunts($emprunts)
-{
-  foreach ($emprunts as $key => $value) {
-  $tmpInfo = $value["idArticle"] . "," . $value["idUser"] . "," .$value["dateDebut"] . "," .$value["dateFin"];
-  echo "<tr><td>" . $value["nom"] ."</td> " . "<td> " . $value["username"] . "</td>" . "<td>" . "du " . date('d-m-Y', strtotime($value["dateDebut"])) . " au " . date('d-m-Y', strtotime($value["dateFin"])) . "</td>";
-  if ($value["rendu"] == 1) {
-  echo "<td>Oui</td>";
-  echo "<td>[EVAL]</td>";
-  }
-  else{
-  echo "<td>Non</td>";
-  echo "<th><button class='uk-button uk-button-default' name='rendre' value='" . $tmpInfo . "'>Rendre</button></td>";
-  }
-  }
-}
-
 function displayInfos($article){
   echo "<ul class=\"uk-list uk-list-striped uk-width-expand\">";
     $description = explode(',', $article["descriptionArticle"]);
@@ -292,16 +272,4 @@ function displayInfos($article){
     }
   echo "</ul>";
 
-}
-
-function rendreArticle($idArticle, $idUser, $dateDebut, $dateFin){
-  $sql = 'UPDATE emprunt SET rendu = 1 WHERE idArticle = :idArticle AND idUser = :idUser AND dateDebut = :dateDebut AND dateFin = :dateFin';
-  $req = EDatabase::prepare($sql, array(PDO::ATTR_CURSOR, PDO::CURSOR_SCROLL));
-  $req->execute(array(
-          'idArticle' => $idArticle,
-          'idUser' => $idUser,
-          'dateDebut' => $dateDebut,
-          'dateFin' => $dateFin
-        ));
-          return EDatabase::lastInsertId();
 }
