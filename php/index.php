@@ -3,11 +3,17 @@ require_once 'fonction.php';
 
 $idCategorie = (empty($_GET["idCategorie"])) ? '' : $_GET["idCategorie"];
 $page = (empty($_GET["page"])) ? '1' : $_GET["page"];
+$recherche = (empty($_GET["recherche"])) ? '' : $_GET["recherche"];
 
 if (!empty($idCategorie)) {
   $categorie = GetCategorieById($idCategorie);
   $articles = getArticlesByCategorie($idCategorie, $page);
   $nbArticles = getNumberArticlesByCategorie($idCategorie);
+}
+else if(!empty($recherche)){
+
+  $articles = recherche($recherche);
+  $nbArticles = count($articles);
 }
 else{
   $articles = getArticlesByDate($page);
@@ -39,6 +45,9 @@ $nbPages = ceil($nbArticles[0] / 10);
         <?php
         if (!empty($idCategorie)) {
           echo $categorie["nomCategorie"];
+        }
+        else if(!empty($recherche)){
+          echo "Résultats pour : \"" . $recherche . "\"";
         }
         else{
           echo "Nouveautés";

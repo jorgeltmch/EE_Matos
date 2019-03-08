@@ -18,6 +18,7 @@ $emprunts = getEmpruntsByUserID($_SESSION["uID"]);
 //   exit;
 // }
 ?>
+
 <!doctype html>
 <html lang="fr">
     <head>
@@ -50,7 +51,7 @@ $emprunts = getEmpruntsByUserID($_SESSION["uID"]);
                   <span><b>Nom complet : </b>  </span><span id="lastName"><?php echo $_SESSION["username"]; ?></span><br>
                   <span><b>Email : </b></span><span id="email"><?php echo $_SESSION["email"]; ?></span><br>
 
-                  <p><b>Nombre de prets :</b> 15</p>
+                  <p><b>Nombre de prets :</b> <?php echo count($emprunts); ?></p>
                   <div class="uk-alert-success" uk-alert>
                     <a class="uk-alert-close" uk-close></a>
                     <p>Vous n'avez aucun article en retard</p>

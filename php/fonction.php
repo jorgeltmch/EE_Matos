@@ -143,14 +143,20 @@ function addProduit($nom, $idCategorie, $description, $stock, $imgArticle, $imgE
  }
 //Recherche d'articles
 function Recherche($recherche){
-  $sql = "SELECT * FROM article WHERE nomArticle LIKE '%'. :recherche .'%'";
-  $req = EDatabase::prepare($sql, array(PDO::ATTR_CURSOR, PDO::CURSOR_SCROLL));
-  $req->execute(
-    array(
-       'recherche' => $recherche
-       ));
-       $res = $req->fetchAll();
-       return $res;
+  $sql = "SELECT * FROM article WHERE nom LIKE :recherche ORDER BY nom"  ;
+  try {
+    $recherche = "%$recherche%";
+    $req = EDatabase::prepare($sql);
+    $req->execute(
+           array(
+             'recherche' => $recherche
+           )
+         );
+            $res = $req->fetchAll(PDO::FETCH_ASSOC);
+            return $res;
+  } catch (\Exception $e) {
+    echo $e->getMessage();
+  }
 }
 
 function addUser($username, $email){

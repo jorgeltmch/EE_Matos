@@ -46,9 +46,9 @@ if (isset($_POST['decuser'])) {
 
     <div class="uk-navbar-item uk-navbar-right">
 
-        <form class=" uk-search uk-search-default uk-margin-right uk-width-1-2@m">
+        <form action="index.php" method="get" class=" uk-search uk-search-default uk-margin-right uk-width-1-2@m">
             <span class="uk-search-icon-flip" uk-search-icon></span>
-            <input class="uk-search-input" type="search" placeholder="Search...">
+            <input name="recherche" class="uk-search-input" type="search" placeholder="Search...">
         </form>
           <form method="post">
           <?php if (empty($_SESSION["username"])):
