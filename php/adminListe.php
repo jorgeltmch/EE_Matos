@@ -11,6 +11,20 @@ if (filter_has_var(INPUT_POST,'rendre')) {
   header('Refresh: 0; url=adminListe.php');
 }
 
+if (filter_has_var(INPUT_POST,'validerEmprunt')) {
+  $singleEmprunt = $_POST["validerEmprunt"];
+  list($idArticle, $idUser, $dateDebut, $dateFin) = explode(",", $singleEmprunt);
+  validerEmprunt($idArticle, $idUser, $dateDebut, $dateFin);
+  header('Refresh: 0; url=adminListe.php');
+}
+
+if (filter_has_var(INPUT_POST,'refuserEmprunt')) {
+  $singleEmprunt = $_POST["refuserEmprunt"];
+  list($idArticle, $idUser, $dateDebut, $dateFin) = explode(",", $singleEmprunt);
+  refuserEmprunt($idArticle, $idUser, $dateDebut, $dateFin);
+  header('Refresh: 0; url=adminListe.php');
+}
+
 ?>
 <!doctype html>
 <html lang="fr">

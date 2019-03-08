@@ -14,7 +14,7 @@ if(isset($_POST['validation'])){
     		echo 'Un problème est survenu durant l\'opération. Veuillez réessayer !';
     	 else {
     		//liste des extensions possibles
-    		$extensions = array('/png', '/gif', '/jpg', '/jpeg');
+    		$extensions = array('/png', '/gif', '/jpg', '/jpeg', '/HEIC');
 
     		//récupère la chaîne à partir du dernier / pour connaître l'extension
     		$extension = strrchr($_FILES['image']['type'], '/');

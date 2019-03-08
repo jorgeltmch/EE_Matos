@@ -10,8 +10,16 @@ if (!empty($idArticle)) {
   $article = getProduitByID($idArticle);
 }
 
+$answer = "";
+
 if (!empty($dateFin) && !empty($dateDebut)) {
-  addEmprunt($article["idArticle"], $_SESSION["uID"], $dateDebut, $dateFin); //TODO : changer id
+  if ($article["stockDisponible"] >= 1) {
+    addEmprunt($article["idArticle"], $_SESSION["uID"], $dateDebut, $dateFin); //TODO : changer id
+    $answer = "success";
+  }else{
+    $answer = "error";
+  }
+
 }
 
 // Modife article 
@@ -86,7 +94,26 @@ header("Refresh:0");
         <?php  include("navbar.php"); ?>
     </header>
 
+<<<<<<< HEAD
     <div class="uk-padding-small" uk-height-viewport="expand: true">
+=======
+      <?php
+        if ($answer == "error") {
+          echo "<div class=\"uk-alert-danger\" uk-alert>
+                  <a class=\"uk-alert-close\" uk-close></a>
+                  <p>Erreur : il semblerait que cet article ne soit plus en stock pour le moment.</p>
+                  </div>";
+        }else if($answer == "success"){
+          echo "<div class=\"uk-alert-success\" uk-alert>
+                  <a class=\"uk-alert-close\" uk-close></a>
+                  <p>La demande d'emprunt a été effectuée avec succès.</p>
+                  </div>";
+        }
+
+       ?>
+
+      <div class="uk-padding-small" uk-height-viewport="expand: true" >
+>>>>>>> Ont peut maintenant accepter ou refuser un prêt
         <div class="uk-grid-small uk-child-width-1-2@s" uk-grid="masonry: true">
             <div>
                 <div class="uk-card uk-card-default uk-card-body uk-text-center" style="height: 400px">
@@ -101,6 +128,7 @@ header("Refresh:0");
             </div>
             <div>
                 <div class="uk-card uk-card-default uk-card-body" style="height: 815px">
+<<<<<<< HEAD
                     <div>
                         <h1 class="uk-heading-bullet"><?php echo $article["nom"] ?><a
                                 class="uk-float-right uk-button uk-button-default uk-text-center" href="#modal-overflow"
@@ -113,6 +141,22 @@ header("Refresh:0");
                         </div>
                         <?php displayInfos($article) ?>
                     </div>
+=======
+                <div>
+                  <h1 class="uk-heading-bullet" ><?php echo $article["nom"] ?><button class="uk-float-right uk-button uk-button-default uk-text-center">Modifier</button></h1>
+
+                  <?php if ($article["stockDisponible"] <= 0){ ?>
+                    <div class="uk-alert-danger" uk-alert>
+                  <?php }else{ ?>
+                    <div class="uk-alert-success" uk-alert>
+                  <?php } ?>
+                   <?php // TODO: alert rouge si pas disponible ?>
+                      <a class="uk-alert-close" uk-close></a>
+                      <p><?php echo $article["stockDisponible"] ?> éléments en stock</p>
+                  </div>
+                  <?php displayInfos($article) ?>
+              </div>
+>>>>>>> Ont peut maintenant accepter ou refuser un prêt
                 </div>
             </div>
             <?php if(!empty($_SESSION["username"])): ?>

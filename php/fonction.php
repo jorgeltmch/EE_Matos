@@ -209,7 +209,7 @@ function userExists($username){
 
   function getEmpruntsByUserID($id)
    {
-     $sql = 'SELECT nom, dateDebut, dateFin, rendu FROM emprunt JOIN article ON article.idArticle = emprunt.idArticle  WHERE idUser = :id';
+     $sql = 'SELECT nom, dateDebut, dateFin, rendu, emprunt.idArticle FROM emprunt JOIN article ON article.idArticle = emprunt.idArticle  WHERE idUser = :id';
      $req = EDatabase::prepare($sql, array(PDO::ATTR_CURSOR, PDO::CURSOR_SCROLL));
      $req->execute(array(
              ':id' => $id
@@ -220,7 +220,7 @@ function userExists($username){
 
    function getAllEmprunts()
     {
-      $sql = 'SELECT nom, dateDebut, dateFin, rendu, username, emprunt.idArticle, emprunt.idUser FROM emprunt JOIN article ON article.idArticle = emprunt.idArticle JOIN users ON users.idUser = emprunt.idUser';
+      $sql = 'SELECT nom, dateDebut, dateFin, rendu, valide, username, emprunt.idArticle, emprunt.idUser FROM emprunt JOIN article ON article.idArticle = emprunt.idArticle JOIN users ON users.idUser = emprunt.idUser';
       $req = EDatabase::prepare($sql, array(PDO::ATTR_CURSOR, PDO::CURSOR_SCROLL));
       $req->execute();
               $res = $req->fetchAll();
@@ -294,16 +294,22 @@ echo "</td></tr>";
 function displayAllEmprunts($emprunts)
 {
   foreach ($emprunts as $key => $value) {
-  $tmpInfo = $value["idArticle"] . "," . $value["idUser"] . "," .$value["dateDebut"] . "," .$value["dateFin"];
-  echo "<tr><td>" . $value["nom"] ."</td> " . "<td> " . $value["username"] . "</td>" . "<td>" . "du " . date('d-m-Y', strtotime($value["dateDebut"])) . " au " . date('d-m-Y', strtotime($value["dateFin"])) . "</td>";
-  if ($value["rendu"] == 1) {
-  echo "<td>Oui</td>";
-  echo "<td>[EVAL]</td>";
-  }
-  else{
-  echo "<td>Non</td>";
-  echo "<th><button class='uk-button uk-button-default' name='rendre' value='" . $tmpInfo . "'>Rendre</button></td>";
-  }
+    $tmpInfo = $value["idArticle"] . "," . $value["idUser"] . "," .$value["dateDebut"] . "," .$value["dateFin"];
+    echo "<tr><td>" . $value["nom"] ."</td> " . "<td> " . $value["username"] . "</td>" . "<td>" . "du " . date('d-m-Y', strtotime($value["dateDebut"])) . " au " . date('d-m-Y', strtotime($value["dateFin"])) . "</td>";
+    if ($value["valide"] == 1) {
+      if ($value["rendu"] == 1) {
+      echo "<td>Oui</td>";
+      echo "<td>[EVAL]</td>";
+      }
+      else{
+      echo "<td>Non</td>";
+      echo "<th><button class='uk-button uk-button-default' name='rendre' value='" . $tmpInfo . "'>Rendre</button></td>";
+      }
+    }else {
+      echo "<td>Non</td>";
+      echo "<th><button class='uk-button uk-button-default' name='validerEmprunt' value='" . $tmpInfo . "'>Accepter</button></td>";
+      echo "<th><button class='uk-button uk-button-default' name='refuserEmprunt' value='" . $tmpInfo . "'>Refuser</button></td>";
+    }
   }
 }
 
@@ -318,6 +324,7 @@ function displayInfos($article){
 }
 
 function rendreArticle($idArticle, $idUser, $dateDebut, $dateFin){
+  increaseStock($idArticle);
   $sql = 'UPDATE emprunt SET rendu = 1 WHERE idArticle = :idArticle AND idUser = :idUser AND dateDebut = :dateDebut AND dateFin = :dateFin';
   $req = EDatabase::prepare($sql, array(PDO::ATTR_CURSOR, PDO::CURSOR_SCROLL));
   $req->execute(array(
@@ -327,4 +334,51 @@ function rendreArticle($idArticle, $idUser, $dateDebut, $dateFin){
           'dateFin' => $dateFin
         ));
           return EDatabase::lastInsertId();
+<<<<<<< HEAD
 }
+=======
+}
+
+function validerEmprunt($idArticle, $idUser, $dateDebut, $dateFin){
+  decreaseStock($idArticle);
+  $sql = 'UPDATE emprunt SET valide = 1 WHERE idArticle = :idArticle AND idUser = :idUser AND dateDebut = :dateDebut AND dateFin = :dateFin';
+  $req = EDatabase::prepare($sql, array(PDO::ATTR_CURSOR, PDO::CURSOR_SCROLL));
+  $req->execute(array(
+          'idArticle' => $idArticle,
+          'idUser' => $idUser,
+          'dateDebut' => $dateDebut,
+          'dateFin' => $dateFin
+        ));
+          return EDatabase::lastInsertId();
+}
+
+function refuserEmprunt($idArticle, $idUser, $dateDebut, $dateFin){
+  $sql = 'DELETE FROM emprunt WHERE idArticle = :idArticle AND idUser = :idUser AND dateDebut = :dateDebut AND dateFin = :dateFin';
+  $req = EDatabase::prepare($sql, array(PDO::ATTR_CURSOR, PDO::CURSOR_SCROLL));
+  $req->execute(array(
+          'idArticle' => $idArticle,
+          'idUser' => $idUser,
+          'dateDebut' => $dateDebut,
+          'dateFin' => $dateFin
+        ));
+          return EDatabase::lastInsertId();
+}
+
+function decreaseStock($idArticle){
+  $sql = 'UPDATE article SET stockDisponible = stockDisponible - 1 WHERE idArticle = :idArticle';
+  $req = EDatabase::prepare($sql, array(PDO::ATTR_CURSOR, PDO::CURSOR_SCROLL));
+  $req->execute(array(
+          'idArticle' => $idArticle
+        ));
+          return EDatabase::lastInsertId();
+}
+
+function increaseStock($idArticle){
+  $sql = 'UPDATE article SET stockDisponible = stockDisponible + 1 WHERE idArticle = :idArticle';
+  $req = EDatabase::prepare($sql, array(PDO::ATTR_CURSOR, PDO::CURSOR_SCROLL));
+  $req->execute(array(
+          'idArticle' => $idArticle
+        ));
+          return EDatabase::lastInsertId();
+}
+>>>>>>> Ont peut maintenant accepter ou refuser un prêt
