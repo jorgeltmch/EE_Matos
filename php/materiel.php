@@ -22,7 +22,7 @@ if (!empty($dateFin) && !empty($dateDebut)) {
 
 }
 
-// Modife article 
+// Modife article
 if(isset($_POST['validation'])){
 $modifNom = filter_input( INPUT_POST, 'modifNom', FILTER_SANITIZE_STRING);
 $idCategorie = filter_input( INPUT_POST, 'modifCategorie', FILTER_SANITIZE_STRING);
@@ -65,7 +65,7 @@ if ($modifDescript == ""){
 
     				//Lecture du fichier
     				$image = file_get_contents($_FILES['image']['tmp_name']);
-           
+
 
     				echo 'L\'insertion s est bien déroulée !';
     			 }
@@ -94,9 +94,6 @@ header("Refresh:0");
         <?php  include("navbar.php"); ?>
     </header>
 
-<<<<<<< HEAD
-    <div class="uk-padding-small" uk-height-viewport="expand: true">
-=======
       <?php
         if ($answer == "error") {
           echo "<div class=\"uk-alert-danger\" uk-alert>
@@ -113,7 +110,6 @@ header("Refresh:0");
        ?>
 
       <div class="uk-padding-small" uk-height-viewport="expand: true" >
->>>>>>> Ont peut maintenant accepter ou refuser un prêt
         <div class="uk-grid-small uk-child-width-1-2@s" uk-grid="masonry: true">
             <div>
                 <div class="uk-card uk-card-default uk-card-body uk-text-center" style="height: 400px">
@@ -128,22 +124,12 @@ header("Refresh:0");
             </div>
             <div>
                 <div class="uk-card uk-card-default uk-card-body" style="height: 815px">
-<<<<<<< HEAD
-                    <div>
-                        <h1 class="uk-heading-bullet"><?php echo $article["nom"] ?><a
+                <div>
+                  <h1 class="uk-heading-bullet"><?php echo $article["nom"] ?><a
                                 class="uk-float-right uk-button uk-button-default uk-text-center" href="#modal-overflow"
                                 uk-toggle>Modifier</a>
                         </h1>
 
-                        <div class="uk-alert-success" uk-alert> <?php // TODO: alert rouge si pas disponible ?>
-                            <a class="uk-alert-close" uk-close></a>
-                            <p><?php echo $article["stockDisponible"] ?> éléments en stock</p>
-                        </div>
-                        <?php displayInfos($article) ?>
-                    </div>
-=======
-                <div>
-                  <h1 class="uk-heading-bullet" ><?php echo $article["nom"] ?><button class="uk-float-right uk-button uk-button-default uk-text-center">Modifier</button></h1>
 
                   <?php if ($article["stockDisponible"] <= 0){ ?>
                     <div class="uk-alert-danger" uk-alert>
@@ -156,7 +142,6 @@ header("Refresh:0");
                   </div>
                   <?php displayInfos($article) ?>
               </div>
->>>>>>> Ont peut maintenant accepter ou refuser un prêt
                 </div>
             </div>
             <?php if(!empty($_SESSION["username"])): ?>
@@ -198,16 +183,16 @@ header("Refresh:0");
                             <select id="modifCategorie" name="modifCategorie" class="uk-select">
                                 <?php
                   foreach (getCategories() as $com)
-                  { 
- 
+                  {
+
                     if($article["idCategorie"] != $com['idCategorie']){
 
                    echo '<option value="'.$com['idCategorie'].'">'.$com['nomCategorie'].'</option>';
 
-                    }else { 
-                       
+                    }else {
+
                          echo '<option value="'.$com['idCategorie'].'" selected="selected">'.$com['nomCategorie'].'</option>';
-                         
+
                     }
 
                   }
@@ -221,7 +206,6 @@ header("Refresh:0");
                             <textarea id="modifDescript" name="modifDescript" class="uk-textarea" rows="5"
                                 placeholder="Textarea"><?php echo $article["descriptionArticle"];  ?></textarea>
                         </div>
-
 
                         <label class="uk-form-label" for="form-stacked-text">Selection si modification de
                             l'image</label>
@@ -241,7 +225,6 @@ header("Refresh:0");
                     </form>
                 </div>
             </div>
-
 </body>
 <script src="js/uikit.min.js"></script>
 <script src="js/uikit-icons.min.js"></script>

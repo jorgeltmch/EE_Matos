@@ -13,7 +13,7 @@ session_start();
     return EDatabase::lastInsertId();
  }
 
-//Suprime la categorie voulue de la base de donnée
+//Supprime la categorie voulue de la base de donnée
  function SupprimerCategorie($idCategorie)
  {
    $sql = 'DELETE FROM categorie WHERE idCategorie = :idCategorie';
@@ -53,7 +53,7 @@ session_start();
            return EDatabase::lastInsertId();
  };
 
-//___________________________AJOUT PRODUIT________________________________
+//Ajoute un produit
 function addProduit($nom, $idCategorie, $description, $stock, $imgArticle, $imgExtension)
  {
    $sql = "INSERT INTO article(nom, descriptionArticle, idCategorie, stockDisponible, img, imgExtension) VALUES(:nom, :descriptionArticle, :idCategorie, :stock, :img, :imgExtension)";
@@ -71,6 +71,7 @@ function addProduit($nom, $idCategorie, $description, $stock, $imgArticle, $imgE
     return EDatabase::lastInsertId();
  }
 
+//Récupère une catégorie
  function GetCategories(){
    $sql = 'SELECT * FROM categorie';
    $req = EDatabase::prepare($sql, array(PDO::ATTR_CURSOR, PDO::CURSOR_SCROLL));
@@ -80,7 +81,7 @@ function addProduit($nom, $idCategorie, $description, $stock, $imgArticle, $imgE
 
  }
 
-
+//Récupère le nombre total d'article
  function getNumberArticles(){
    $sql = 'SELECT COUNT(*) FROM article';
    $req = EDatabase::prepare($sql, array(PDO::ATTR_CURSOR, PDO::CURSOR_SCROLL));
@@ -89,6 +90,8 @@ function addProduit($nom, $idCategorie, $description, $stock, $imgArticle, $imgE
    return $datacom;
  }
 
+
+//Récupère le nombre d'article pour une certaine catégorie
  function getNumberArticlesByCategorie($idCategorie){
    $sql = 'SELECT COUNT(*) FROM article WHERE idCategorie = :idCategorie';
    $req = EDatabase::prepare($sql, array(PDO::ATTR_CURSOR, PDO::CURSOR_SCROLL));
@@ -101,6 +104,7 @@ function addProduit($nom, $idCategorie, $description, $stock, $imgArticle, $imgE
    return $datacom;
  }
 
+//Récupère une catégorie par son id
  function GetCategorieById($idCategorie){
    $sql = 'SELECT * FROM categorie WHERE idCategorie = :id';
    $req = EDatabase::prepare($sql, array(PDO::ATTR_CURSOR, PDO::CURSOR_SCROLL));
@@ -112,6 +116,7 @@ function addProduit($nom, $idCategorie, $description, $stock, $imgArticle, $imgE
 
  }
 
+//Récupère tous les articles d'une catégorie
  function getArticlesByCategorie($idCategorie, $page){
            $page2 = $page * 10;
            $page = ($page == 1) ? 0 : $page + 10 - 1;
@@ -125,6 +130,8 @@ function addProduit($nom, $idCategorie, $description, $stock, $imgArticle, $imgE
 
  }
 
+
+//Récupère tous les articles par date
  function getArticlesByDate($page){
    $page2 = $page * 10;
    $page = ($page == 1) ? 0 : $page + 10 - 1;
@@ -141,7 +148,7 @@ function addProduit($nom, $idCategorie, $description, $stock, $imgArticle, $imgE
 
 
  }
-//Recherche d'articles
+//Recherche d'articles par nom
 function Recherche($recherche){
   $sql = "SELECT * FROM article WHERE nom LIKE :recherche ORDER BY nom"  ;
   try {
@@ -159,6 +166,7 @@ function Recherche($recherche){
   }
 }
 
+//Ajoute un Utilisateur
 function addUser($username, $email){
   $sql = "INSERT INTO users(username, email) VALUES(:username, :email)";
   $req = EDatabase::prepare($sql, array(PDO::ATTR_CURSOR, PDO::CURSOR_SCROLL));
@@ -171,6 +179,7 @@ function addUser($username, $email){
    return EDatabase::lastInsertId();
 }
 
+//Vérifie que l'utilisateur existe
 function userExists($username){
   $sql = "SELECT idUser FROM users WHERE username = :username";
   $req = EDatabase::prepare($sql, array(PDO::ATTR_CURSOR, PDO::CURSOR_SCROLL));
@@ -183,19 +192,8 @@ function userExists($username){
    return $res;
 }
 
- //function idCategorie($categorie)
- //{
- // $sql = 'SELECT idCategorie FROM categorie WHERE nomCategorie = :nomCategorie';
- // $req = EDatabase::prepare($sql, array(PDO::ATTR_CURSOR, PDO::CURSOR_SCROLL));
- // $req->execute(
- //   array(
- //      ':nomCategorie' => $categorie
- //      )
- //  );
- //  $res = $req->fetch();
- //  return $res;
- //}
 
+//Récupère un produit par son id
  function getProduitByID($id)
   {
     $sql = 'SELECT * FROM article WHERE idArticle = :id';
@@ -207,6 +205,8 @@ function userExists($username){
             return $res;
   }
 
+
+//Récupère tous les
   function getEmpruntsByUserID($id)
    {
      $sql = 'SELECT nom, dateDebut, dateFin, rendu, emprunt.idArticle FROM emprunt JOIN article ON article.idArticle = emprunt.idArticle  WHERE idUser = :id';
@@ -218,6 +218,7 @@ function userExists($username){
              return $res;
    }
 
+//Récupère tous les emprunts
    function getAllEmprunts()
     {
       $sql = 'SELECT nom, dateDebut, dateFin, rendu, valide, username, emprunt.idArticle, emprunt.idUser FROM emprunt JOIN article ON article.idArticle = emprunt.idArticle JOIN users ON users.idUser = emprunt.idUser';
@@ -228,6 +229,7 @@ function userExists($username){
     }
 
 
+//Récupère l'utilisateur avec son email
    function getUserIdByEmail($email){
      $sql = 'SELECT idUser FROM users WHERE email = :email';
      $req = EDatabase::prepare($sql, array(PDO::ATTR_CURSOR, PDO::CURSOR_SCROLL));
@@ -239,6 +241,7 @@ function userExists($username){
    }
 
 
+//Ajoute un emprunt
 function addEmprunt($idArticle, $idUser, $dateDebut, $dateFin)
   {
     $sql = 'INSERT INTO emprunt(idArticle, idUser,dateDebut, dateFin) VALUES(:idArticle, :idUser, :dateDebut, :dateFin)';
@@ -251,6 +254,9 @@ function addEmprunt($idArticle, $idUser, $dateDebut, $dateFin)
            ));
             return EDatabase::lastInsertId();
   }
+
+
+
 function ajoutEmprunt($idUser, $idArticle, $dateDebut,$dateFin){
   $sql = 'INSERT INTO emprunt(idUser, idArticle, dateDebut, dateFin) VALUES(:idUser, :idArticle, :dateDebut, :dateFin)';
   $req = EDatabase::prepare($sql, array(PDO::ATTR_CURSOR, PDO::CURSOR_SCROLL));
@@ -263,6 +269,51 @@ function ajoutEmprunt($idUser, $idArticle, $dateDebut,$dateFin){
           return EDatabase::lastInsertId();
 }
 
+function validerEmprunt($idArticle, $idUser, $dateDebut, $dateFin){
+  decreaseStock($idArticle);
+  $sql = 'UPDATE emprunt SET valide = 1 WHERE idArticle = :idArticle AND idUser = :idUser AND dateDebut = :dateDebut AND dateFin = :dateFin';
+  $req = EDatabase::prepare($sql, array(PDO::ATTR_CURSOR, PDO::CURSOR_SCROLL));
+  $req->execute(array(
+          'idArticle' => $idArticle,
+          'idUser' => $idUser,
+          'dateDebut' => $dateDebut,
+          'dateFin' => $dateFin
+        ));
+          return EDatabase::lastInsertId();
+}
+
+function refuserEmprunt($idArticle, $idUser, $dateDebut, $dateFin){
+  $sql = 'DELETE FROM emprunt WHERE idArticle = :idArticle AND idUser = :idUser AND dateDebut = :dateDebut AND dateFin = :dateFin';
+  $req = EDatabase::prepare($sql, array(PDO::ATTR_CURSOR, PDO::CURSOR_SCROLL));
+  $req->execute(array(
+          'idArticle' => $idArticle,
+          'idUser' => $idUser,
+          'dateDebut' => $dateDebut,
+          'dateFin' => $dateFin
+        ));
+          return EDatabase::lastInsertId();
+}
+
+function decreaseStock($idArticle){
+  $sql = 'UPDATE article SET stockDisponible = stockDisponible - 1 WHERE idArticle = :idArticle';
+  $req = EDatabase::prepare($sql, array(PDO::ATTR_CURSOR, PDO::CURSOR_SCROLL));
+  $req->execute(array(
+          'idArticle' => $idArticle
+        ));
+          return EDatabase::lastInsertId();
+}
+
+function increaseStock($idArticle){
+  $sql = 'UPDATE article SET stockDisponible = stockDisponible + 1 WHERE idArticle = :idArticle';
+  $req = EDatabase::prepare($sql, array(PDO::ATTR_CURSOR, PDO::CURSOR_SCROLL));
+  $req->execute(array(
+          'idArticle' => $idArticle
+        ));
+          return EDatabase::lastInsertId();
+}
+
+
+///////////////AFFICHAGE///////////////////
 function displayCategories(){
   $categories = GetCategories();
   echo "<ul class=\"uk-nav uk-nav-default uk-text-center\">";
@@ -334,51 +385,4 @@ function rendreArticle($idArticle, $idUser, $dateDebut, $dateFin){
           'dateFin' => $dateFin
         ));
           return EDatabase::lastInsertId();
-<<<<<<< HEAD
 }
-=======
-}
-
-function validerEmprunt($idArticle, $idUser, $dateDebut, $dateFin){
-  decreaseStock($idArticle);
-  $sql = 'UPDATE emprunt SET valide = 1 WHERE idArticle = :idArticle AND idUser = :idUser AND dateDebut = :dateDebut AND dateFin = :dateFin';
-  $req = EDatabase::prepare($sql, array(PDO::ATTR_CURSOR, PDO::CURSOR_SCROLL));
-  $req->execute(array(
-          'idArticle' => $idArticle,
-          'idUser' => $idUser,
-          'dateDebut' => $dateDebut,
-          'dateFin' => $dateFin
-        ));
-          return EDatabase::lastInsertId();
-}
-
-function refuserEmprunt($idArticle, $idUser, $dateDebut, $dateFin){
-  $sql = 'DELETE FROM emprunt WHERE idArticle = :idArticle AND idUser = :idUser AND dateDebut = :dateDebut AND dateFin = :dateFin';
-  $req = EDatabase::prepare($sql, array(PDO::ATTR_CURSOR, PDO::CURSOR_SCROLL));
-  $req->execute(array(
-          'idArticle' => $idArticle,
-          'idUser' => $idUser,
-          'dateDebut' => $dateDebut,
-          'dateFin' => $dateFin
-        ));
-          return EDatabase::lastInsertId();
-}
-
-function decreaseStock($idArticle){
-  $sql = 'UPDATE article SET stockDisponible = stockDisponible - 1 WHERE idArticle = :idArticle';
-  $req = EDatabase::prepare($sql, array(PDO::ATTR_CURSOR, PDO::CURSOR_SCROLL));
-  $req->execute(array(
-          'idArticle' => $idArticle
-        ));
-          return EDatabase::lastInsertId();
-}
-
-function increaseStock($idArticle){
-  $sql = 'UPDATE article SET stockDisponible = stockDisponible + 1 WHERE idArticle = :idArticle';
-  $req = EDatabase::prepare($sql, array(PDO::ATTR_CURSOR, PDO::CURSOR_SCROLL));
-  $req->execute(array(
-          'idArticle' => $idArticle
-        ));
-          return EDatabase::lastInsertId();
-}
->>>>>>> Ont peut maintenant accepter ou refuser un prêt

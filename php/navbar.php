@@ -53,7 +53,7 @@ if (isset($_POST['decuser'])) {
           <form method="post">
           <?php if (empty($_SESSION["username"])):
             ?>
-          <button class="uk-button uk-button-secondary" id="SignInButton"  onclick=""><a href="adminAjout.php">Login</a></button>
+          <button class="uk-button uk-button-default" id="SignInButton"  onclick=""><a href="adminAjout.php">Login</a></button>
 <?php else: ?>
         <a href="profil.php" ><img class="uk-border-circle uk-height-max-medium"  src="<?php echo $_SESSION["imgProfil"]; ?>" alt="Border circle" style="height: 40px"></a>
         <button class="uk-button uk-button-secondary" id="SignOutButton"  onclick=""><a href="index.php">Logout</a></button>

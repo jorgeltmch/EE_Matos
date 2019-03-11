@@ -13,10 +13,10 @@ $emprunts = getEmpruntsByUserID($_SESSION["uID"]);
 // if (!empty($dateFin) && !empty($dateDebut)) {
 //   addEmprunt($idArticle, $test, $dateDebut, $dateFin); //TODO : changer id
 // }
-// if (empty($_SESSION["username"])) {
-//   header("Location: index.php");
-//   exit;
-// }
+if (empty($_SESSION["username"])) {
+  header("Location: index.php");
+  exit;
+}
 ?>
 
 <!doctype html>
