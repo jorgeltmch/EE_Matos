@@ -2,9 +2,7 @@
 require_once 'fonction.php';
 
 
-
 $emprunts = getEmpruntsByUserID($_SESSION["uID"]);
-
 
 // $dateFin = (empty($_POST["dateFin"])) ? '' : $_POST["dateFin"];
 // $idArticle = (empty($_POST["idArticle"])) ? '' : $_POST["dateFin"];

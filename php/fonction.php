@@ -118,9 +118,11 @@ function addProduit($nom, $idCategorie, $description, $stock, $imgArticle, $imgE
 
 //Récupère tous les articles d'une catégorie
  function getArticlesByCategorie($idCategorie, $page){
-           $page2 = $page * 10;
-           $page = ($page == 1) ? 0 : $page + 10 - 1;
-           $sql = 'SELECT * FROM article WHERE idCategorie = :id  ORDER BY dateAjout LIMIT ' .$page. ','. $page2  ;
+   $pageLimit2 = $page * 10;
+   $pageLimit1 = ($page == 1) ? 0 : $page * 10 - 10;
+
+   $pageLimit1 -= 1;
+           $sql = 'SELECT * FROM article WHERE idCategorie = :id  ORDER BY dateAjout LIMIT ' .$pageLimit1. ','. $pageLimit2  ;
              $req = EDatabase::prepare($sql);
                   $req->execute(array(
                           ':id' => $idCategorie,
@@ -133,9 +135,13 @@ function addProduit($nom, $idCategorie, $description, $stock, $imgArticle, $imgE
 
 //Récupère tous les articles par date
  function getArticlesByDate($page){
-   $page2 = $page * 10;
-   $page = ($page == 1) ? 0 : $page + 10 - 1;
-   $sql = 'SELECT * FROM article ORDER BY dateAjout DESC LIMIT ' .$page. ','. $page2  ;
+
+   $pageLimit2 = $page * 10;
+   $pageLimit1 = ($page == 1) ? 0 : $page * 10 - 10;
+
+//   $pageLimit1 -= 1;
+  // $pageLimit2 -= 1 ;
+   $sql = 'SELECT * FROM article ORDER BY dateAjout DESC LIMIT ' .$pageLimit1. ','. $pageLimit2  ;
    try {
      $req = EDatabase::prepare($sql);
           $req->execute();
@@ -209,7 +215,7 @@ function userExists($username){
 //Récupère tous les
   function getEmpruntsByUserID($id)
    {
-     $sql = 'SELECT nom, dateDebut, dateFin, rendu, emprunt.idArticle FROM emprunt JOIN article ON article.idArticle = emprunt.idArticle  WHERE idUser = :id';
+     $sql = 'SELECT nom, dateDebut, dateFin, rendu, article.idArticle FROM emprunt JOIN article ON article.idArticle = emprunt.idArticle  WHERE idUser = :id';
      $req = EDatabase::prepare($sql, array(PDO::ATTR_CURSOR, PDO::CURSOR_SCROLL));
      $req->execute(array(
              ':id' => $id

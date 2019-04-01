@@ -147,8 +147,11 @@ header("Refresh:0");
             <?php if(!empty($_SESSION["username"])): ?>
             <div>
                 <div class="uk-card uk-card-default uk-card-body uk-width-*@s" style="height: 400px">
-                    <a class="uk-button uk-button-default" href="#modal-center"
-                        uk-toggle><?php include("calendrier.php"); ?></a>
+
+                        <a class="uk-button uk-button-default uk-text-center" href="#modal-center" uk-toggle>
+                          Réserver ce produit
+                        </a>
+                        <?php //include("calendrier.php"); ?>
                     <?php  include("popupLouer.php"); ?>
                 </div>
             </div>
