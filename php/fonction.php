@@ -121,7 +121,6 @@ function addProduit($nom, $idCategorie, $description, $stock, $imgArticle, $imgE
    $pageLimit2 = $page * 10;
    $pageLimit1 = ($page == 1) ? 0 : $page * 10 - 10;
 
-   $pageLimit1 -= 1;
            $sql = 'SELECT * FROM article WHERE idCategorie = :id  ORDER BY dateAjout LIMIT ' .$pageLimit1. ','. $pageLimit2  ;
              $req = EDatabase::prepare($sql);
                   $req->execute(array(
@@ -153,6 +152,16 @@ function addProduit($nom, $idCategorie, $description, $stock, $imgArticle, $imgE
 
 
 
+ }
+
+ function getDatesNonDisponibles($idArticle){
+   $sql = 'SELECT dateDebut, dateFin FROM emprunt WHERE idArticle = :id';
+   $req = EDatabase::prepare($sql, array(PDO::ATTR_CURSOR, PDO::CURSOR_SCROLL));
+   $req->execute(array(
+           ':id' => $id
+           ));
+           $res = $req->fetch();
+           return $res;
  }
 //Recherche d'articles par nom
 function Recherche($recherche){

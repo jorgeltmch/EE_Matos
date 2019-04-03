@@ -87,6 +87,7 @@ header("Refresh:0");
     <?php require "ulkit.php"; ?>
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="stylesheet" href="css/uikit.min.css" />
+    <link rel="stylesheet" href="css/styleCalendar.css">
 </head>
 
 <body class="uk-background-muted">
@@ -148,10 +149,10 @@ header("Refresh:0");
             <div>
                 <div class="uk-card uk-card-default uk-card-body uk-width-*@s" style="height: 400px">
 
-                        <a class="uk-button uk-button-default uk-text-center" href="#modal-center" uk-toggle>
+                        <!-- <a class="uk-button uk-button-default uk-text-center" href="#modal-center" uk-toggle>
                           Réserver ce produit
-                        </a>
-                        <?php //include("calendrier.php"); ?>
+                        </a> -->
+                        <?php include("calendar.php"); ?>
                     <?php  include("popupLouer.php"); ?>
                 </div>
             </div>
