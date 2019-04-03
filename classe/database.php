@@ -10,8 +10,8 @@ require_once '../config/conparam.php';
  * @brief	Helper class pour encapsuler l'objet PDO
  * 			et l'appel aux méthodes
  * @author 	dominique.aigroz@edu.ge.ch
- * @remark	
- *  utilisation : 
+ * @remark
+ *  utilisation :
  *  EDatabase::prepare('SELECT USERID, EMAIL, USERNAME FROM USER', array(PDO::ATTR_CURSOR, PDO::CURSOR_SCROLL));
  */
 class EDatabase {
@@ -32,7 +32,7 @@ class EDatabase {
 	public static function getInstance() {
 		if(!self::$pdoInstance){
 			try{
-					
+
 				$dsn = EDB_DBTYPE.':host='.EDB_HOST.';port='.EDB_PORT.';dbname='.EDB_DBNAME;
 			   	self::$pdoInstance = new PDO($dsn, EDB_USER, EDB_PASS, array('charset'=>'utf8'));
 				self::$pdoInstance->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
@@ -50,6 +50,7 @@ class EDatabase {
 	 */
 	final public static function __callStatic( $chrMethod, $arrArguments ) {
 		$pdo = self::getInstance();
+
 		return call_user_func_array(array($pdo, $chrMethod), $arrArguments);
 	} # end method
 }

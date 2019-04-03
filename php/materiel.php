@@ -228,6 +228,7 @@ header("Refresh:0");
                     </form>
                 </div>
             </div>
+            <?php require_once("footer.php");  ?>
 </body>
 <script src="js/uikit.min.js"></script>
 <script src="js/uikit-icons.min.js"></script>

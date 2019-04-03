@@ -109,6 +109,5 @@ if(isset($_POST['validation'])){
             </div>
             <input type="submit" name="validation" id="validation" value="Envoyer" class="uk-button uk-button-primary uk-margin-bottom"/>
         </form>
-
-
+        <?php require_once("footer.php");  ?>
     </body>

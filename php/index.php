@@ -93,10 +93,8 @@ $nbPages = ceil($nbArticles[0] / 10);
 
 
           <?php endforeach; ?>
-
-
-
-
+        </div>
+          <?php require_once("footer.php");  ?>
 
     </body>
 </html>

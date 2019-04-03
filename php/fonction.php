@@ -172,7 +172,7 @@ function Recherche($recherche){
   }
 }
 
-//Ajoute un Utilisateur
+//Ajoute un Utilisateur s'il ne s'est jamais connecté
 function addUser($username, $email){
   $sql = "INSERT INTO users(username, email) VALUES(:username, :email)";
   $req = EDatabase::prepare($sql, array(PDO::ATTR_CURSOR, PDO::CURSOR_SCROLL));
@@ -188,6 +188,18 @@ function addUser($username, $email){
 //Vérifie que l'utilisateur existe
 function userExists($username){
   $sql = "SELECT idUser FROM users WHERE username = :username";
+  $req = EDatabase::prepare($sql, array(PDO::ATTR_CURSOR, PDO::CURSOR_SCROLL));
+  $req->execute(
+    array(
+       'username' => $username
+       )
+   );
+   $res = $req->fetch();
+   return $res;
+}
+
+function isAdmin($username){
+  $sql = "SELECT admin FROM users WHERE username = :username";
   $req = EDatabase::prepare($sql, array(PDO::ATTR_CURSOR, PDO::CURSOR_SCROLL));
   $req->execute(
     array(
@@ -323,7 +335,6 @@ function increaseStock($idArticle){
 function displayCategories(){
   $categories = GetCategories();
   echo "<ul class=\"uk-nav uk-nav-default uk-text-center\">";
-  echo "<li class=\"uk-active\"><a href=\"index.php\">EE Matos</a></li>";
   echo "<li class=\"uk-nav-header\">Catégories</li>";
   echo "<li class=\"uk-nav-divider\"></li>";
   foreach ($categories as $key => $value) {

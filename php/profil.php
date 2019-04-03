@@ -82,5 +82,6 @@ if (empty($_SESSION["username"])) {
             </div>
         </div>
       </div>
+      <?php require_once("footer.php");  ?>
     </body>
 </html>

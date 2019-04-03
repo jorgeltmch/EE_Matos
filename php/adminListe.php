@@ -67,5 +67,6 @@ if (filter_has_var(INPUT_POST,'refuserEmprunt')) {
             </tbody>
           </table>
         </form>
+        <?php require_once("footer.php");  ?>
     </body>
 </html>

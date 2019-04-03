@@ -13,6 +13,7 @@ if (!empty($username)) {
   $_SESSION["firstname"] = $fistname;
   $_SESSION["email"] = $email;
   $_SESSION["imgProfil"] = $imgProfil;
+  $_SESSION["isAdmin"] = "0";
 
   if (empty(userExists($username))) {
     addUser($username, $email);
@@ -172,16 +173,20 @@ if (isset($_POST['decuser'])) {
 
 <div id="offcanvas-slide" uk-offcanvas>
     <div class="uk-offcanvas-bar">
-      <?php displayCategories(); ?>
-      <!--  <ul class="uk-nav uk-nav-default uk-text-center">
-            <li class="uk-active"><a href="index.php">EE Matos</a></li>
-            <li class="uk-nav-header">Catégorie</li>
-            <li><a href="index.php">Accueil</a></li>
-            <li><a href="profil.php">Profil</a></li>
-            <li><a href="materiel.php">Matériel</a></li>
-            <li class="uk-nav-divider"></li>
-            <li><a href="#">Info</a></li>
-        </ul>
-      -->
+      <a href="index.php"><h1>EE Matos</h1></a>
+      <?php
+      if (!empty($_SESSION["username"]) && isAdmin($_SESSION["username"])):
+      ?>
+      <br>
+
+      <ul class="uk-nav uk-nav-default uk-text-center">
+        <li class="uk-nav-header">Administration</li>
+        <li class="uk-nav-divider"></li>
+        <li><a href=adminAjout.php>Ajout d'article</a></li>
+        <li><a href=adminGestion.php>Gestion des catégories</a></li>
+        <li><a href=adminListe.php>Liste des emprunts</a></li>
+      </ul>
+    <?php endif; ?><br>
+    <?php displayCategories();?>
     </div>
 </div>
