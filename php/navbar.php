@@ -188,5 +188,12 @@ if (isset($_POST['decuser'])) {
       </ul>
     <?php endif; ?><br>
     <?php displayCategories();?>
+    <br>
+    <ul class="uk-nav uk-nav-default uk-text-center">
+      <li class="uk-nav-header">Contact</li>
+      <li class="uk-nav-divider"></li>
+      <li><a href=proposerArticle.php>Proposer un article</a></li>
+      <li><a href=contact.php>Signaler un bug</a></li>
+    </ul><br>
     </div>
 </div>
