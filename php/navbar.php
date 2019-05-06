@@ -185,6 +185,7 @@ if (isset($_POST['decuser'])) {
         <li><a href=adminAjout.php>Ajout d'article</a></li>
         <li><a href=adminGestion.php>Gestion des catégories</a></li>
         <li><a href=adminListe.php>Liste des emprunts</a></li>
+        <li><a href=adminListUser.php>Liste des utilisateurs</a></li>
       </ul>
     <?php endif; ?><br>
     <?php displayCategories();?>

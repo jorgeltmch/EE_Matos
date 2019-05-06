@@ -256,6 +256,17 @@ function isAdmin($username){
     }
 
 
+    function getAllUsers()
+    {
+      $sql = 'SELECT admin, username, email, idUser FROM users';
+      $req = EDatabase::prepare($sql, array(PDO::ATTR_CURSOR, PDO::CURSOR_SCROLL));
+      $req->execute();
+              $res = $req->fetchAll();
+              return $res;
+
+    }
+
+
 //Récupère l'utilisateur avec son email
    function getUserIdByEmail($email){
      $sql = 'SELECT idUser FROM users WHERE email = :email';
@@ -339,6 +350,25 @@ function increaseStock($idArticle){
           return EDatabase::lastInsertId();
 }
 
+//Promouvoir un utilisateur au statut d'admin Admin
+  function promoteUser($idUser){
+    $sql = 'UPDATE users SET admin = 1 WHERE idUser = :idUser';
+    $req = EDatabase::prepare($sql, array(PDO::ATTR_CURSOR, PDO::CURSOR_SCROLL));
+    $req->execute(array(
+            'idUser' => $idUser
+          ));
+            return EDatabase::lastInsertId();
+  }
+
+//Rétrograder un admin au statut d'utilisateur
+  function demoteUser($idUser){
+    $sql = 'UPDATE users SET admin = 0 WHERE idUser = :idUser';
+    $req = EDatabase::prepare($sql, array(PDO::ATTR_CURSOR, PDO::CURSOR_SCROLL));
+    $req->execute(array(
+            'idUser' => $idUser
+          ));
+            return EDatabase::lastInsertId();
+  }
 
 ///////////////AFFICHAGE///////////////////
 function displayCategories(){
@@ -384,11 +414,27 @@ function displayAllEmprunts($emprunts)
       }
     }else {
       echo "<td>Non</td>";
-      echo "<th><button class='uk-button uk-button-default' name='validerEmprunt' value='" . $tmpInfo . "'>Accepter</button></td>";
-      echo "<th><button class='uk-button uk-button-default' name='refuserEmprunt' value='" . $tmpInfo . "'>Refuser</button></td>";
+      echo "<th><button class='uk-button uk-button-primary' name='validerEmprunt' value='" . $tmpInfo . "'>Accepter</button></td>";
+      echo "<th><button class='uk-button uk-button-danger' name='refuserEmprunt' value='" . $tmpInfo . "'>Refuser</button></td>";
     }
   }
 }
+
+  function displayAllUsers($users)
+  {
+    foreach ($users as $key => $value) {
+      $tmpInfo = $value["idUser"];
+      echo "<tr><td>" . $value["username"] ."</td> " . "<td> " . $value["email"] . "</td>";
+        if ($value["admin"] == 1) {
+        echo "<td>Oui</td>";
+        echo "<th><button class='uk-button uk-button-danger' name='retrograder' value='" . $tmpInfo . "'>Rétrograder</button></td>";
+        }
+        else{
+        echo "<td>Non</td>";
+        echo "<th><button class='uk-button uk-button-primary' name='promouvoir' value='" . $tmpInfo . "'>Promouvoir</button></td>";
+        }
+    }
+  }
 
 function displayInfos($article){
   echo "<ul class=\"uk-list uk-list-striped uk-width-expand\">";

@@ -51,9 +51,10 @@ if (filter_has_var(INPUT_POST,'Modifier')) {
 
         <div>
           <div class="uk-button-group">
-              <a href="adminGestion.php" class="uk-button uk-button-secondary">Gestion</a>
-              <a href="adminAjout.php" class="uk-button uk-button-secondary">Ajout</a>
-              <a href="adminListe.php" class="uk-button uk-button-secondary">Liste</a>
+            <a href="adminGestion.php" class="uk-button uk-button-secondary">Gestion</a>
+            <a href="adminAjout.php" class="uk-button uk-button-secondary">Ajout</a>
+            <a href="adminListe.php" class="uk-button uk-button-secondary">Emprunts</a>
+            <a href="adminListUser.php" class="uk-button uk-button-secondary">Utilisateurs</a>
           </div>
         </div>
 
