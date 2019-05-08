@@ -41,7 +41,7 @@ if (isset($_POST['decuser'])) {
 
     <div class="uk-navbar-left ">
 
-        <a class="uk-navbar-item uk-logo" href="index.php">Matos</a>
+        <a class="uk-navbar-item uk-logo" href="index">Matos</a>
 
     </div>
 
@@ -51,15 +51,20 @@ if (isset($_POST['decuser'])) {
             <span class="uk-search-icon-flip" uk-search-icon></span>
             <input name="recherche" class="uk-search-input" type="search" placeholder="Search...">
         </form>
-          <form method="post">
-          <?php if (empty($_SESSION["username"])):
+        <form method="post">
+            <?php if (empty($_SESSION["username"])):
             ?>
-          <button class="uk-button uk-button-default" id="SignInButton"  onclick=""><a href="adminAjout.php">Login</a></button>
-<?php else: ?>
-        <a href="profil.php" ><img class="uk-border-circle uk-height-max-medium"  src="<?php echo $_SESSION["imgProfil"]; ?>" alt="Border circle" style="height: 40px"></a>
-        <button class="uk-button uk-button-secondary" id="SignOutButton"  onclick=""><a href="index.php">Logout</a></button>
-<?php endif; ?>
-            </form>
+
+            <button class="uk-button uk-button-default" id="SignInButton" onclick=""><a
+                    href="adminAjout.php">Login</a></button>
+            <?php else: ?>
+            <a href="profil.php"><img class="uk-border-circle uk-height-max-medium"
+                    src="<?php echo $_SESSION["imgProfil"]; ?>" alt="Border circle" style="height: 40px"></a>
+            <button class="uk-button uk-button-secondary" id="SignOutButton" onclick=""><a
+                    href="index.php">Logout</a></button>
+            <?php endif; ?>
+        </form>
+
         <div id="result"></div>
     </div>
 
@@ -68,103 +73,110 @@ if (isset($_POST['decuser'])) {
 <script src="https://apis.google.com/js/platform.js"></script>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
 <script type="text/javascript">
-    // Email pour savoir si on a déjà envoyé les information de pointage pour un user.
-    // alwaysLowered est mis à 1 afin de placer la fenêtre de déconnexion derrière
-    // une fois qu'on remet le focus sur la fenêtre principale
-    var strWindowFeatures = "menubar=no,location=no,resizable=no,scrollbars=no,status=no,alwaysLowered=1";
+// Email pour savoir si on a déjà envoyé les information de pointage pour un user.
+// alwaysLowered est mis à 1 afin de placer la fenêtre de déconnexion derrière
+// une fois qu'on remet le focus sur la fenêtre principale
+var strWindowFeatures = "menubar=no,location=no,resizable=no,scrollbars=no,status=no,alwaysLowered=1";
 
 
-    $(document).ready(function () {
-        // Ajouter un handle sur le bouton connexion
-        $("#SignInButton").click(handleAuthClick);
-        $("#SignOutButton").click(disconnect);
-        // Initialiser l'api people de google
-        // en lui passant une call-back pour la mise à jour
-        // du status de la personne connectée.
-        EELAuth.EELClientInitialize(updateSigninStatus);
+$(document).ready(function() {
+    // Ajouter un handle sur le bouton connexion
+    $("#SignInButton").click(handleAuthClick);
+    $("#SignOutButton").click(disconnect);
+    // Initialiser l'api people de google
+    // en lui passant une call-back pour la mise à jour
+    // du status de la personne connectée.
+    EELAuth.EELClientInitialize(updateSigninStatus);
 
-    });
+});
 
-    function updateSigninStatus(isSignedIn) {
-      // location.reload();
-        // Si l'utilisateur est connecté, on va récupérer
-        // les infos de l'utilisateur sous forme d'objet
-        // qui contient :
-        //          lastname,
-        //          firstname
-        //          email,
-        //          image,
-        //          locale
-        if (isSignedIn) {
-            EELAuth.getUserInfo(onReceiveUserInfo);
+function updateSigninStatus(isSignedIn) {
+    // location.reload();
+    // Si l'utilisateur est connecté, on va récupérer
+    // les infos de l'utilisateur sous forme d'objet
+    // qui contient :
+    //          lastname,
+    //          firstname
+    //          email,
+    //          image,
+    //          locale
+    if (isSignedIn) {
+        EELAuth.getUserInfo(onReceiveUserInfo);
 
-        } else {
-            EELAuth.signIn();
-        }
+    } else {
+        EELAuth.signIn();
     }
-    /**
-     * Call-back quand on click sur le bouton login
-     * @param {type} event
-     */
-    function handleAuthClick(event) {
+}
+/**
+ * Call-back quand on click sur le bouton login
+ * @param {type} event
+ */
+function handleAuthClick(event) {
 
-        event.preventDefault();
-        updateSigninStatus(EELAuth.isSignedIn());
-    }
-
-
-    function onReceiveUserInfo(info) {
-        // Si on a déjà envoyé une requête pour le même user
-        // on ne renvoye pas.
-        /* @remark Vous récupérez un objet de ce type:
-          info.email
-          info.lastname
-          info.firstname
-          info.image
-          info.locale
-          */
-          $.ajax({
-              method: "POST",
-              url: "navbar.php",
-              data: {"lastname": info.lastname, "fistname": info.firstname,"email": info.email,"locale": info.locale,"imgProfil": info.image},
-              success: function () {
-              window.location.replace("profil.php");
-              }
-          });
-    }
+    event.preventDefault();
+    updateSigninStatus(EELAuth.isSignedIn());
+}
 
 
-    /**
-     * Gère la déconnection avec people api de google
-     * @returns {undefined}
-     */
-    function disconnect(){
-      /*EELAuth.revokeAllScopes();
-        clearInfo();
-        // On lance la fenêtre de déconnexion
-        window.open('https://www.google.com/accounts/Logout?continue=https://appengine.google.com/_ah/logout', "LogoutEEL", strWindowFeatures);
+function onReceiveUserInfo(info) {
+    // Si on a déjà envoyé une requête pour le même user
+    // on ne renvoye pas.
+    /* @remark Vous récupérez un objet de ce type:
+      info.email
+      info.lastname
+      info.firstname
+      info.image
+      info.locale
       */
+    $.ajax({
+        method: "POST",
+        url: "navbar.php",
+        data: {
+            "lastname": info.lastname,
+            "fistname": info.firstname,
+            "email": info.email,
+            "locale": info.locale,
+            "imgProfil": info.image
+        },
+        success: function() {
+            window.location.replace("profil.php");
+        }
+    });
+}
 
-      $.post('navbar.php', {decuser:"dec"}, function(data) {
-          console.log(data);
-          clearInfo();
-          window.location.replace("index.php");
-      });
-    }
+
+/**
+ * Gère la déconnection avec people api de google
+ * @returns {undefined}
+ */
+function disconnect() {
+    /*EELAuth.revokeAllScopes();
+      clearInfo();
+      // On lance la fenêtre de déconnexion
+      window.open('https://www.google.com/accounts/Logout?continue=https://appengine.google.com/_ah/logout', "LogoutEEL", strWindowFeatures);
+    */
+
+    $.post('navbar.php', {
+        decuser: "dec"
+    }, function(data) {
+        console.log(data);
+        clearInfo();
+        window.location.replace("index.php");
+    });
+}
 
 
 
 
-    /**
-     * Efface les information relatives au pointage de l'utilisateur
-     */
-    function clearInfo() {
-        $("#profilImage").html('');
-        $("#profilName").html('');
-        $("#eventTime").html('');
-        $("#disconnectMsg").html('');
-    }
-
+/**
+ * Efface les information relatives au pointage de l'utilisateur
+ */
+function clearInfo() {
+    $("#profilImage").html('');
+    $("#profilName").html('');
+    $("#eventTime").html('');
+    $("#disconnectMsg").html('');
+}
 </script>
 
 
@@ -173,28 +185,31 @@ if (isset($_POST['decuser'])) {
 
 <div id="offcanvas-slide" uk-offcanvas>
     <div class="uk-offcanvas-bar">
-      <a href="index.php"><h1>EE Matos</h1></a>
-      <?php
+        <a href="index.php">
+            <h1>EE Matos</h1>
+        </a>
+        <?php
       if (!empty($_SESSION["username"]) && isAdmin($_SESSION["username"])):
       ?>
-      <br>
+        <br>
 
-      <ul class="uk-nav uk-nav-default uk-text-center">
-        <li class="uk-nav-header">Administration</li>
-        <li class="uk-nav-divider"></li>
-        <li><a href=adminAjout.php>Ajout d'article</a></li>
-        <li><a href=adminGestion.php>Gestion des catégories</a></li>
-        <li><a href=adminListe.php>Liste des emprunts</a></li>
-        <li><a href=adminListUser.php>Liste des utilisateurs</a></li>
-      </ul>
-    <?php endif; ?><br>
-    <?php displayCategories();?>
-    <br>
-    <ul class="uk-nav uk-nav-default uk-text-center">
-      <li class="uk-nav-header">Contact</li>
-      <li class="uk-nav-divider"></li>
-      <li><a href=proposerArticle.php>Proposer un article</a></li>
-      <li><a href=contact.php>Signaler un bug</a></li>
-    </ul><br>
+        <ul class="uk-nav uk-nav-default uk-text-center">
+            <li class="uk-nav-header">Administration</li>
+            <li class="uk-nav-divider"></li>
+            <li><a href=adminAjout.php>Ajout d'article</a></li>
+            <li><a href=adminGestion.php>Gestion des catégories</a></li>
+            <li><a href=adminListe.php>Liste des emprunts</a></li>
+            <li><a href=adminListUser.php>Liste des utilisateurs</a></li>
+        </ul>
+        <?php endif; ?><br>
+        <?php displayCategories();?>
+        <br>
+        <ul class="uk-nav uk-nav-default uk-text-center">
+            <li class="uk-nav-header">Contact</li>
+            <li class="uk-nav-divider"></li>
+            <li><a href=proposerArticle.php>Proposer un article</a></li>
+            <li><a href=contact.php>Signaler un bug</a></li>
+        </ul><br>
+
     </div>
 </div>

@@ -44,71 +44,77 @@ if(isset($_POST['validation'])){
 
 <!doctype html>
 <html lang="fr">
-    <head>
-        <meta charset="utf-8">
-        <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1" />
-        <title>EE Matos</title>
-        <?php require "ulkit.php"; ?>
-    </head>
 
-    <body class="uk-text-center">
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1" />
+    <title>EE Matos</title>
+    <?php require "ulkit.php"; ?>
+</head>
 
-        <?php require "navbar.php"; ?>
+<body class="uk-text-center">
 
-        <div>
-          <div class="uk-button-group">
+    <?php require "navbar.php"; ?>
+
+    <div>
+        <div class="uk-button-group">
             <a href="adminGestion.php" class="uk-button uk-button-secondary">Gestion</a>
             <a href="adminAjout.php" class="uk-button uk-button-secondary">Ajout</a>
             <a href="adminListe.php" class="uk-button uk-button-secondary">Emprunts</a>
             <a href="adminListUser.php" class="uk-button uk-button-secondary">Utilisateurs</a>
-          </div>
         </div>
 
-        <h1 class="uk-heading-divider">Ajout de nouveau produit</h1>
-        <form enctype="multipart/form-data" action="adminAjout.php" method="post" class="uk-margin-auto uk-margin-large-top uk-form-stacked uk-width-1-3@m">
+    </div>
+    </div>
 
-            <div class="uk-margin">
-                <label class="uk-form-label" for="form-stacked-text">Nom du produit</label>
-                <div class="uk-form-controls">
-                    <input name="nomProduit" class="uk-input" id="form-stacked-text" type="text" placeholder="ASUS...">
-                </div>
+    <h1 class="uk-heading-divider">Ajout de nouveau produit</h1>
+    <form enctype="multipart/form-data" action="adminAjout.php" method="post"
+        class="uk-margin-auto uk-margin-large-top uk-form-stacked uk-width-1-3@m">
+
+        <div class="uk-margin">
+            <label class="uk-form-label" for="form-stacked-text">Nom du produit</label>
+            <div class="uk-form-controls">
+                <input name="nomProduit" class="uk-input" id="form-stacked-text" type="text" placeholder="ASUS...">
             </div>
+        </div>
 
-            <div class="uk-margin">
-                <label class="uk-form-label" for="form-stacked-text">Catégorie de l'objet</label>
-                <select name="categorie" class="uk-select">
-                  <?php
+        <div class="uk-margin">
+            <label class="uk-form-label" for="form-stacked-text">Catégorie de l'objet</label>
+            <select name="categorie" class="uk-select">
+                <?php
                   foreach (getCategories() as $com)
                   {
                     echo '<option value="'.$com['idCategorie'].'">'.$com['nomCategorie'].'</option>';
                   }
                   ?>
-                </select>
+            </select>
+        </div>
+
+        <label class="uk-form-label" for="form-stacked-text">Caractéristiques du produit (séparer avec des
+            virgules)</label>
+        <div class="uk-margin">
+            <textarea class="uk-textarea" rows="5" name="description" placeholder="Textarea"></textarea>
+        </div>
+
+        <div class="uk-margin">
+            <label class="uk-form-label" for="form-stacked-text">Stock disponible</label>
+            <div class="uk-form-controls">
+                <input name="stock" class="uk-input" id="form-stacked-text" type="number" min="0">
+            </div>
+        </div>
+
+
+        <label class="uk-form-label" for="form-stacked-text">Image du produit</label>
+        <div class="js-upload uk-placeholder uk-text-center">
+            <span uk-icon="icon: cloud-upload"></span>
+            <span class="uk-text-middle">Glissez, déposez ou </span>
+            <div uk-form-custom>
+                <input type="file" name="image" id="image" />
+                <span class="uk-link">cliquez ici</span>
             </div>
 
-            <label class="uk-form-label" for="form-stacked-text">Caractéristiques du produit (séparer avec des virgules)</label>
-            <div class="uk-margin">
-              <textarea class="uk-textarea" rows="5" name="description" placeholder="Textarea"></textarea>
-            </div>
-
-            <div class="uk-margin">
-                <label class="uk-form-label" for="form-stacked-text">Stock disponible</label>
-                <div class="uk-form-controls">
-                    <input name="stock" class="uk-input" id="form-stacked-text" type="text">
-                </div>
-            </div>
-
-
-            <label class="uk-form-label" for="form-stacked-text">Image du produit</label>
-            <div class="js-upload uk-placeholder uk-text-center">
-                <span uk-icon="icon: cloud-upload"></span>
-                <span class="uk-text-middle">Glissez, déposez ou </span>
-                <div uk-form-custom>
-                    <input type="file" name="image" id="image"/>
-                    <span class="uk-link">cliquez ici</span>
-                </div>
-            </div>
-            <input type="submit" name="validation" id="validation" value="Envoyer" class="uk-button uk-button-primary uk-margin-bottom"/>
-        </form>
-        <?php require_once("footer.php");  ?>
-    </body>
+            <input type="submit" name="validation" id="validation" value="Envoyer"
+                class="uk-button uk-button-primary uk-margin-bottom" />
+    </form>
+    <?php require_once("footer.php");  ?>
+</body>

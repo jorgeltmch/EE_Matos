@@ -1,0 +1,47 @@
+ErrorDocument 403 /EE_Matos/php/index.php
+DirectoryIndex EE_Matos/php/index.php
+Options All -Indexes
+IndexIgnore *
+
+
+#RewriteEngine on
+#RewriteCond %{REQUEST_URI} !/maintenance.html$
+#RewriteCond %{REMOTE_ADDR} !^xxx\.xxx\.xxx\.xxx
+#RewriteRule $ /maintenance.html [R=302,L]
+
+<FilesMatch fonction.php>
+
+ order allow,deny
+ deny from all
+
+</FilesMatch>
+
+<FilesMatch scriptVerifRendu.php>
+
+ order allow,deny
+ deny from all
+ 
+</FilesMatch>
+
+<FilesMatch ulkit.php>
+
+ order allow,deny
+ deny from all
+ 
+</FilesMatch>
+
+<FilesMatch popupLouer.php>
+
+ order allow,deny
+ deny from all
+ 
+</FilesMatch>
+
+<FilesMatch .htaccess>
+
+ order allow,deny
+ deny from all
+ 
+</FilesMatch>
+
+

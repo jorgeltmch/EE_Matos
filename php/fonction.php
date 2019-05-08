@@ -37,12 +37,13 @@ session_start();
  }
 
  //Modifie l'article
- function ModifierArticle($idArticle, $modifNom, $idCategorie, $modifDescript, $imageArticle, $exImg)
+ function ModifierArticle($idArticle, $modifNom, $stock, $idCategorie, $modifDescript, $imageArticle, $exImg)
  {
-   $sql = 'UPDATE article SET nom = :modifNom, idCategorie = :idCategorie, descriptionArticle = :modifDescript, dateModif = :dateModif, img = :imageArticle, imgExtension = :exImg WHERE idArticle = :idArticle';
+   $sql = 'UPDATE article SET nom = :modifNom, stockDisponible = :stock, idCategorie = :idCategorie, descriptionArticle = :modifDescript, dateModif = :dateModif, img = :imageArticle, imgExtension = :exImg WHERE idArticle = :idArticle';
    $req = EDatabase::prepare($sql, array(PDO::ATTR_CURSOR, PDO::CURSOR_SCROLL));
    $req->execute(array(
            'modifNom' => $modifNom,
+           'stock' => $stock,
            'idCategorie' => $idCategorie,
            'modifDescript' => $modifDescript,
            'dateModif' => date('Y-m-d H:i:s'),
@@ -50,9 +51,36 @@ session_start();
            'exImg' => $exImg,
            'idArticle' => $idArticle
          ));
-           return EDatabase::lastInsertId();
+           return $sucessA = EDatabase::lastInsertId();
  };
 
+ //Ajoute Comentaire dans la base donnée
+ function AjoutComArticle($idArticle, $mailUser, $comArticle, $noteArticle)
+ {
+   $sql = 'INSERT INTO commentaire(idArticle, mailUser, com, note) VALUES(:idArticle, :mailUser, :comArticle, :noteArticle)';
+   $req = EDatabase::prepare($sql, array(PDO::ATTR_CURSOR, PDO::CURSOR_SCROLL));
+   $req->execute(
+    array(
+            'idArticle' => $idArticle,
+            'mailUser' => $mailUser,
+            'comArticle' => $comArticle,
+            'noteArticle' => $noteArticle,
+            )
+          );
+     return $sucessB = EDatabase::lastInsertId();
+ }
+
+ //affichage commentaire
+ function GetCommentaire(){
+   $sql = 'SELECT * FROM commentaire';
+   $req = EDatabase::prepare($sql, array(PDO::ATTR_CURSOR, PDO::CURSOR_SCROLL));
+   $req->execute();
+   $datacom = $req->fetchAll(PDO::FETCH_ASSOC);
+   return $datacom;
+
+ }
+
+//___________________________AJOUT PRODUIT________________________________
 //Ajoute un produit
 function addProduit($nom, $idCategorie, $description, $stock, $imgArticle, $imgExtension)
  {
