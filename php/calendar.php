@@ -1,4 +1,4 @@
-<?php
+  <?php
 /**
 *   Ce programme affiche un calendrier.
 *
@@ -8,6 +8,7 @@
 **/
 const JOUR_ANGLAIS = array('Monday','Tuesday','Wednesday','Thursday','Friday','Saturday','Sunday');
 const LISTE_MOIS = array(1 => "Janvier","Février","Mars","Avril","Mai","Juin","Juillet","Août","Septembre","Octobre","Novembre","Décembre");
+
 
 $idArticle="1";
 // $datesNonDisponible = getDatesNonDisponibles($idArticle);
@@ -80,16 +81,27 @@ function generateCalendar($moisAffiche, $anneeAffiche, $jourAnglais){
     $moisActuel = date("n", time());
     $anneeActuel = date("Y", time());
     $classeJour = "PasVide";
+    $dateActuelle = "$anneeActuel-$moisActuel-$jourActuel 00:00:00";
+    $idArticle = $_GET["idArticle"];
+    $emprunts = getEmpruntsByArticleId($idArticle);
+    $article = getProduitByID($idArticle);
 
-
-    for ($ligne=0; $ligne < 6 ; $ligne++)
+    if ($numeroCaseCommencementMois >= 6) {
+      $ligneS = 6;
+    }
+    else{
+      $ligneS = 5;
+    }
+    for ($ligne=0; $ligne < $ligneS ; $ligne++)
     {
         echo "<tr>";
         for ($colonne=0; $colonne < 7 ; $colonne++)
         {
             if( ($ligne == 0 && $colonne < $numeroCaseCommencementMois)|| $jourCalendrier > $nbDeJour)
             {
-                echo "<td class=\"Vide\"></td>";
+
+                echo "<td class=\"lastmonth\"></td>";
+
             }
             else
             {
@@ -102,7 +114,38 @@ function generateCalendar($moisAffiche, $anneeAffiche, $jourAnglais){
 
                 // else
                 // {
-                    $classeJour = "  <td class=\"pasVide\">$jourCalendrier</td>";
+
+                    $actual_link = "http://$_SERVER[HTTP_HOST]$_SERVER[REQUEST_URI]";
+                    $date = "$anneeAffiche-$moisAffiche-$jourCalendrier 00:00:00";
+                    
+                    if (!empty($emprunts)) {
+                      $empruntsAjd = getEmpruntsToday($idArticle, $date);
+                      // var_dump($empruntsAjd);
+                      $nbArticlesEmpruntes = 0;
+                      foreach ($empruntsAjd as $key => $value) {
+                        // if (strtotime($date) >= strtotime($value["dateDebut"]) && strtotime($date) <= strtotime($value["dateFin"])) {
+                        //   $classeJour = "  <td class=\"reserve\"><a href=\"$actual_link&jour=" . urlencode($date) . "\">$jourCalendrier</a></td>";
+                        // }
+                        $nbArticlesEmpruntes += $value["nbArticles"];
+
+                        }
+                        //GRISE SI
+                        // if (strtotime($date) >= strtotime($value["dateDebut"]) && strtotime($date) <= strtotime($value["dateFin"])) {
+                        if ($article["stockDisponible"] <= $nbArticlesEmpruntes || strtotime($dateActuelle) > strtotime($date)) {
+
+                          $classeJour = "  <td class=\"reserve\">$jourCalendrier</td>";
+                        }
+                        else{
+                          $classeJour = "  <td><a href=\"$actual_link&jour=" . urlencode($date) . "\"> $jourCalendrier</a></td>";
+                        }
+
+                      }
+                    else{
+                      $classeJour = "  <td><a href=\"$actual_link&jour=" . urlencode($date) . "\"> $jourCalendrier</a></td>";
+                    }
+
+
+                  //  $classeJour = "  <td class=\"pasVide\"><a id=\"calPopUp\" href=\"$actual_link&jour=" . urlencode($date) . "\">$jourCalendrier</a></td>";
                 // }
 
                 echo $classeJour;
@@ -114,7 +157,9 @@ function generateCalendar($moisAffiche, $anneeAffiche, $jourAnglais){
 }
 
 ?>
-    <div class="conteneur">
+<link rel="stylesheet" href="../css/calendrier.css" />
+<div id="calendar" class="uk-width-1-1@m">
+
         <!-- <div class="titre"> -->
             <!-- <h1>Réserver une date</h1> -->
             <!-- <hr> -->
@@ -123,25 +168,25 @@ function generateCalendar($moisAffiche, $anneeAffiche, $jourAnglais){
                     <form action="#" method="post">
                         <input type="hidden"  name="moisHidden" value="<?php echo $moisAffiche; ?>">
                         <input type="hidden" name="anneeHidden" value="<?php echo $anneeAffiche; ?>">
-                        <td class="pasBordure"><input type="submit" name="moisAvant" value="<"></td>
-                        <td class="pasBordure" colspan="5"><h2><?php echo LISTE_MOIS[$moisAffiche] . " " . $anneeAffiche; ?></h2></td>
-                        <td class="pasBordure"><input type="submit" name="moisApres" value=">"></td>
+                        <td ><input type="submit" name="moisAvant" value="<"></td>
+                        <td colspan="5"><h1><?php echo LISTE_MOIS[$moisAffiche] . " " . $anneeAffiche; ?></h1></td>
+                        <td><input type="submit" name="moisApres" value=">"></td>
                     </form>
                 </tr>
-                    <tr>
-                        <th>Lundi</th>
-                        <th>Mardi</th>
-                        <th>Mercredi</th>
-                        <th>Jeudi</th>
-                        <th>Vendredi</th>
-                        <th>Samedi</th>
-                        <th>Dimanche</th>
-                    </tr>
-                    <tr>
+                <td>Lun.</td>
+                <td>Mar.</td>
+                <td>Mer.</td>
+                <td>Jeu.</td>
+                <td>Ven.</td>
+                <td>Sam.</td>
+                <td>Dim.</td>
+                    <!-- <tr> -->
+
                         <?php
                             generateCalendar($moisAffiche,$anneeAffiche, JOUR_ANGLAIS);
                         ?>
-                    </tr>
+
+                    <!-- </tr> -->
                 </table>
             <!-- </div> -->
             <!-- <div class="aa" id="inscription">

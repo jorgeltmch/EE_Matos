@@ -4,7 +4,8 @@
 
 
 #calendar{
-  width:358px;
+
+  width:500px;
   margin:0 auto;
   margin-top:2%;
   margin-bottom:2%;
@@ -15,12 +16,13 @@
   box-shadow:0 0 50px -14px rgba(0,0,0,.8);
 }
 
-#calendar h1{
+/* #calendar h1{ */
+#titre {
   background:#ee3333;
   border-radius:5px 5px 0 0;
-  padding:20px;
+  padding:10px;
   font-size:140%;
-  font-weight:300;
+  font-weight:100;
   text-transform:uppercase;
   letter-spacing:1px;
   color:#fff;
@@ -29,6 +31,7 @@
 }
 
 #calendar table{
+  text-align: center;
   border-top:1px solid #ddd;
   border-left:1px solid #ddd;
   border-spacing:0;
@@ -36,7 +39,7 @@
 }
 
 #calendar td{
-  width:38px;
+  width:60px;
   height:38px;
   background:#eee;
   border-right:1px solid #ddd;
@@ -53,6 +56,11 @@
 
 #calendar .lastmonth,#calendar .nextmonth,#calendar .nextmonth ~ *{
   background:#fff;
+  color:#999;
+}
+
+#calendar .reserve{
+  background:#d3c9c9;
   color:#999;
 }
 

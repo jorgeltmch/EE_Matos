@@ -1,19 +1,24 @@
 <?php
 require_once 'fonction.php';
 $idArticle = $_GET["idArticle"];
+$jour = (empty($_GET["jour"])) ? '' : $_GET["jour"];
 
 $dateFin = (empty($_POST["dateFin"])) ? '' : $_POST["dateFin"];
 $dateDebut = (empty($_POST["dateDebut"])) ? '' : $_POST["dateDebut"];
-
+$nbArticle = (empty($_POST["nbArticle"])) ? '' : $_POST["nbArticle"];
 if (!empty($idArticle)) {
   $article = getProduitByID($idArticle);
+
 }
 
+
+// var_dump($emprunts);
 $answer = "";
 
-if (!empty($dateFin) && !empty($dateDebut)) {
+
+if (!empty($dateFin) && !empty($dateDebut) && !empty($nbArticle)) {
   if ($article["stockDisponible"] >= 1) {
-    addEmprunt($article["idArticle"], $_SESSION["uID"], $dateDebut, $dateFin); //TODO : changer id
+    addEmprunt($article["idArticle"], $_SESSION["uID"], $dateDebut, $dateFin, $nbArticle); //TODO : changer id
     $answer = "success";
   }else{
     $answer = "error";
@@ -21,6 +26,7 @@ if (!empty($dateFin) && !empty($dateDebut)) {
 
 }
 
+//TODO : FONCTION ou INCLUDE
 // Modife article
 if(isset($_POST['validation'])){
 $modifNom = filter_input( INPUT_POST, 'modifNom', FILTER_SANITIZE_STRING);
@@ -116,10 +122,9 @@ $commentaire = GetCommentaire();
     <meta charset="utf-8">
     <?php require "ulkit.php"; ?>
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <link rel="stylesheet" href="css/uikit.min.css" />
-    <link rel="stylesheet" href="css/styleCalendar.css">
+    <link rel="stylesheet" href="../css/uikit.min.css" />
+    <!-- <link rel="stylesheet" href="../css/styleCalendar.css"> -->
 </head>
-
 <body class="uk-background-muted">
     <header>
         <?php  include("navbar.php"); ?>
@@ -143,7 +148,7 @@ $commentaire = GetCommentaire();
     <div class="uk-padding-small" uk-height-viewport="expand: true">
         <div class="uk-grid-small uk-child-width-1-2@s" uk-grid="masonry: true">
             <div>
-                <div class="uk-card uk-card-default uk-card-body uk-text-center" style="height: 400px">
+                <div class="uk-card uk-card-default uk-card-body uk-text-center" style="height: 300px">
                     <div class="uk-child-width-1-3@m" uk-grid uk-lightbox="animation: slide">
                         <div>
                             <?php
@@ -175,20 +180,30 @@ $commentaire = GetCommentaire();
                       <a class="uk-alert-close" uk-close></a>
                       <p><?php echo $article["stockDisponible"] ?> élément(s) en stock</p>
                   </div>
-                  <?php displayInfos($article) ?>
+                  <?php displayInfos($article);
+                  if (!empty($jour)) {
+                    $jour = strtotime($jour);
+                    include("popupLouer.php");
+                    echo "<script type=\"text/javascript\">";
+                    echo "var modal = UIkit.modal(\"#modal-center\");";
+                    echo "setTimeout(function(){";
+                    echo "modal.show();";
+                    echo "}, 0);";
+                    echo "</script>";
+
+                  }
+                  ?>
               </div>
                 </div>
             </div>
             <?php if(!empty($_SESSION["username"]) && isAdmin($_SESSION["username"])): ?>
             <div>
-                <div class="uk-card uk-card-default uk-card-body uk-width-*@s" style="height: 400px">
+                <div class="uk-card uk-card-default uk-card-body uk-width-*@s" style="height: 500px">
 
-                        <a class="uk-button uk-button-default uk-text-center" href="#modal-center" uk-toggle>
-                            Réserver ce produit
-                        </a>
-
-                        <?php  include("popupLouer.php"); ?>
-                    </div>
+                        <!-- <a class="uk-button uk-button-default uk-text-center" href="#modal-center" uk-toggle>
+                          Réserver ce produit
+                        </a> -->
+                        <?php include("calendar.php") ?>
                 </div>
                 <?php endif; ?>
             </div>
@@ -369,7 +384,6 @@ foreach ($commentaire as $key => $value) {
 
                     <?php require_once("footer.php");  ?>
 </body>
-<script src="js/uikit.min.js"></script>
-<script src="js/uikit-icons.min.js"></script>
+
 
 </html>

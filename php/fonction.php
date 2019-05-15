@@ -2,6 +2,16 @@
 require_once '../classe/database.php';
 session_start();
 
+function getEmpruntsByArticleId($id){
+  $sql = 'SELECT dateDebut, dateFin, rendu, idArticle FROM emprunt WHERE idArticle = :id'; //AND rendu = 1
+  $req = EDatabase::prepare($sql, array(PDO::ATTR_CURSOR, PDO::CURSOR_SCROLL));
+  $req->execute(array(
+          ':id' => $id
+          ));
+          $res = $req->fetchAll();
+          return $res;
+}
+
 //Ajoute une catégorie à la basse de donnée
  function AjouterCategorie($nomCategorie)
  {
@@ -273,6 +283,18 @@ function isAdmin($username){
              return $res;
    }
 
+   function getEmpruntsToday($id, $date)
+    {
+      $sql = 'SELECT nom, dateDebut, dateFin, rendu, nbArticles, article.idArticle FROM emprunt JOIN article ON article.idArticle = emprunt.idArticle  WHERE emprunt.idArticle = :id  AND DATEDIFF(:dateEmprunt, dateDebut) >= 0 AND DATEDIFF(:dateEmprunt, dateFin) <= 0';
+      $req = EDatabase::prepare($sql, array(PDO::ATTR_CURSOR, PDO::CURSOR_SCROLL));
+      $req->execute(array(
+              ':id' => $id,
+              ':dateEmprunt' => $date
+
+              ));
+              $res = $req->fetchAll();
+              return $res;
+    }
 //Récupère tous les emprunts
    function getAllEmprunts()
     {
@@ -308,15 +330,17 @@ function isAdmin($username){
 
 
 //Ajoute un emprunt
-function addEmprunt($idArticle, $idUser, $dateDebut, $dateFin)
+function addEmprunt($idArticle, $idUser, $dateDebut, $dateFin, $nbArticles)
   {
-    $sql = 'INSERT INTO emprunt(idArticle, idUser,dateDebut, dateFin) VALUES(:idArticle, :idUser, :dateDebut, :dateFin)';
+    $sql = 'INSERT INTO emprunt(idArticle, idUser, dateDebut, dateFin, nbArticles) VALUES(:idArticle, :idUser, :dateDebut, :dateFin, :nbArticles)';
     $req = EDatabase::prepare($sql, array(PDO::ATTR_CURSOR, PDO::CURSOR_SCROLL));
     $req->execute(array(
             ':idArticle' => $idArticle,
             ':idUser' => $idUser,
             ':dateDebut' => $dateDebut,
-            ':dateFin' => $dateFin
+            ':dateFin' => $dateFin,
+            ':nbArticles' => $nbArticles
+
            ));
             return EDatabase::lastInsertId();
   }
@@ -336,7 +360,7 @@ function ajoutEmprunt($idUser, $idArticle, $dateDebut,$dateFin){
 }
 
 function validerEmprunt($idArticle, $idUser, $dateDebut, $dateFin){
-  decreaseStock($idArticle);
+  // decreaseStock($idArticle);
   $sql = 'UPDATE emprunt SET valide = 1 WHERE idArticle = :idArticle AND idUser = :idUser AND dateDebut = :dateDebut AND dateFin = :dateFin';
   $req = EDatabase::prepare($sql, array(PDO::ATTR_CURSOR, PDO::CURSOR_SCROLL));
   $req->execute(array(
@@ -360,23 +384,23 @@ function refuserEmprunt($idArticle, $idUser, $dateDebut, $dateFin){
           return EDatabase::lastInsertId();
 }
 
-function decreaseStock($idArticle){
-  $sql = 'UPDATE article SET stockDisponible = stockDisponible - 1 WHERE idArticle = :idArticle';
-  $req = EDatabase::prepare($sql, array(PDO::ATTR_CURSOR, PDO::CURSOR_SCROLL));
-  $req->execute(array(
-          'idArticle' => $idArticle
-        ));
-          return EDatabase::lastInsertId();
-}
-
-function increaseStock($idArticle){
-  $sql = 'UPDATE article SET stockDisponible = stockDisponible + 1 WHERE idArticle = :idArticle';
-  $req = EDatabase::prepare($sql, array(PDO::ATTR_CURSOR, PDO::CURSOR_SCROLL));
-  $req->execute(array(
-          'idArticle' => $idArticle
-        ));
-          return EDatabase::lastInsertId();
-}
+// function decreaseStock($idArticle){
+//   $sql = 'UPDATE article SET stockDisponible = stockDisponible - 1 WHERE idArticle = :idArticle';
+//   $req = EDatabase::prepare($sql, array(PDO::ATTR_CURSOR, PDO::CURSOR_SCROLL));
+//   $req->execute(array(
+//           'idArticle' => $idArticle
+//         ));
+//           return EDatabase::lastInsertId();
+// }
+//
+// function increaseStock($idArticle){
+//   $sql = 'UPDATE article SET stockDisponible = stockDisponible + 1 WHERE idArticle = :idArticle';
+//   $req = EDatabase::prepare($sql, array(PDO::ATTR_CURSOR, PDO::CURSOR_SCROLL));
+//   $req->execute(array(
+//           'idArticle' => $idArticle
+//         ));
+//           return EDatabase::lastInsertId();
+// }
 
 //Promouvoir un utilisateur au statut d'admin Admin
   function promoteUser($idUser){
@@ -475,7 +499,7 @@ function displayInfos($article){
 }
 
 function rendreArticle($idArticle, $idUser, $dateDebut, $dateFin){
-  increaseStock($idArticle);
+  // increaseStock($idArticle);
   $sql = 'UPDATE emprunt SET rendu = 1 WHERE idArticle = :idArticle AND idUser = :idUser AND dateDebut = :dateDebut AND dateFin = :dateFin';
   $req = EDatabase::prepare($sql, array(PDO::ATTR_CURSOR, PDO::CURSOR_SCROLL));
   $req->execute(array(
