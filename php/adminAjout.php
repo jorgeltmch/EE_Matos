@@ -2,6 +2,11 @@
 
 require_once 'fonction.php';
 
+if (empty($_SESSION["username"]) || !isAdmin($_SESSION["uID"])){
+  header("Location: index.php");
+  exit;
+}
+
 if(isset($_POST['validation'])){
     $nomProduit = filter_input(INPUT_POST, 'nomProduit', FILTER_SANITIZE_STRING);
     $idCategorie = filter_input(INPUT_POST, 'categorie', FILTER_SANITIZE_STRING);

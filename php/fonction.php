@@ -245,12 +245,12 @@ function userExists($username){
    return $res;
 }
 
-function isAdmin($username){
-  $sql = "SELECT admin FROM users WHERE username = :username";
+function isAdmin($uID){
+  $sql = "SELECT admin FROM users WHERE idUser = :uID";
   $req = EDatabase::prepare($sql, array(PDO::ATTR_CURSOR, PDO::CURSOR_SCROLL));
   $req->execute(
     array(
-       'username' => $username
+       'uID' => $uID
        )
    );
    $res = $req->fetch();

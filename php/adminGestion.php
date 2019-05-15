@@ -1,6 +1,12 @@
 <?php
 require_once "fonction.php";
 
+if (empty($_SESSION["username"]) || !isAdmin($_SESSION["uID"])){
+  header("Location: index.php");
+  exit;
+}
+
+
 //Initialisation des variables nécessaires
 $nomCategorie = "";
 

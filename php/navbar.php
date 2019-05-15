@@ -189,7 +189,7 @@ function clearInfo() {
             <h1>EE Matos</h1>
         </a>
         <?php
-      if (!empty($_SESSION["username"]) && isAdmin($_SESSION["username"])):
+      if (!empty($_SESSION["username"]) && isAdmin($_SESSION["uID"])):
       ?>
         <br>
 
