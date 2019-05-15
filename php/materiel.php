@@ -196,7 +196,7 @@ $commentaire = GetCommentaire();
               </div>
                 </div>
             </div>
-            <?php if(!empty($_SESSION["username"]) && isAdmin($_SESSION["username"])): ?>
+            <?php //if(!empty($_SESSION["username"]) && isAdmin($_SESSION["username"])): ?>
             <div>
                 <div class="uk-card uk-card-default uk-card-body uk-width-*@s" style="height: 500px">
 
@@ -205,7 +205,7 @@ $commentaire = GetCommentaire();
                         </a> -->
                         <?php include("calendar.php") ?>
                 </div>
-                <?php endif; ?>
+                <?php //endif; ?>
             </div>
 
 
