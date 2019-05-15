@@ -41,7 +41,7 @@ if (isset($_POST['decuser'])) {
 
     <div class="uk-navbar-left ">
 
-        <a class="uk-navbar-item uk-logo" href="index">Matos</a>
+        <a class="uk-navbar-item uk-logo" href="index.php">Matos</a>
 
     </div>
 

@@ -212,11 +212,11 @@ $commentaire = GetCommentaire();
 
 
 
-            <div class="uk-padding-small" uk-height-viewport="expand: true">
+            <div class="uk-padding-small uk-width-1-1" uk-height-viewport="expand: true">
                 <div class="uk-grid-small uk-child-width-1@s" uk-grid="masonry: true">
                     <div>
                         <div class="uk-card uk-card-default uk-card-body uk-text-center uk-child-width-1-2@s">
-                            <h1 class="uk-heading-bullet">Commentaire <a
+                            <h1 class="uk-heading-bullet">Commentaires <a
                                     class="uk-float-right uk-button uk-button-default uk-text-center"
                                     href="#modal-overflow3" uk-toggle>Ajouter</a></h1>
                             <?php
@@ -344,7 +344,7 @@ foreach ($commentaire as $key => $value) {
                         <button class="uk-modal-close-default" type="button" uk-close></button>
 
                         <div class="uk-modal-header">
-                            <h2 class="uk-modal-title">Commentaire</h2>
+                            <h2 class="uk-modal-title">Commentaires</h2>
                         </div>
 
                         <div class="uk-modal-body" uk-overflow-auto>
