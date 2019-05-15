@@ -434,7 +434,7 @@ function displayAllEmprunts($emprunts)
     if ($value["valide"] == 1) {
       if ($value["rendu"] == 1) {
       echo "<td>Oui</td>";
-      echo "<td>[EVAL]</td>";
+      echo "<td></td>";
       }
       else{
       echo "<td>Non</td>";

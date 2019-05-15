@@ -45,11 +45,11 @@ if (empty($_SESSION["username"])) {
             <div style="width: 500px;">
                 <div class="uk-card uk-card-default uk-card-body" style="height: 815px">
                   <h3 class="uk-card-title uk-heading-bullet uk-heading-line">Profil</h3>
-                  <span><b>Prenom :</b> </span><span id="firstName"><?php echo $_SESSION["firstname"]; ?></span><br>
+                  <span><b>Prénom :</b> </span><span id="firstName"><?php echo $_SESSION["firstname"]; ?></span><br>
                   <span><b>Nom complet : </b>  </span><span id="lastName"><?php echo $_SESSION["username"]; ?></span><br>
                   <span><b>Email : </b></span><span id="email"><?php echo $_SESSION["email"]; ?></span><br>
 
-                  <p><b>Nombre de prets :</b> <?php echo count($emprunts); ?></p>
+                  <p><b>Nombre de prêts :</b> <?php echo count($emprunts); ?></p>
                   <div class="uk-alert-success" uk-alert>
                     <a class="uk-alert-close" uk-close></a>
                     <p>Vous n'avez aucun article en retard</p>
@@ -63,7 +63,7 @@ if (empty($_SESSION["username"])) {
                   <table class="uk-table uk-table-striped">
                     <thead>
                         <tr>
-                            <th>Debut</th>
+                            <th>Début</th>
                             <th>Objet</th>
                             <th>Fin</th>
                             <th>Rendu</th>

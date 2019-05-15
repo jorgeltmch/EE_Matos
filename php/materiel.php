@@ -44,7 +44,7 @@ if ($idCategorie == ""){
     	 if(!is_uploaded_file($_FILES['image']['tmp_name'])){
          //echo 'Un problème est survenu durant l\'opération. Veuillez réessayer !';
        }
-    		
+
     	 else {
     		//liste des extensions possibles
     		$extensions = array('/png', '/gif', '/jpg', '/jpeg');
@@ -86,7 +86,7 @@ if ($sucessA = true) {
         }
 
 
-// com article 
+// com article
 if(isset($_POST['validationCom'])){
 $comArticle = filter_input( INPUT_POST, 'com', FILTER_SANITIZE_STRING);
 $noteArticle = filter_input( INPUT_POST, 'note', FILTER_SANITIZE_STRING);
@@ -161,23 +161,27 @@ $commentaire = GetCommentaire();
                                 uk-toggle>Modifier</a>
                         </h1>
 
+                  <?php if(isset($_SESSION["username"])) : ?>
+                      <a class="uk-float-right uk-button uk-button-default uk-text-center" href="#modal-overflow" uk-toggle>Modifier</a>
+                  <?php endif; ?>
 
-                        <?php if ($article["stockDisponible"] <= 0){ ?>
-                        <div class="uk-alert-danger" uk-alert>
-                            <?php }else{ ?>
-                            <div class="uk-alert-success" uk-alert>
-                                <?php } ?>
-                                <?php // TODO: alert rouge si pas disponible ?>
-                                <a class="uk-alert-close" uk-close></a>
-                                <p><?php echo $article["stockDisponible"] ?> éléments en stock</p>
-                            </div>
-                            <?php displayInfos($article) ?>
-                        </div>
-                    </div>
+                  </h1>
+                  <?php if ($article["stockDisponible"] <= 0){ ?>
+                    <div class="uk-alert-danger" uk-alert>
+                  <?php }else{ ?>
+                    <div class="uk-alert-success" uk-alert>
+                  <?php } ?>
+                   <?php // TODO: alert rouge si pas disponible ?>
+                      <a class="uk-alert-close" uk-close></a>
+                      <p><?php echo $article["stockDisponible"] ?> élément(s) en stock</p>
+                  </div>
+                  <?php displayInfos($article) ?>
+              </div>
                 </div>
-                <?php if(!empty($_SESSION["username"])): ?>
-                <div>
-                    <div class="uk-card uk-card-default uk-card-body uk-width-*@s" style="height: 400px">
+            </div>
+            <?php if(!empty($_SESSION["username"]) && isAdmin($_SESSION["username"])): ?>
+            <div>
+                <div class="uk-card uk-card-default uk-card-body uk-width-*@s" style="height: 400px">
 
                         <a class="uk-button uk-button-default uk-text-center" href="#modal-center" uk-toggle>
                             Réserver ce produit

@@ -81,7 +81,7 @@ if (filter_has_var(INPUT_POST,'Modifier')) {
             <div class="uk-margin">
                 <label class="uk-form-label" for="form-stacked-text">Modifier le nom de catégorie</label>
                 <div class="uk-form-controls">
-                    <input class="uk-input" id="form-stacked-text" type="text" name="nouveauNom" placeholder="Remplir si modification du nom">
+                    <input class="uk-input" id="form-stacked-text" type="text" name="nouveauNom" placeholder="Remplir pour modifier le nom de l'article">
                 </div>
             </div>
             <input type="submit" name="Supprimer" value="Supprimer" id="Supprimer" class="uk-button uk-button-primary uk-margin-small-top uk-margin-bottom" ></input>
@@ -97,7 +97,7 @@ if (filter_has_var(INPUT_POST,'Modifier')) {
             <div class="uk-margin">
                 <label class="uk-form-label" for="form-stacked-text">Ajouter un nom de catégorie</label>
                 <div class="uk-form-controls">
-                    <input class="uk-input" id="form-stacked-text" type="text" name="nomCategorie" placeholder="Ecran">
+                    <input class="uk-input" id="form-stacked-text" type="text" name="nomCategorie" placeholder="Nom de catégorie">
                 </div>
             </div>
             <input type="submit" name="creerCategorie" value="Valider" class="uk-button uk-button-primary uk-margin-small-top uk-margin-bottom" onclick="UIkit.notification({message: 'Ajout réussi.', status: 'success'})"></input>

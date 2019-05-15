@@ -71,10 +71,11 @@ if(isset($_POST['validation'])){
     <form enctype="multipart/form-data" action="adminAjout.php" method="post"
         class="uk-margin-auto uk-margin-large-top uk-form-stacked uk-width-1-3@m">
 
-        <div class="uk-margin">
-            <label class="uk-form-label" for="form-stacked-text">Nom du produit</label>
-            <div class="uk-form-controls">
-                <input name="nomProduit" class="uk-input" id="form-stacked-text" type="text" placeholder="ASUS...">
+            <div class="uk-margin">
+                <label class="uk-form-label" for="form-stacked-text">Nom du produit</label>
+                <div class="uk-form-controls">
+                    <input name="nomProduit" class="uk-input" id="form-stacked-text" type="text" placeholder="Souris HP...">
+                </div>
             </div>
         </div>
 
@@ -90,11 +91,10 @@ if(isset($_POST['validation'])){
             </select>
         </div>
 
-        <label class="uk-form-label" for="form-stacked-text">Caractéristiques du produit (séparer avec des
-            virgules)</label>
-        <div class="uk-margin">
-            <textarea class="uk-textarea" rows="5" name="description" placeholder="Textarea"></textarea>
-        </div>
+            <label class="uk-form-label" for="form-stacked-text">Caractéristiques du produit (séparer avec des virgules)</label>
+            <div class="uk-margin">
+              <textarea class="uk-textarea" rows="5" name="description" placeholder="Noir, 2000dpi, USB, ..."></textarea>
+            </div>
 
         <div class="uk-margin">
             <label class="uk-form-label" for="form-stacked-text">Stock disponible</label>

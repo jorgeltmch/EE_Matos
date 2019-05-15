@@ -57,7 +57,7 @@ if (filter_has_var(INPUT_POST,'refuserEmprunt')) {
                 <th>Utilisateur</th>
                 <th>Date début/fin</th>
                 <th>Rendu</th>
-                <th></th>
+                <th>Actions</th>
               </tr>
             <tbody>
               <?php
