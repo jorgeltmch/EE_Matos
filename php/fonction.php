@@ -81,10 +81,14 @@ function getEmpruntsByArticleId($id){
  }
 
  //affichage commentaire
- function GetCommentaire(){
-   $sql = 'SELECT * FROM commentaire';
+ function GetCommentaire($idArticle){
+   $sql = 'SELECT * FROM commentaire WHERE idArticle = :idArticle';
    $req = EDatabase::prepare($sql, array(PDO::ATTR_CURSOR, PDO::CURSOR_SCROLL));
-   $req->execute();
+   $req->execute(
+     array(
+        'idArticle' => $idArticle
+        )
+   );
    $datacom = $req->fetchAll(PDO::FETCH_ASSOC);
    return $datacom;
 

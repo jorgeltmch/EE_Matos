@@ -112,7 +112,7 @@ if ($sucessB = true) {
 
 
 }
-$commentaire = GetCommentaire();
+$commentaire = GetCommentaire($idArticle);
 ?>
 <!DOCTYPE html>
 <html>
@@ -320,7 +320,7 @@ foreach ($commentaire as $key => $value) {
                                     <div uk-form-custom="target: true">
                                         <input type="file" name="image" id="image" />
                                         <input class="uk-input uk-form-width-medium" type="text"
-                                            placeholder="Select file" disabled>
+                                            placeholder="Sélectionner fichier" disabled>
 
                                     </div>
 

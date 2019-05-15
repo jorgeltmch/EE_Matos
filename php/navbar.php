@@ -46,22 +46,23 @@ if (isset($_POST['decuser'])) {
     </div>
 
     <div class="uk-navbar-item uk-navbar-right">
-
-        <form action="index.php" method="get" class=" uk-search uk-search-default uk-margin-right uk-width-1-2@m">
+        <div class="uk-container">
+        <form action="index.php" method="get" class=" uk-search uk-search-default uk-margin-right uk-width-1-1@m">
             <span class="uk-search-icon-flip" uk-search-icon></span>
             <input name="recherche" class="uk-search-input" type="search" placeholder="Recherche...">
         </form>
+        </div>
         <form method="post">
             <?php if (empty($_SESSION["username"])):
             ?>
 
             <button class="uk-button uk-button-default" id="SignInButton" onclick=""><a
-                    href="adminAjout.php">Login</a></button>
+                    href="adminAjout.php">Connexion</a></button>
             <?php else: ?>
             <a href="profil.php"><img class="uk-border-circle uk-height-max-medium"
                     src="<?php echo $_SESSION["imgProfil"]; ?>" alt="Border circle" style="height: 40px"></a>
             <button class="uk-button uk-button-secondary" id="SignOutButton" onclick=""><a
-                    href="index.php">Logout</a></button>
+                    href="index.php">Déconexion</a></button>
             <?php endif; ?>
         </form>
 

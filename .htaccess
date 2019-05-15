@@ -3,6 +3,9 @@ DirectoryIndex EE_Matos/php/index.php
 Options All -Indexes
 IndexIgnore *
 
+#RewriteEngine On
+#RewriteCond %{HTTPS} off
+#RewriteRule ^(.*)$ https://%{HTTP_HOST}%{REQUEST_URI} [L,R=301]
 
 #RewriteEngine on
 #RewriteCond %{REQUEST_URI} !/maintenance.html$
