@@ -62,7 +62,7 @@ if (isset($_POST['decuser'])) {
             <a href="profil.php"><img class="uk-border-circle uk-height-max-medium"
                     src="<?php echo $_SESSION["imgProfil"]; ?>" alt="Border circle" style="height: 40px"></a>
             <button class="uk-button uk-button-secondary" id="SignOutButton" onclick=""><a
-                    href="index.php">Déconexion</a></button>
+                    href="index.php">Déconnexion</a></button>
             <?php endif; ?>
         </form>
 

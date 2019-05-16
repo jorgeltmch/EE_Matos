@@ -14,7 +14,9 @@ if (!empty($idArticle)) {
 
 }
 
-
+if(isset($_POST['supprimer'])){
+  supprimerArticle($idArticle);
+}
 
 $answer = "";
 
@@ -168,10 +170,13 @@ $commentaire = GetCommentaire($idArticle);
                         <h1 class="uk-heading-bullet"><?php echo $article["nom"] ?><a
                                 class="uk-float-right uk-button uk-button-default uk-text-center" href="#modal-overflow"
                                 uk-toggle>Modifier</a>
+                                <a class="uk-float-right uk-button uk-button-default uk-text-center" href="#modal-delete" uk-toggle>Supprimer</a>
                         </h1>
 
+
                   <?php if(isset($_SESSION["username"])) : ?>
-                      <a class="uk-float-right uk-button uk-button-default uk-text-center" href="#modal-overflow" uk-toggle>Modifier</a>
+                    <a class="uk-float-right uk-button uk-button-default uk-text-center" href="#modal-overflow" uk-toggle>Modifier</a> </button>
+
                   <?php endif; ?>
 
                   </h1>
@@ -254,7 +259,23 @@ foreach ($commentaire as $key => $value) {
                 </div>
 
 
+                <div id="modal-delete" uk-modal>
 
+                  <div class="uk-modal-dialog">
+                    <form action="#" method="post">
+                      <div class="uk-modal-header">
+                          <h2 class="uk-modal-title">Voulez vous vraiment supprimer cet article ?</h2>
+                      </div>
+                      <div class="uk-modal-footer uk-text-right">
+                          <button class="uk-button uk-button-default uk-modal-close"
+                              type="button">Annuler</button>
+                          <input type="submit" name="supprimer" id="validation" value="ok"
+                              class="uk-button uk-button-primary ">
+                      </div>
+                    </form>
+
+                  </div>
+                </div>
 
                 <div id="modal-overflow" uk-modal>
                     <div class="uk-modal-dialog">

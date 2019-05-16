@@ -170,12 +170,12 @@ function generateCalendar($moisAffiche, $anneeAffiche, $jourAnglais){
             <!-- <hr> -->
             <table>
                 <tr>
-                    <form action="#" method="post">
+                    <form action="#" method="post" >
                         <input type="hidden"  name="moisHidden" value="<?php echo $moisAffiche; ?>">
                         <input type="hidden" name="anneeHidden" value="<?php echo $anneeAffiche; ?>">
-                        <td ><input type="submit" name="moisAvant" value="<"></td>
-                        <td colspan="5"><h1><?php echo LISTE_MOIS[$moisAffiche] . " " . $anneeAffiche; ?></h1></td>
-                        <td><input type="submit" name="moisApres" value=">"></td>
+                        <td ><input class="uk-button" type="submit" name="moisAvant" value="<"></td>
+                        <td colspan="5" class="uk-background-primary"><h1><?php echo LISTE_MOIS[$moisAffiche] . " " . $anneeAffiche; ?></h1></td>
+                        <td class="uk-background-primary"><input class="uk-button" type="submit" name="moisApres" value=">"></td>
                     </form>
                 </tr>
                 <td>Lun.</td>

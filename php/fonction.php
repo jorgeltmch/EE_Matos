@@ -64,6 +64,16 @@ function getEmpruntsByArticleId($id){
            return $sucessA = EDatabase::lastInsertId();
  };
 
+ function supprimerArticle($idArticle)
+ {
+   $sql = 'UPDATE article SET visible = 0 WHERE idArticle = :idArticle';
+   $req = EDatabase::prepare($sql, array(PDO::ATTR_CURSOR, PDO::CURSOR_SCROLL));
+   $req->execute(array(
+           'idArticle' => $idArticle
+         ));
+           return $sucessA = EDatabase::lastInsertId();
+ }
+
  //Ajoute Comentaire dans la base donnée
  function AjoutComArticle($idArticle, $mailUser, $comArticle, $noteArticle)
  {
@@ -163,7 +173,7 @@ function addProduit($nom, $idCategorie, $description, $stock, $imgArticle, $imgE
    $pageLimit2 = $page * 10;
    $pageLimit1 = ($page == 1) ? 0 : $page * 10 - 10;
 
-           $sql = 'SELECT * FROM article WHERE idCategorie = :id  ORDER BY dateAjout LIMIT ' .$pageLimit1. ','. $pageLimit2  ;
+           $sql = 'SELECT * FROM article WHERE idCategorie = :id AND visible = 1  ORDER BY dateAjout LIMIT ' .$pageLimit1. ','. $pageLimit2  ;
              $req = EDatabase::prepare($sql);
                   $req->execute(array(
                           ':id' => $idCategorie,
@@ -182,7 +192,7 @@ function addProduit($nom, $idCategorie, $description, $stock, $imgArticle, $imgE
 
 //   $pageLimit1 -= 1;
   // $pageLimit2 -= 1 ;
-   $sql = 'SELECT * FROM article ORDER BY dateAjout DESC LIMIT ' .$pageLimit1. ','. $pageLimit2  ;
+   $sql = 'SELECT * FROM article WHERE visible = 1 ORDER BY dateAjout DESC LIMIT ' .$pageLimit1. ','. $pageLimit2  ;
    try {
      $req = EDatabase::prepare($sql);
           $req->execute();
