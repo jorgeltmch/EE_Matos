@@ -173,10 +173,8 @@ $commentaire = GetCommentaire($idArticle);
                                 <a class="uk-float-right uk-button uk-button-default uk-text-center" href="#modal-delete" uk-toggle>Supprimer</a>
                         </h1>
 
-
-                  <?php if(isset($_SESSION["username"])) : ?>
-                    <a class="uk-float-right uk-button uk-button-default uk-text-center" href="#modal-overflow" uk-toggle>Modifier</a> </button>
-
+                  <?php if(isset($_SESSION["username"]) && isAdmin($_SESSION["uID"])["admin"]) : ?>
+                      <a class="uk-float-right uk-button uk-button-default uk-text-center" href="#modal-overflow" uk-toggle>Modifier</a>
                   <?php endif; ?>
 
                   </h1>
@@ -208,7 +206,7 @@ $commentaire = GetCommentaire($idArticle);
               </div>
                 </div>
             </div>
-            <?php //if(!empty($_SESSION["username"]) && isAdmin($_SESSION["username"])): ?>
+            <?php if(!empty($_SESSION["username"])): ?>
             <div>
                 <div class="uk-card uk-card-default uk-card-body uk-width-*@s" style="height: 500px">
 
@@ -217,7 +215,7 @@ $commentaire = GetCommentaire($idArticle);
                         </a> -->
                         <?php include("calendar.php") ?>
                 </div>
-                <?php //endif; ?>
+                <?php endif; ?>
             </div>
 
 
@@ -228,12 +226,16 @@ $commentaire = GetCommentaire($idArticle);
                 <div class="uk-grid-small uk-child-width-1@s" uk-grid="masonry: true">
                     <div>
                         <div class="uk-card uk-card-default uk-card-body uk-text-center uk-child-width-1-2@s">
-                            <h1 class="uk-heading-bullet">Commentaires <a
-                                    class="uk-float-right uk-button uk-button-default uk-text-center"
-                                    href="#modal-overflow3" uk-toggle>Ajouter</a></h1>
+                            <h1 class="uk-heading-bullet">Commentaires
+                              <?php if (!empty($_SESSION["username"])): ?>
+                              <a class="uk-float-right uk-button uk-button-default uk-text-center"
+                                    href="#modal-overflow3" uk-toggle>Ajouter</a>
                             <?php
-foreach ($commentaire as $key => $value) {
-    echo '
+                          endif; ?>
+                          </h1>
+                          <?php
+                          foreach ($commentaire as $key => $value) {
+                            echo '
                         <article class="uk-comment uk-comment-primary uk-margin-top">
                             <header class="uk-comment-header uk-grid-medium uk-flex-middle" uk-grid>
                                 <div class="uk-width-auto">
