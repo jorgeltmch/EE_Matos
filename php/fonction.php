@@ -342,7 +342,15 @@ function isAdmin($uID){
              return $res;
    }
 
-
+function getUserById($id){
+     $sql = 'SELECT * FROM users WHERE idUser = :id';
+     $req = EDatabase::prepare($sql, array(PDO::ATTR_CURSOR, PDO::CURSOR_SCROLL));
+     $req->execute(array(
+             ':id' => $id
+             ));
+             $res = $req->fetch();
+             return $res;
+   }
 //Ajoute un emprunt
 function addEmprunt($idArticle, $idUser, $dateDebut, $dateFin, $nbArticles)
   {
@@ -523,4 +531,18 @@ function rendreArticle($idArticle, $idUser, $dateDebut, $dateFin){
           'dateFin' => $dateFin
         ));
           return EDatabase::lastInsertId();
+}
+
+function articleEnRetard($idUser){
+  $sql = "SELECT idArticle FROM emprunt WHERE idUser = :idUser AND dateFin < NOW()";
+ 
+  
+    $req = EDatabase::prepare($sql);
+    $req->execute(
+           array(
+             'idUser' => $idUser,
+           )
+         );
+            $res = $req->fetchAll(PDO::FETCH_ASSOC);
+            return $res;
 }

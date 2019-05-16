@@ -3,7 +3,9 @@
   <!-- <h1>October</h1> -->
   <table>
     <td ><h1><input type="submit" name="moisAvant" value="<"></h1></td>
+
     <td colspan="5"><h1>Mai 2019</h1></td>
+
     <td><h1><input type="submit" name="moisApres" value=">"></h1></td>
     <tr>
         <td>Lun.</td>
@@ -29,3 +31,4 @@
     <tr><td>28</td><td>29</td><td class="hastask">30</td><td>31</td><td class="nextmonth">1</td><td>2</td><td>3</td></tr>
   </table>
 </div>
+

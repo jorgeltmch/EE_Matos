@@ -19,12 +19,12 @@ IndexIgnore *
 
 </FilesMatch>
 
-<FilesMatch scriptVerifRendu.php>
+#<FilesMatch scriptVerifRendu.php>
 
- order allow,deny
- deny from all
+ #order allow,deny
+ #deny from all
  
-</FilesMatch>
+#</FilesMatch>
 
 <FilesMatch ulkit.php>
 

@@ -7,6 +7,9 @@
  * The IMAP section shows how to save this message to the 'Sent Mail' folder using IMAP commands.
  */
 
+require_once 'fonction.php';
+
+
 //Import PHPMailer classes into the global namespace
 use PHPMailer\PHPMailer\Exception;
 use PHPMailer\PHPMailer\SMTP;
@@ -22,6 +25,12 @@ require_once 'C:\Users\martinsd\Desktop\EasyPHP-Devserver-17\eds-www\EE_Matos\PH
 
 function getMail($verifRenduEmail, $verifRenduIdUser, $verifRenduNom){
 
+$idArticle = articleEnRetard($_SESSION["verifRenduIdUser"]);
+$idArticle = $idArticle[0]["idArticle"];
+$nomArticle = getProduitByID($idArticle)["nom"];
+$articleDateFin = $_SESSION["verifRenduDate"];
+$articleNb = $_SESSION["verifRenduNb"];
+// $nomUser = getUserById($_SESSION["verifRenduIdUser"])["nom"];
 //require '../vendor/autoload.php';
 
 //Create a new PHPMailer instance
@@ -52,33 +61,81 @@ $mail->SMTPSecure = 'tls';
 $mail->SMTPAuth = true;
 
 //Username to use for SMTP authentication - use full email address for gmail
-$mail->Username = "testcfptinfo@gmail.com";
+$mail->Username = "cfptmatos@gmail.com";
 
 //Password to use for SMTP authentication
 $mail->Password = "Super2019";
 
 //Set who the message is to be sent from
-$mail->setFrom('from@example.com', 'First Last');
+$mail->setFrom('from@example.com', 'MATOS');
 
 //Set an alternative reply-to address
-$mail->addReplyTo('replyto@example.com', 'First Last');
+$mail->addReplyTo('replyto@example.com', 'MATOS');
 
 //Set who the message is to be sent to
-$mail->addAddress($verifRenduEmail, 'John Doe');
+$mail->addAddress($verifRenduEmail);
 
 //Set the subject line
-$mail->Subject = 'PHPMailer GMail SMTP test';
+$mail->Subject = 'MATOS - RETARD';
 
 //Read an HTML message body from an external file, convert referenced images to embedded,
 //convert HTML into a basic plain-text alternative body
-$mail->msgHTML(file_get_contents($_SERVER["DOCUMENT_ROOT"]. "/" . APPNAME .'/PHPMailer/examples/contents.html'), __DIR__);
+$mail->msgHTML(file_get_contents($_SERVER["DOCUMENT_ROOT"]. "/" . APPNAME .'/php/contents.php'), __DIR__);
 //$mail->msgHTML("hello world", __DIR__);
 
 //Replace the plain text body with one created manually
-$mail->AltBody = 'This is a plain-text message body';
+$mail->Body = 
+'
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1" />
+  <title>PHPMailer Test</title>
+</head>
+
+<body style="text-align:center">
+  <div style="font-family: Arial, Helvetica, sans-serif; font-size: 11px;">
+    <h1>Avertissement de Retard</h1>
+    <div align="center">
+
+      <h2>
+        Vous avez un article en retard !
+        
+</h2>
+
+<h3> 
+Nom du produit :
+</h3>
+<h3> 
+'
+. $nomArticle . 
+'   (X' . $articleNb . ')
+
+</h3>
+<h3>
+  Vous devez le rendre pour le ' . $articleDateFin .'
+</h3>
+<h3>
+Merci de bien vouloir le remttre au plus vite.
+</h3>
+<h3>
+  Sous peine de sanction !
+</h3>
+
+
+    </div>
+    <p>Team Matos <strong>2018-2019</strong>.</p>
+    <p>Copyright © 2019 CPFTi - École Entreprise</p>
+  </div>
+</body>
+
+</html>'
+;
+
 
 //Attach an image file
-$mail->addAttachment('images/phpmailer_mini.png');
+$mail->addAttachment("");
 
 //send the message, check for errors
 if (!$mail->send()) {
