@@ -117,7 +117,12 @@ function generateCalendar($moisAffiche, $anneeAffiche, $jourAnglais){
 
                     $actual_link = "http://$_SERVER[HTTP_HOST]$_SERVER[REQUEST_URI]";
                     $date = "$anneeAffiche-$moisAffiche-$jourCalendrier 00:00:00";
-                    
+                    if (strtotime($dateActuelle) > strtotime($date)) {
+                      $classeJour = "  <td class=\"reserve\">$jourCalendrier</td>";
+                    }
+                    else{
+
+
                     if (!empty($emprunts)) {
                       $empruntsAjd = getEmpruntsToday($idArticle, $date);
                       // var_dump($empruntsAjd);
@@ -131,7 +136,7 @@ function generateCalendar($moisAffiche, $anneeAffiche, $jourAnglais){
                         }
                         //GRISE SI
                         // if (strtotime($date) >= strtotime($value["dateDebut"]) && strtotime($date) <= strtotime($value["dateFin"])) {
-                        if ($article["stockDisponible"] <= $nbArticlesEmpruntes || strtotime($dateActuelle) > strtotime($date)) {
+                        if ($article["stockDisponible"] <= $nbArticlesEmpruntes) {
 
                           $classeJour = "  <td class=\"reserve\">$jourCalendrier</td>";
                         }
@@ -140,10 +145,10 @@ function generateCalendar($moisAffiche, $anneeAffiche, $jourAnglais){
                         }
 
                       }
-                    else{
+                    else {
                       $classeJour = "  <td><a href=\"$actual_link&jour=" . urlencode($date) . "\"> $jourCalendrier</a></td>";
                     }
-
+}
 
                   //  $classeJour = "  <td class=\"pasVide\"><a id=\"calPopUp\" href=\"$actual_link&jour=" . urlencode($date) . "\">$jourCalendrier</a></td>";
                 // }

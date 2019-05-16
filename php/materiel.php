@@ -3,6 +3,9 @@ require_once 'fonction.php';
 $idArticle = $_GET["idArticle"];
 $jour = (empty($_GET["jour"])) ? '' : $_GET["jour"];
 
+$emprunte = false;
+
+
 $dateFin = (empty($_POST["dateFin"])) ? '' : $_POST["dateFin"];
 $dateDebut = (empty($_POST["dateDebut"])) ? '' : $_POST["dateDebut"];
 $nbArticle = (empty($_POST["nbArticle"])) ? '' : $_POST["nbArticle"];
@@ -12,14 +15,15 @@ if (!empty($idArticle)) {
 }
 
 
-// var_dump($emprunts);
+
 $answer = "";
 
 
 if (!empty($dateFin) && !empty($dateDebut) && !empty($nbArticle)) {
-  if ($article["stockDisponible"] >= 1) {
+  if ($article["stockDisponible"] >= 1 && $emprunte == false) {
     addEmprunt($article["idArticle"], $_SESSION["uID"], $dateDebut, $dateFin, $nbArticle); //TODO : changer id
     $answer = "success";
+    $emprunte = true;
   }else{
     $answer = "error";
   }
@@ -183,13 +187,16 @@ $commentaire = GetCommentaire($idArticle);
                   <?php displayInfos($article);
                   if (!empty($jour)) {
                     $jour = strtotime($jour);
-                    include("popupLouer.php");
-                    echo "<script type=\"text/javascript\">";
-                    echo "var modal = UIkit.modal(\"#modal-center\");";
-                    echo "setTimeout(function(){";
-                    echo "modal.show();";
-                    echo "}, 0);";
-                    echo "</script>";
+                    if ($emprunte == false) {
+                      include("popupLouer.php");
+                      echo "<script type=\"text/javascript\">";
+                      echo "var modal = UIkit.modal(\"#modal-center\");";
+                      echo "setTimeout(function(){";
+                      echo "modal.show();";
+                      echo "}, 0);";
+                      echo "</script>";
+                    }
+
 
                   }
                   ?>
