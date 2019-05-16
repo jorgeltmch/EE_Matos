@@ -173,9 +173,12 @@ $commentaire = GetCommentaire($idArticle);
                                 <a class="uk-float-right uk-button uk-button-default uk-text-center" href="#modal-delete" uk-toggle>Supprimer</a>
                         </h1>
 
-                  <?php if(isset($_SESSION["username"]) && isAdmin($_SESSION["uID"])["admin"]) : ?>
-                      <a class="uk-float-right uk-button uk-button-default uk-text-center" href="#modal-overflow" uk-toggle>Modifier</a>
-                  <?php endif; ?>
+
+                  <!-- <?php if(isset($_SESSION["username"])) : ?>
+                    <a class="uk-float-right uk-button uk-button-default uk-text-center" href="#modal-overflow" uk-toggle>Modifier</a> </button>
+
+                  <?php endif; ?> -->
+
 
                   </h1>
                   <?php if ($article["stockDisponible"] <= 0){ ?>
