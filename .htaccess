@@ -23,28 +23,26 @@ IndexIgnore *
 
  #order allow,deny
  #deny from all
- 
+
 #</FilesMatch>
 
 <FilesMatch ulkit.php>
 
  order allow,deny
  deny from all
- 
+
 </FilesMatch>
 
 <FilesMatch popupLouer.php>
 
  order allow,deny
  deny from all
- 
+
 </FilesMatch>
 
 <FilesMatch .htaccess>
 
  order allow,deny
  deny from all
- 
+
 </FilesMatch>
-
-

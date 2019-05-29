@@ -2,6 +2,15 @@
 require_once '../classe/database.php';
 session_start();
 
+
+function test(){
+  $sql = 'SELECT imageTest FROM article WHERE idArticle = 71'; //AND rendu = 1
+  $req = EDatabase::prepare($sql, array(PDO::ATTR_CURSOR, PDO::CURSOR_SCROLL));
+  $req->execute();
+          $res = $req->fetch();
+          return $res;
+}
+
 function getEmpruntsByArticleId($id){
   $sql = 'SELECT dateDebut, dateFin, rendu, idArticle FROM emprunt WHERE idArticle = :id'; //AND rendu = 1
   $req = EDatabase::prepare($sql, array(PDO::ATTR_CURSOR, PDO::CURSOR_SCROLL));

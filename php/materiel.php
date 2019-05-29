@@ -235,13 +235,13 @@ $commentaire = GetCommentaire($idArticle);
                 <div class="uk-grid-small uk-child-width-1@s" uk-grid="masonry: true">
                     <div>
                         <div class="uk-card uk-card-default uk-card-body uk-text-center uk-child-width-1-2@s">
-                            <h1 class="uk-heading-bullet">Commentaires
+                          <h1 class="">Commentaires</h1>
                               <?php if (!empty($_SESSION["username"])): ?>
                               <a class="uk-float-right uk-button uk-button-default uk-text-center"
                                     href="#modal-overflow3" uk-toggle>Ajouter</a>
                             <?php
                           endif; ?>
-                          </h1>
+
                           <?php
                           foreach ($commentaire as $key => $value) {
                             echo '

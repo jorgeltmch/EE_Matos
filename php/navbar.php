@@ -41,7 +41,7 @@ if (isset($_POST['decuser'])) {
 
     <div class="uk-navbar-left ">
 
-        <a class="uk-navbar-item uk-logo" href="index.php">Matos</a>
+        <a class="uk-navbar-item uk-logo" href="index.php"><img src="../img/logoBlack.png" alt="logo" height="70" width="70"></a>
 
     </div>
 
@@ -187,7 +187,7 @@ function clearInfo() {
 <div id="offcanvas-slide" uk-offcanvas>
     <div class="uk-offcanvas-bar">
         <a href="index.php">
-            <h1>EE Matos</h1>
+            <h1><img src="../img/logoWhite.png" alt="logo" height="90" width="90"></h1>
         </a>
         <?php
       if (!empty($_SESSION["username"]) && isAdmin($_SESSION["uID"])["admin"]):
