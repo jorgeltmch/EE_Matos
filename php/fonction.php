@@ -309,6 +309,19 @@ function isAdmin($uID){
               $res = $req->fetchAll();
               return $res;
     }
+
+    function getEmpruntsTodayUser($id, $date)
+     {
+       $sql = 'SELECT  dateDebut, dateFin, rendu, nbArticles, idArticle FROM emprunt  WHERE idUser = :id  AND DATEDIFF(:dateEmprunt, dateDebut) >= 0 AND DATEDIFF(:dateEmprunt, dateFin) <= 0';
+       $req = EDatabase::prepare($sql, array(PDO::ATTR_CURSOR, PDO::CURSOR_SCROLL));
+       $req->execute(array(
+               ':id' => $id,
+               ':dateEmprunt' => $date
+
+               ));
+               $res = $req->fetchAll();
+               return $res;
+     }
 //Récupère tous les emprunts
    function getAllEmprunts()
     {
@@ -535,8 +548,8 @@ function rendreArticle($idArticle, $idUser, $dateDebut, $dateFin){
 
 function articleEnRetard($idUser){
   $sql = "SELECT idArticle FROM emprunt WHERE idUser = :idUser AND dateFin < NOW()";
- 
-  
+
+
     $req = EDatabase::prepare($sql);
     $req->execute(
            array(

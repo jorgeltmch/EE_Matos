@@ -10,6 +10,6 @@ define ('EDB_DBNAME', "matos");
 // Nom du compte admin de la base de donnée
 define ('EDB_USER', "matosAdmin");
 // Mot de passe du compte admin
-define ('EDB_PASS', "SuperMatos");
+define ('EDB_PASS', "SuperMatos"); //battleRoyale2019
 
 ?>

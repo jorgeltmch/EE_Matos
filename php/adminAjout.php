@@ -40,7 +40,10 @@ if(isset($_POST['validation'])){
 
             addProduit($nomProduit, $idCategorie, $description, $stock, $image, $_FILES['image']['type']);
 
-    				echo 'L\'insertion s est bien déroulée !';
+    				echo '<div class="uk-alert-success" uk-alert>
+                             <a class="uk-alert-close" uk-close></a>
+                             <p>L\'insertion s\'est bien déroulée</p>
+                             </div>';
     			 }
     		  }
     	  }
@@ -98,7 +101,7 @@ if(isset($_POST['validation'])){
 
         <label class="uk-form-label" for="form-stacked-text">Caractéristiques du produit (séparer avec des virgules)</label>
         <div class="uk-margin">
-          <textarea class="uk-textarea" rows="5" name="description" placeholder="Textarea"></textarea>
+          <textarea class="uk-textarea" rows="5" name="description" placeholder="Description de l'article"></textarea>
         </div>
 
         <div class="uk-margin">
@@ -112,10 +115,9 @@ if(isset($_POST['validation'])){
         <label class="uk-form-label" for="form-stacked-text">Image du produit</label>
         <div class="js-upload uk-placeholder uk-text-center">
             <span uk-icon="icon: cloud-upload"></span>
-            <span class="uk-text-middle">Glissez, déposez ou </span>
             <div uk-form-custom>
                 <input type="file" name="image" id="image"/>
-                <span class="uk-link">cliquez ici</span>
+                <span class="uk-link">Ajouter une image</span>
             </div>
         </div>
         <input type="submit" name="validation" id="validation" value="Envoyer" class="uk-button uk-button-primary uk-margin-bottom"/>

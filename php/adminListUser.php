@@ -51,7 +51,7 @@ if (filter_has_var(INPUT_POST,'retrograder')) {
               <tr>
                 <th>Utilisateur</th>
                 <th>Adresse</th>
-                <th>Statut</th>
+                <th>Administrateur</th>
                 <th>Actions</th>
               </tr>
             <tbody>

@@ -78,7 +78,7 @@ if (empty($_SESSION["username"])) {
                 </div>
             </div>
             <div>
-                <div class="uk-card uk-card-default uk-card-body uk-width-*@s" style="height: 500px"><?php include("calendrier.php"); ?> </div>
+                <div class="uk-card uk-card-default uk-card-body uk-width-*@s" style="height: 500px"><?php include("calendarUser.php"); ?> </div>
             </div>
         </div>
       </div>

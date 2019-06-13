@@ -1,10 +1,8 @@
 <?php
 require_once 'fonction.php';
 $idArticle = $_GET["idArticle"];
-$jour = (empty($_GET["jour"])) ? '' : $_GET["jour"];
-
-$emprunte = false;
-
+$jour = (empty($_GET["jour"])) ? '' : filter_input( INPUT_GET, 'jour', FILTER_SANITIZE_STRING);
+$emprunte = "";
 
 $dateFin = (empty($_POST["dateFin"])) ? '' : $_POST["dateFin"];
 $dateDebut = (empty($_POST["dateDebut"])) ? '' : $_POST["dateDebut"];
@@ -14,15 +12,11 @@ if (!empty($idArticle)) {
 
 }
 
-if(isset($_POST['supprimer'])){
-  supprimerArticle($idArticle);
-}
 
 $answer = "";
 
-
 if (!empty($dateFin) && !empty($dateDebut) && !empty($nbArticle)) {
-  if ($article["stockDisponible"] >= 1 && $emprunte == false) {
+  if ($article["stockDisponible"] >= 1 && $emprunte == false ) {
     addEmprunt($article["idArticle"], $_SESSION["uID"], $dateDebut, $dateFin, $nbArticle); //TODO : changer id
     $answer = "success";
     $emprunte = true;
@@ -31,6 +25,12 @@ if (!empty($dateFin) && !empty($dateDebut) && !empty($nbArticle)) {
   }
 
 }
+
+if(isset($_POST['supprimer'])){
+  supprimerArticle($idArticle);
+}
+
+
 
 //TODO : FONCTION ou INCLUDE
 // Modife article
@@ -86,7 +86,8 @@ if ($idCategorie == ""){
 
 $image = (empty($image)) ? $article["img"] : $image ;
  ModifierArticle($idArticle, $modifNom, $stock, $idCategorie, $modifDescript, $image, $_FILES['image']['type']);
-header("Refresh:0");
+//TODO bug popup Modifier
+ header("Refresh:0");
 if ($sucessA = true) {
  $flashMessage = '<div class="uk-alert-success" uk-alert>
                   <a class="uk-alert-close" uk-close></a>
@@ -100,6 +101,7 @@ if ($sucessA = true) {
 
 // com article
 if(isset($_POST['validationCom'])){
+  $emprunte = true;
 $comArticle = filter_input( INPUT_POST, 'com', FILTER_SANITIZE_STRING);
 $noteArticle = filter_input( INPUT_POST, 'note', FILTER_SANITIZE_STRING);
 
@@ -107,8 +109,11 @@ $idArticle = $article["idArticle"];
 $mailUser = $_SESSION["email"];
 
 AjoutComArticle($idArticle, $mailUser, $comArticle, $noteArticle);
-header("Refresh:0");
+ // header("Refresh:0");
 if ($sucessB = true) {
+
+
+
  $flashMessage = '<div class="uk-alert-success" uk-alert>
                   <a class="uk-alert-close" uk-close></a>
                   <p>Le commentaire a été avec succès.</p>
@@ -201,6 +206,7 @@ $commentaire = GetCommentaire($idArticle);
                       echo "modal.show();";
                       echo "}, 0);";
                       echo "</script>";
+                      $emprunte = true;
                     }
 
 
@@ -302,7 +308,7 @@ $commentaire = GetCommentaire($idArticle);
                                         l'article</label>
                                     <div class="uk-form-controls">
                                         <input class="uk-input" id="modifNom" type="text" name="modifNom"
-                                            placeholder="Remplire si modification du nom">
+                                            placeholder="Nouveau nom">
                                     </div>
                                 </div>
 
@@ -346,9 +352,7 @@ $commentaire = GetCommentaire($idArticle);
                                 </div>
 
 
-                                <label class="uk-form-label" for="form-stacked-text">Selection si
-                                    modification de
-                                    l'image</label>
+                                <label class="uk-form-label" for="form-stacked-text">Modification de l'image</label>
                                 <div class="uk-margin" uk-margin>
                                     <div uk-form-custom="target: true">
                                         <input type="file" name="image" id="image" />
@@ -383,7 +387,7 @@ $commentaire = GetCommentaire($idArticle);
                         <div class="uk-modal-body" uk-overflow-auto>
 
 
-                            <form enctype="multipart/form-data"
+                            <form
                                 class="uk-margin-auto uk-margin-large-top uk-form-stacked" method="POST" action="#">
 
 
