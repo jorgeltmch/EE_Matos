@@ -23,13 +23,15 @@ require_once 'C:\Users\martinsd\Desktop\EasyPHP-Devserver-17\eds-www\EE_Matos\PH
 require_once 'C:\Users\martinsd\Desktop\EasyPHP-Devserver-17\eds-www\EE_Matos\PHPMailer\src/PHPMailer.php';
 require_once 'C:\Users\martinsd\Desktop\EasyPHP-Devserver-17\eds-www\EE_Matos\PHPMailer\src/SMTP.php'; */
 
-function getMail($verifRenduEmail, $verifRenduIdUser, $verifRenduNom){
-
+function getMail($verifRenduEmail, $verifRenduIdUser){
+if(!empty($_SESSION["verifRenduIdUser"])){
 $idArticle = articleEnRetard($_SESSION["verifRenduIdUser"]);
 $idArticle = $idArticle[0]["idArticle"];
 $nomArticle = getProduitByID($idArticle)["nom"];
 $articleDateFin = $_SESSION["verifRenduDate"];
 $articleNb = $_SESSION["verifRenduNb"];
+};
+
 // $nomUser = getUserById($_SESSION["verifRenduIdUser"])["nom"];
 //require '../vendor/autoload.php';
 
@@ -70,20 +72,35 @@ $mail->Password = "Super2019";
 $mail->setFrom('from@example.com', 'MATOS');
 
 //Set an alternative reply-to address
-$mail->addReplyTo('replyto@example.com', 'MATOS');
-
+if($_SESSION["retard"] == true){
+$mail->addReplyTo('cfptmatos@gmail.com', 'MATOS');
+}
+elseif($_SESSION["bug"] == true){
+  $mail->addReplyTo($verifRenduEmail);
+}
 //Set who the message is to be sent to
-$mail->addAddress($verifRenduEmail);
+if($_SESSION["retard"] == true){
+  $mail->addAddress($verifRenduEmail);
+}
+elseif($_SESSION["bug"] == true){
+  $mail->addAddress("cfptmatos@gmail.com");
+}
+
 
 //Set the subject line
+if($_SESSION["retard"] == true){
 $mail->Subject = 'MATOS - RETARD';
-
+}
+elseif($_SESSION["bug"] == true){
+  $mail->Subject = 'MATOS - BUG';
+}
 //Read an HTML message body from an external file, convert referenced images to embedded,
 //convert HTML into a basic plain-text alternative body
 $mail->msgHTML(file_get_contents($_SERVER["DOCUMENT_ROOT"]. "/" . APPNAME .'/php/contents.php'), __DIR__);
 //$mail->msgHTML("hello world", __DIR__);
 
 //Replace the plain text body with one created manually
+if($_SESSION["retard"] == true){
 $mail->Body = 
 '
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
@@ -95,7 +112,7 @@ $mail->Body =
 </head>
 
 <body style="text-align:center">
-  <div style="font-family: Arial, Helvetica, sans-serif; font-size: 11px;">
+<div style="font-family: Arial, Helvetica, sans-serif; font-size: 11px;">
     <h1>Avertissement de Retard</h1>
     <div align="center">
 
@@ -132,6 +149,31 @@ Merci de bien vouloir le remttre au plus vite.
 
 </html>'
 ;
+}
+elseif($_SESSION["bug"] == true)
+{
+$mail->Body = 
+'
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1" />
+  <title>PHPMailer Test</title>
+</head>
+
+<body style="text-align:center">
+<div style="font-family: Arial, Helvetica, sans-serif; font-size: 20px;">
+   '.
+   $_SESSION["desBug"]
+
+   .'
+  </div>
+</body>
+
+</html>'
+;
+}
 
 
 //Attach an image file
@@ -167,4 +209,6 @@ if (!$mail->send()) {
 
     return $result;
 }*/
+$_SESSION["retard"] = false;
+$_SESSION["bug"] = false;
 }

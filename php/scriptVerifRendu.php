@@ -1,6 +1,6 @@
 <?php
 require_once '../classe/database.php';
-
+require_once 'fonction.php';
 
 require_once '../PHPMailer/examples/gmail.php';
 
@@ -16,9 +16,13 @@ AND e.idArticle = a.idArticle;';
    $datacom = $req->fetchAll(PDO::FETCH_ASSOC);
 
    foreach ($datacom as $com)
-                  {                   
-                    getMail($com['email'], $com['idUser'], $com['nom']);
-                    $_SESSION["verifRenduUser"] = $com['idUser'];
+                  { 
+                    $_SESSION["retard"] = true;    
+                    $_SESSION["verifRenduIdUser"] = $com['idUser'];
                     $_SESSION["verifRenduDate"] = $com['dateFin'];
-                    $_SESSION["verifRenduNb"] = $com['nbArticles'];
+                    $_SESSION["verifRenduNb"] = $com['nbArticles'];   
+                    var_dump($com['idUser']);           
+                    getMail($com['email'], $com['idUser']);
+                    
+                    
                   };

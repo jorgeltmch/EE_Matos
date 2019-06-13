@@ -7,7 +7,7 @@ require_once 'fonction.php';
 <html lang="fr">
     <head>
         <meta charset="utf-8">
-        <title>Proposez un nouvel article !</title>
+        <title>Signaler un bug !</title>
         <?php require "ulkit.php"; ?>
     </head>
 
@@ -24,14 +24,14 @@ require_once 'fonction.php';
 
 
         <!-- <div class="uk-child-width-1-5@m uk-margin" uk-grid> -->
-          <form class="uk-position-center">
+          <form action="scriptSignaleBug.php" method="post" class="uk-position-center">
             <fieldset class="uk-fieldset">
               <legend class="uk-legend">Aidez-nous à améliorer notre site...</legend>
               <div class="uk-margin">
-                <textarea class="uk-textarea" rows="5" placeholder="Je souhaite signalger le bug / problème suivant..."></textarea>
+                <textarea id="desBug" name="desBug" class="uk-textarea" rows="5" placeholder="Je souhaite signaler le bug / problème suivant..."></textarea>
               </div>
             </fieldset>
-              <button class="uk-button uk-button-primary uk-width-1-1 uk-margin-small-bottom">Signaler</button>
+              <button name="btnBug" class="uk-button uk-button-primary uk-width-1-1 uk-margin-small-bottom">Signaler</button>
           </form>
         <!-- </div> -->
         <?php require_once("footer.php");  ?>
